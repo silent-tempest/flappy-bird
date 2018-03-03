@@ -13,19 +13,27 @@
 'use strict';
 
 var
-  PIXEL_DENSITY = 0.8,
+  PX_DENS = 0.8,
   touchable = 'ontouchend' in window,
-  MODE, safari, Bird, Pipe, game;
+  pipes = [],
+  MODE, safari, Bird, Pipe, game, bird, world;
 
 safari = platform.os &&
   platform.os.family === 'iOS' &&
   platform.name === 'Safari';
 
-if ( touchable && !safari ) {
+if ( false && touchable && !safari ) {
   MODE = 'webgl';
 } else {
   MODE = '2d';
 }
+
+world = {
+  gravity: v6.vec2( 0, 55 * PX_DENS ),
+  MIN_PIPE_HEIGHT: 256 * PX_DENS,
+  MAX_PIPE_HEIGHT: 384 * PX_DENS,
+  PIPE_OFF: 200 * PX_DENS
+};
 
 game = {
   changeColor: function changeColor () {
@@ -50,65 +58,148 @@ game = {
   init: function init () {
     this.renderer = v6( {
       settings: {
-        scale: PIXEL_DENSITY
+        scale: PX_DENS
       },
 
       mode: MODE
-    } );
+    } )
+      .lineWidth( 1.5 )
+      .noFill();
 
-    this.bird = new Bird( this );
+    bird = new Bird();
+    pipes.push( new Pipe() );
 
     this.camera = this.renderer.camera( {
       speed: [
-        0.01, // x axis
-        0.01, // y axis
+        0.1, // x axis
+        0.1, // y axis
         0.01, // zoom in
         0.01  // zoom out
       ],
 
-      scale: [
+      zoom: [
+        // todo make adapted
+        // see main.js from v6-flappy-bird (1st version)
         1,  // current zoom
-        1,  // min zoom
-        1.5 // max zoom
+        1,  // min zoom (zoom out)
+        1.5 // max zoom (zoom in)
       ]
     } );
 
+    this.resize();
     this.ui.init();
     this.changeColor();
 
     v6
       .ticker( this.update, this.draw, this )
       .tick();
+
+    _( window ).resize( this.resize );
   },
 
   update: function update ( dt ) {
     this.camera
-      .lookAt( this.bird.pos )
+      .lookAt( bird.pos )
       .update();
   },
 
   draw: function draw () {
     this.renderer
+      .restore()
+      .save()
+      .clear()
       .setTransformFromCamera( this.camera )
       .stroke( this.birdColor );
-    this.bird.show();
+
+    bird.show();
+
+    this.renderer.stroke( this.pipeColor );
+
+    pipes.forEach( _.invoke( 'show' ) );
+  },
+
+  resize: function resize ( e ) {
+    if ( e ) {
+      game.renderer.resize( true );
+    }
+
+    game.camera.offset.set( game.renderer.width * 0.2, game.renderer.height * 0.5 );
   }
 };
 
-Bird = function ( game ) {
-  this.renderer = game.renderer;
+Pipe = function Pipe ( x ) {
+  var center, spacing;
+
+  if ( x == null ) {
+    spacing = world.MIN_PIPE_HEIGHT;
+    center = Pipe.lastCenter = 0;
+    this.x = world.PIPE_OFF * 2;
+  } else {
+    spacing = _.random( world.MIN_PIPE_HEIGHT, world.MAX_PIPE_HEIGHT );
+    center = Pipe.getCenter();
+    this.x = x;
+  }
+
+  this.top = center - spacing * 0.5;
+  this.bottom = this.top + spacing;
+  this.finished = false;
+};
+
+Pipe.prototype = {
+  show: function show () {
+    var
+      renderer = game.renderer,    
+      cam = game.camera,
+      x = this.x,
+      w = this.w,
+      // hide top and bottom edges
+      pad = 5 * PX_DENS,
+      diff, y1, h1, y2, h2;
+
+    if ( x > renderer.width / cam.zoom[ 0 ] || x + w < -cam.offset[ 0 ] / cam.zoom[ 0 ] ) {
+      return;
+    }
+
+    diff = cam.position[ 1 ] - cam.position[ 3 ];
+    h1 = this.top - bird.pos.y + cam.offset.y / cam.zoom[ 0 ] + diff + pad;
+
+    if ( h1 > 0 ) {
+      y1 = bird.pos.y - cam.offset.y / cam.zoom[ 0 ] - diff - pad;
+      renderer.rect( x, y1, w, h1 );
+    }
+
+    h2 = renderer.height / cam.zoom[ 0 ] - this.bottom + bird.pos.y - cam.offset.y / cam.zoom[ 0 ] - diff + pad;
+
+    if ( h2 > 0 ) {
+      y2 = this.bottom;
+      renderer.rect( x, y2, w, h2 );
+    }
+  },
+
+  constructor: Pipe,
+  w: 72 * PX_DENS
+};
+
+Pipe.getCenter = function getCenter () {
+  return Pipe.lastCenter += _.random( -Pipe.step, Pipe.step );
+};
+
+Pipe.lastCenter = 0;
+Pipe.step = 300 * PX_DENS;
+
+Bird = function Bird () {
   this.pos = v6.vec2();
-  this.r = 24;
   this.sides = 5;
   this.angle = 0;
 };
 
 Bird.prototype = {
-  show: function () {
-    this.renderer.polygon( this.pos.x, this.pos.y, this.r, this.sides, this.angle );
+  show: function show () {
+    game.renderer.polygon( this.pos.x, this.pos.y, this.r, this.sides, this.angle );
   },
 
-  constructor: Bird
+  constructor: Bird,
+  r: 18 * PX_DENS
 };
 
 _( function () {
