@@ -13,6 +13,9 @@
 'use strict';
 
 var
+  atan2 = Math.atan2,
+  min = Math.min,
+  max = Math.max,
   PX_DENS = 0.8,
   touchable = 'ontouchend' in window,
   pipes = [],
@@ -29,10 +32,11 @@ if ( false && touchable && !safari ) {
 }
 
 world = {
-  gravity: v6.vec2( 0, 55 * PX_DENS ),
+  GRAVITY: v6.vec2( 0, 55 * PX_DENS ),
   MIN_PIPE_HEIGHT: 256 * PX_DENS,
   MAX_PIPE_HEIGHT: 384 * PX_DENS,
-  PIPE_OFF: 200 * PX_DENS
+  PIPE_OFF: 200 * PX_DENS,
+  SPEED: 500 * PX_DENS
 };
 
 game = {
@@ -56,6 +60,10 @@ game = {
   },
 
   init: function init () {
+    var stopFly = function stopFly () {
+      game.touched = game.jumped = false;
+    };
+
     this.renderer = v6( {
       settings: {
         scale: PX_DENS
@@ -94,10 +102,41 @@ game = {
       .ticker( this.update, this.draw, this )
       .tick();
 
-    _( window ).resize( this.resize );
+    _( window )
+      .resize( this.resize )
+      .touchstart( this.fly )
+      .touchend( stopFly );
   },
 
   update: function update ( dt ) {
+    if ( this.stopped ) {
+      this.camera.zoomIn();
+    }
+
+    if ( this.addSpeed ) {
+      this.pipeSpeed += world.SPEED * 0.02;
+
+      if ( this.pipeSpeed >= world.SPEED ) {
+        this.pipeSpeed = world.SPEED;
+        this.addSpeed = false;
+      }
+    } else if ( this.stopped ) {
+      this.pipeSpeed = max( 0, this.pipeSpeed - world.SPEED * 0.01 );
+    }
+
+    if ( this.zoomOut ) {
+      this.camera.zoomOut();
+    }
+
+    if ( !this.stopped && ( this.touched && !this.flew || !this.started && bird.pos.y > 0 ) ) {
+      this.flew = this.started;
+      bird.fly();
+    }
+
+    bird.update();
+
+    
+
     this.camera
       .lookAt( bird.pos )
       .update();
@@ -124,7 +163,29 @@ game = {
     }
 
     game.camera.offset.set( game.renderer.width * 0.2, game.renderer.height * 0.5 );
-  }
+  },
+
+  fly: function fly ( e ) {
+    if ( e && ( /* ignore( e ) || */ !game.stopped && e.which !== 1 ) ) {
+      return;
+    }
+
+    game.touched = true;
+
+    if ( !game.started ) {
+      game.start();
+    }
+  },
+
+  COLLISION_STEPS: 0,
+  pipeSpeed: 0,
+  collision: true,
+  addSpeed: false,
+  touched: false,
+  started: false,
+  stopped: true,
+  zoomOut: true,
+  flew: false
 };
 
 Pipe = function Pipe ( x ) {
@@ -191,14 +252,65 @@ Bird = function Bird () {
   this.pos = v6.vec2();
   this.sides = 5;
   this.angle = 0;
+  this.spd = 0;
 };
 
 Bird.prototype = {
+  hitsPipe: function hitsPipe ( pipe ) {
+    var
+      pos = this.pos,
+      r = this.r;
+
+    // Bird is far from the pipe
+    if ( pos.x + r < pipe.x ||
+         pos.x - r > pipe.x + pipe.w ||
+         pos.y - r > pipe.top &&
+         pos.y + r < pipe.bottom )
+    {
+      return false;
+    }
+
+    // Bird inside the pipe
+    if ( pos.x + r >= pipe.x &&
+         pos.x - r <= pipe.x + pipe.w &&
+       ( pos.y + r < pipe.top ||
+         pos.y - r > pipe.bottom ) )
+    {
+      return true;
+    }
+
+    // Bird hits corners
+    return this._hitsCorner( pipe.x, pipe.top - r * 2, pipe.w, r * 2 ) ||
+           this._hitsCorner( pipe.x, pipe.bottom, pipe.w, r * 2 );
+  },
+
+  _hitsCorner: function _hitsCorner ( x2, y2, w2, h2 ) {
+    var
+      x1 = this.pos.x,
+      y1 = this.pos.y,
+      r1 = this.r,
+      dx = x1 - max( min( x1, x2 + w2 ), x2 ),
+      dy = y1 - max( min( y1, y2 + h2 ), y2 );
+
+    return dx * dx + dy * dy <= r1 * r1;
+  },
+
+  update: function ( dt ) {
+    this.spd = max( this.maxSpd, this.spd - world.GRAVITY );
+    this.angle += ( atan2( this.spd, game.pipeSpeed ) - this.angle ) * 0.1;
+  },
+
+  fly: function fly () {
+    this.spd = max( this.maxSpd, this.spd + this.lift );
+  },
+
   show: function show () {
     game.renderer.polygon( this.pos.x, this.pos.y, this.r, this.sides, this.angle );
   },
 
   constructor: Bird,
+  maxSpd: -1200 * PX_DENS,
+  lift: 1750 * PX_DENS,
   r: 18 * PX_DENS
 };
 
