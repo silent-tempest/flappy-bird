@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+/*!
+ * This file implements `npm install <repository>` from a specific directory.
+ * @file install
+ */
+
 /* globals Promise */
 
 'use strict';
@@ -60,6 +65,14 @@ make( [ '.temp', match[ 2 ] ] )
     process.exit( 1 );
   } );
 
+/**
+ * @private
+ * @method make
+ * @param  {Array<string>}     path
+ * @param  {number}            [_index=1]
+ * @param  {boolean}           [_exists]
+ * @return {Promise<boolean?>}
+ */
 function make ( path, _index, _exists )
 {
   var currentPath;
@@ -89,6 +102,14 @@ function make ( path, _index, _exists )
     } );
 }
 
+/**
+ * @private
+ * @method handleExec
+ * @param  {object} object
+ * @param  {string} object.stdout
+ * @param  {string} object.stderr
+ * @return {void}
+ */
 function handleExec ( object )
 {
   if ( object ) {

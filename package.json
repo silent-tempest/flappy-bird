@@ -3,17 +3,13 @@
   "version": "2.0.0",
   "main": "index.js",
   "scripts": {
-    "install": "node install silent-tempest/router#master/packages/body_parser && node install silent-tempest/router#master/packages/send_static",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ."
-  },
-  "scripts": {
-    "prepublish": "npm run lint && npm run test && npm run docs",
+    "prepublish": "npm run lintnodejs && npm run lint && npm run test && npm run docs",
     "install": "node install silent-tempest/router#master/packages/body_parser && node install silent-tempest/router#master/packages/send_static",
     "start": "node .",
     "test": "mocha -r chai/register-should",
-    "docs": "jsdoc -d docs . lib",
-    "lint": "jshint ."
+    "docs": "jsdoc -d docs .",
+    "lintnodejs": "jshint -c .jshintrc_nodejs .",
+    "lint": "jshint static_scripts test"
   },
   "author": "SILENT",
   "license": "GPL-3.0",

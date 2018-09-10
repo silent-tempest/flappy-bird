@@ -11,7 +11,7 @@ let router = new Router()
   .set( 'view engine', engine )
   .use( require( 'router.body_parser' )( {
     extensions: {
-      URLENCODED: 128
+      URLENCODED: 0
     }
   } ) )
   .use( require( 'router.send_static' )( 'static' ) );
@@ -20,7 +20,7 @@ let server = new Server( router.handle.bind( router ) ).listen( 3000, () => {
   console.log( 'http://localhost:3000' );
 } );
 
-if ( process.env.ENV !== 'DEV' ) {
+if ( process.env.NODE_ENV === 'production' ) {
   router.set( 'view cache', true );
 }
 
