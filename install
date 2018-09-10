@@ -1,0 +1,97 @@
+#!/usr/bin/env node
+
+/* globals Promise */
+
+'use strict';
+
+var child_process = require( 'child_process' );
+var promisify     = require( 'util' ).promisify;
+var sep           = require( 'path' ).sep;
+var fs            = require( 'fs' );
+var access = promisify( fs.access );
+var mkdir  = promisify( fs.mkdir );
+var exec   = promisify( child_process.exec );
+var string = process.argv[ process.argv.length - 1 ];
+var match  = /^(.+)\/(.+)#([^/]+)\/(.+)$/.exec( string );
+
+if ( ! match ) {
+  console.log( [
+    '  Input is invalid: "' + string + '"',
+    '  Valid example:    "silent-tempest/router#master/packages/send_static"'
+  ].join( '\n' ) );
+  process.exit( 1 );
+}
+
+make( [ '.temp', match[ 2 ] ] )
+  .then( function ( exists )
+  {
+    if ( exists === false ) {
+      return exec( [
+        'cd .temp/' + match[ 2 ],
+        'git init',
+        'git remote add -t ' + match[ 3 ] + ' -f origin https://github.com/' + match[ 1 ] + '/' + match[ 2 ] + '.git',
+        'git pull origin ' + match[ 3 ]
+      ].join( '\n' ) );
+    }
+  } )
+  .then( handleExec )
+  .then( function ()
+  {
+    var folder   = './.temp/' + match[ 2 ] + '/' + match[ 4 ];
+    var _package = require( folder + '/package.json' );
+    var pack     = _package.name + '-' + _package.version + '.tgz';
+
+    return access( pack, fs.F_OK )
+      .then( function ( error )
+      {
+        if ( error ) {
+          return exec( 'npm pack ' + folder );
+        }
+      } )
+      .then( handleExec )
+      .then( function ()
+      {
+        return exec( 'npm i ' + pack );
+      } );
+  } )
+  [ 'catch' ]( function ( error )
+  {
+    console.log( error );
+    process.exit( 1 );
+  } );
+
+function make ( path, _index, _exists )
+{
+  var currentPath;
+
+  if ( ! _index ) {
+    _index = 1;
+  }
+
+  if ( _index > path.length ) {
+    return Promise.resolve( _exists );
+  }
+
+  return access( ( currentPath = path.slice( 0, _index ).join( sep ) ), fs.F_OK )
+    [ 'catch' ]( function ( error )
+    {
+      _exists = false;
+
+      if ( error.code !== 'ENOENT' ) {
+        throw error;
+      }
+
+      return mkdir( currentPath );
+    } )
+    .then( function ()
+    {
+      return make( path, _index + 1, _exists );
+    } );
+}
+
+function handleExec ( object )
+{
+  if ( object ) {
+    console.log( object );
+  }
+}

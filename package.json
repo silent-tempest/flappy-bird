@@ -1,0 +1,50 @@
+{
+  "name": "flappyshape",
+  "version": "2.0.0",
+  "main": "index.js",
+  "scripts": {
+    "install": "node install silent-tempest/router#master/packages/body_parser && node install silent-tempest/router#master/packages/send_static",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "scripts": {
+    "prepublish": "npm run lint && npm run test && npm run docs",
+    "install": "node install silent-tempest/router#master/packages/body_parser && node install silent-tempest/router#master/packages/send_static",
+    "start": "node .",
+    "test": "mocha -r chai/register-should",
+    "docs": "jsdoc -d docs . lib",
+    "lint": "jshint ."
+  },
+  "author": "SILENT",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "pg": "^7.4.3",
+    "router": "github:silent-tempest/router#master",
+    "router.body_parser": "file:router.body_parser-1.0.0.tgz",
+    "router.send_static": "file:router.send_static-1.0.0.tgz",
+    "template_engine": "github:silent-tempest/template_engine#master",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "browserify": "^16.2.2",
+    "browserify-optional": "^1.0.1",
+    "chai": "^4.1.2",
+    "jsdoc": "^3.5.5",
+    "jshint": "^2.9.6",
+    "mocha": "^5.2.0",
+    "uglify-es": "^3.3.9",
+    "v6.js": "github:silent-tempest/v6.js#dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silent-tempest/flappyshape.git"
+  },
+  "bugs": {
+    "url": "https://github.com/silent-tempest/flappyshape/issues"
+  },
+  "homepage": "https://github.com/silent-tempest/flappyshape#readme",
+  "description": "",
+  "engines": {
+    "node": "8.11.4"
+  }
+}
