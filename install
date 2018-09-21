@@ -22,7 +22,7 @@ var match  = /^(.+)\/(.+)#([^/]+)\/(.+)$/.exec( string );
 if ( ! match ) {
   console.log( [
     '  Input is invalid: "' + string + '"',
-    '  Valid example:    "silent-tempest/router#master/packages/send_static"'
+    '  Valid example:    "silent-tempest/router#master/packages/body_parser"'
   ].join( '\n' ) );
   process.exit( 1 );
 }
@@ -50,6 +50,10 @@ make( [ '.temp', match[ 2 ] ] )
       .then( function ( error )
       {
         if ( error ) {
+          if ( error.code !== 'ENOENT' ) {
+            throw error;
+          }
+
           return exec( 'npm pack ' + folder );
         }
       } )
@@ -66,12 +70,13 @@ make( [ '.temp', match[ 2 ] ] )
   } );
 
 /**
+ * Эта функция рекурсивно и асинхронно создает путь `path`.
  * @private
  * @method make
- * @param  {Array<string>}     path
- * @param  {number}            [_index=1]
- * @param  {boolean}           [_exists]
- * @return {Promise<boolean?>}
+ * @param  {Array.<string>}     path
+ * @param  {number}             [_index=1]
+ * @param  {boolean}            [_exists]
+ * @return {Promise.<boolean?>}            Значение Promise будет `false` когда `path` не существовал раньше.
  */
 function make ( path, _index, _exists )
 {

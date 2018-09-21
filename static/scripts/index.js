@@ -1,1 +1,4195 @@
-!function(){return function t(e,r,n){function i(s,a){if(!r[s]){if(!e[s]){var f="function"==typeof require&&require;if(!a&&f)return f(s,!0);if(o)return o(s,!0);var c=new Error("Cannot find module '"+s+"'");throw c.code="MODULE_NOT_FOUND",c}var u=r[s]={exports:{}};e[s][0].call(u.exports,function(t){return i(e[s][1][t]||t)},u,u.exports,t,e,r,n)}return r[s].exports}for(var o="function"==typeof require&&require,s=0;s<n.length;s++)i(n[s]);return i}}()({1:[function(t,e,r){"use strict";function n(){}function i(t,e,r,n){var i={listener:r,active:!0,type:e,once:n};t._events||(t._events=Object.create(null)),t._events[e]||(t._events[e]=[]),t._events[e].push(i)}function o(t,e){return t._events&&t._events[e]}n.prototype={emit:function(t){var e,r,n,i=o(this,t);if(!i)return this;for(arguments.length>1&&(e=[].slice.call(arguments,1)),r=0,n=i.length;r<n;++r)i[r].active&&(i[r].once&&(i[r].active=!1),e?i[r].listener.apply(this,e):i[r].listener.call(this));return this},off:function(t,e){var r,n;if(t){if(r=o(this,t))if(e)for(n=r.length-1;n>=0;--n)r[n].listener===e&&r[n].active&&(r[n].active=!1);else r.length=0}else this._events=null;return this},on:function(t,e){return i(this,t,e),this},once:function(t,e){return i(this,t,e,!0),this},constructor:n},e.exports=n},{}],2:[function(t,e,r){"use strict";var n=Object.prototype.toString;e.exports=function(t,e){throw Error('"'+n.call(t)+'" is not '+e)}},{}],3:[function(t,e,r){"use strict";var n,i=t("./type"),o="undefined";e.exports=function(t){return t===n?o:o=i(n=t)}},{"./type":58}],4:[function(t,e,r){"use strict";e.exports=function(t){return t.replace(/\\(\\)?/g,"$1")}},{}],5:[function(t,e,r){"use strict";var n,i=t("../isset"),o=Object.prototype.__defineGetter__,s=Object.prototype.__defineSetter__;e.exports=function(t,e,r){var a,f,c=i("get",r),u=i("set",r);if(c||u){if(c&&"function"!=typeof(a=r.get))throw TypeError("Getter must be a function: "+a);if(u&&"function"!=typeof(f=r.set))throw TypeError("Setter must be a function: "+f);if(i("writable",r))throw TypeError("Invalid property descriptor. Cannot both specify accessors and a value or writable attribute");if(!o)throw Error("Cannot define getter or setter");c&&o.call(t,e,a),u&&s.call(t,e,f)}else i("value",r)?t[e]=r.value:i(e,t)||(t[e]=n);return t}},{"../isset":42}],6:[function(t,e,r){"use strict";e.exports=function(t,e){var r,n=[];for(t.lastIndex=0;r=t.exec(e);)n.push(r);return n}},{}],7:[function(t,e,r){"use strict";var n=t("../call-iteratee"),i=t("../isset");e.exports=function(t,e,r,o){var s,a,f;for(s=-1,a=t.length-1;a>=0&&(f=o?a:++s,!i(f,t)||!1!==n(e,r,t[f],f,t));--a);return t}},{"../call-iteratee":15,"../isset":42}],8:[function(t,e,r){"use strict";var n=t("../call-iteratee");e.exports=function(t,e,r,i,o){var s,a,f;for(s=-1,a=o.length-1;a>=0&&(f=i?o[a]:o[++s],!1!==n(e,r,t[f],f,t));--a);return t}},{"../call-iteratee":15}],9:[function(t,e,r){"use strict";var n=t("../isset");e.exports=function(t,e,r){for(var i,o=e.length-r,s=0;s<o;++s){if(i=e[s],!n(i,t))return;t=t[i]}return t}},{"../isset":42}],10:[function(t,e,r){"use strict";var n=t("./base-to-index"),i=Array.prototype.indexOf,o=Array.prototype.lastIndexOf;e.exports=function(t,e,r,s){var a,f,c,u,l;if(e==e&&(u=s?o:i))return u.call(t,e,r);if(!(a=t.length))return-1;for(c=a-1,void 0!==r?(r=n(r,a),f=(c=s?Math.min(c,r):Math.max(0,r))-1):f=-1;c>=0;--c)if((l=t[u=s?c:++f])===e||e!=e&&l!=l)return u;return-1}},{"./base-to-index":13}],11:[function(t,e,r){"use strict";var n,i,o=t("./base-index-of"),s=t("../support/support-keys"),a=Object.prototype.hasOwnProperty;"not-supported"===s&&(n=["toString","toLocaleString","valueOf","hasOwnProperty","isPrototypeOf","propertyIsEnumerable","constructor"],i=function(t,e){var r,i;for(r=n.length-1;r>=0;--r)o(t,i=n[r])<0&&a.call(e,i)&&t.push(i);return t}),e.exports=function(t){var e,r=[];for(e in t)a.call(t,e)&&r.push(e);return"not-supported"!==s?r:i(r,t)}},{"../support/support-keys":53,"./base-index-of":10}],12:[function(t,e,r){"use strict";var n=t("./base-get");e.exports=function(t,e){if(null!=t)return e.length>1?n(t,e,0):t[e[0]]}},{"./base-get":9}],13:[function(t,e,r){"use strict";e.exports=function(t,e){return e&&t?(t<0&&(t+=e),t||0):0}},{}],14:[function(t,e,r){"use strict";var n=t("./_throw-argument-exception"),i=t("./default-to");e.exports=function(t,e){var r;return"function"!=typeof e&&n(e,"a function"),t=i(t,1),function(){return--t>=0&&(r=e.apply(this,arguments)),r}}},{"./_throw-argument-exception":2,"./default-to":24}],15:[function(t,e,r){"use strict";e.exports=function(t,e,r,n,i){return void 0===e?t(r,n,i):t.call(e,r,n,i)}},{}],16:[function(t,e,r){"use strict";var n=t("./base/base-exec"),i=t("./_unescape"),o=t("./is-key"),s=t("./to-key"),a=t("./_type"),f=/(^|\.)\s*([_a-z]\w*)\s*|\[\s*((?:-)?(?:\d+|\d*\.\d+)|("|')(([^\\]\\(\\\\)*|[^\4])*)\4)\s*\]/gi;e.exports=function(t){var e,r,c;if(o(t))return[s(t)];if("array"===a(t))for(e=Array(r=t.length),c=r-1;c>=0;--c)e[c]=s(t[c]);else e=function(t){for(var e,r=n(f,t),o=r.length-1;o>=0;--o)(e=r[o])[2]?r[o]=e[2]:null!=e[5]?r[o]=i(e[5]):r[o]=e[3];return r}(""+t);return e}},{"./_type":3,"./_unescape":4,"./base/base-exec":6,"./is-key":34,"./to-key":56}],17:[function(t,e,r){"use strict";e.exports=function(t,e,r){return t>=r?r:t<=e?e:t}},{}],18:[function(t,e,r){"use strict";var n=t("./create"),i=t("./get-prototype-of"),o=t("./to-object"),s=t("./each"),a=t("./is-object-like");e.exports=function t(e,r,f){var c;return(void 0===r||f)&&(r=e,e=!0),c=n(i(r=o(r))),s(r,function(r,n,i){r===i?this[n]=this:e&&a(r)?this[n]=t(e,r):this[n]=r},c),c}},{"./create":20,"./each":27,"./get-prototype-of":30,"./is-object-like":36,"./to-object":57}],19:[function(t,e,r){"use strict";e.exports={ERR:{INVALID_ARGS:"Invalid arguments",FUNCTION_EXPECTED:"Expected a function",STRING_EXPECTED:"Expected a string",UNDEFINED_OR_NULL:"Cannot convert undefined or null to object",REDUCE_OF_EMPTY_ARRAY:"Reduce of empty array with no initial value",NO_PATH:"No path was given"},MAX_ARRAY_LENGTH:4294967295,MAX_SAFE_INT:9007199254740991,MIN_SAFE_INT:-9007199254740991,DEEP:1,DEEP_KEEP_FN:2,PLACEHOLDER:{}}},{}],20:[function(t,e,r){"use strict";var n=t("./define-properties"),i=t("./set-prototype-of"),o=t("./is-primitive");function s(){}e.exports=Object.create||function(t,e){var r;if(null!==t&&o(t))throw TypeError("Object prototype may only be an Object or null: "+t);return s.prototype=t,r=new s,s.prototype=null,null===t&&i(r,null),arguments.length>=2&&n(r,e),r}},{"./define-properties":26,"./is-primitive":39,"./set-prototype-of":51}],21:[function(t,e,r){"use strict";var n=t("../base/base-for-each"),i=t("../base/base-for-in"),o=t("../is-array-like"),s=t("../to-object"),a=t("../iteratee").iteratee,f=t("../keys");e.exports=function(t){return function(e,r,c){return e=s(e),r=a(r),o(e)?n(e,r,c,t):i(e,r,c,t,f(e))}}},{"../base/base-for-each":7,"../base/base-for-in":8,"../is-array-like":32,"../iteratee":43,"../keys":44,"../to-object":57}],22:[function(t,e,r){"use strict";e.exports=function(t){return function(e){var r,n,i;return e.window===e?r=Math.max(e["inner"+t]||0,e.document.documentElement["client"+t]):9===e.nodeType?(n=e.body,i=e.documentElement,r=Math.max(n["scroll"+t],i["scroll"+t],n["offset"+t],i["offset"+t],n["client"+t],i["client"+t])):r=e["client"+t],r}}},{}],23:[function(t,e,r){"use strict";var n=t("../cast-path"),i=t("../noop");e.exports=function(t,e){return function(r){var o;return(r=n(r)).length?(e&&(o=Array.prototype.slice.call(arguments,1)),function(e){return t(e,r,o)}):i}}},{"../cast-path":16,"../noop":47}],24:[function(t,e,r){"use strict";e.exports=function(t,e){return null!=t&&t==t?t:e}},{}],25:[function(t,e,r){"use strict";var n=t("./mixin"),i=t("./clone");e.exports=function(t,e){return null==e?i(!0,t):n(!0,i(!0,t),e)}},{"./clone":18,"./mixin":46}],26:[function(t,e,r){"use strict";var n,i,o,s,a=t("./support/support-define-property");"full"!==a?(o=t("./is-primitive"),s=t("./each"),i=t("./base/base-define-property"),n=function(t,e){if("not-supported"!==a)try{return Object.defineProperties(t,e)}catch(t){}if(o(t))throw TypeError("defineProperties called on non-object");if(o(e))throw TypeError("Property description must be an object: "+e);return s(e,function(t,e){if(o(t))throw TypeError("Property description must be an object: "+t);i(this,e,t)},t),t}):n=Object.defineProperties,e.exports=n},{"./base/base-define-property":5,"./each":27,"./is-primitive":39,"./support/support-define-property":52}],27:[function(t,e,r){"use strict";e.exports=t("./create/create-each")()},{"./create/create-each":21}],28:[function(t,e,r){"use strict";e.exports=t("./create/create-get-element-dimension")("Height")},{"./create/create-get-element-dimension":22}],29:[function(t,e,r){"use strict";e.exports=t("./create/create-get-element-dimension")("Width")},{"./create/create-get-element-dimension":22}],30:[function(t,e,r){"use strict";var n=t("./constants").ERR,i=Object.prototype.toString;e.exports=Object.getPrototypeOf||function(t){var e;if(null==t)throw TypeError(n.UNDEFINED_OR_NULL);return void 0!==(e=t.__proto__)?e:"[object Function]"===i.call(t.constructor)?t.constructor.prototype:t}},{"./constants":19}],31:[function(t,e,r){"use strict";var n=t("./is-object-like"),i=t("./is-length"),o=t("./is-window-like");e.exports=function(t){return n(t)&&i(t.length)&&!o(t)}},{"./is-length":35,"./is-object-like":36,"./is-window-like":41}],32:[function(t,e,r){"use strict";var n=t("./is-length"),i=t("./is-window-like");e.exports=function(t){return null!=t&&("object"==typeof t?n(t.length)&&!i(t):"string"==typeof t)}},{"./is-length":35,"./is-window-like":41}],33:[function(t,e,r){"use strict";var n=t("./is-object-like"),i=t("./is-length"),o={}.toString;e.exports=Array.isArray||function(t){return n(t)&&i(t.length)&&"[object Array]"===o.call(t)}},{"./is-length":35,"./is-object-like":36}],34:[function(t,e,r){"use strict";var n=t("./_type"),i=/(^|[^\\])(\\\\)*(\.|\[)/;e.exports=function(t){var e;return!t||"array"!==n(t)&&("number"==(e=typeof t)||"boolean"===e||"symbol"===n(t)||!i.test(t))}},{"./_type":3}],35:[function(t,e,r){"use strict";var n=t("./constants").MAX_ARRAY_LENGTH;e.exports=function(t){return"number"==typeof t&&t>=0&&t<=n&&t%1==0}},{"./constants":19}],36:[function(t,e,r){"use strict";e.exports=function(t){return!!t&&"object"==typeof t}},{}],37:[function(t,e,r){"use strict";var n=t("./is-object-like"),i={}.toString;e.exports=function(t){return n(t)&&"[object Object]"===i.call(t)}},{"./is-object-like":36}],38:[function(t,e,r){"use strict";var n=t("./get-prototype-of"),i=t("./is-object"),o=Object.prototype.hasOwnProperty,s=Function.prototype.toString,a=s.call(Object);e.exports=function(t){var e,r;return!!i(t)&&(null===(e=n(t))||!!o.call(e,"constructor")&&("function"==typeof(r=e.constructor)&&s.call(r)===a))}},{"./get-prototype-of":30,"./is-object":37}],39:[function(t,e,r){"use strict";e.exports=function(t){return!t||"object"!=typeof t&&"function"!=typeof t}},{}],40:[function(t,e,r){"use strict";var n=t("./type");e.exports=function(t){return"symbol"===n(t)}},{"./type":58}],41:[function(t,e,r){"use strict";var n=t("./is-object-like");e.exports=function(t){return n(t)&&t.window===t}},{"./is-object-like":36}],42:[function(t,e,r){"use strict";e.exports=function(t,e){return null!=e&&(void 0!==e[t]||t in e)}},{}],43:[function(t,e,r){"use strict";var n=t("./is-array-like-object"),i=t("./matches-property"),o=t("./property");r.iteratee=function(t){return"function"==typeof t?t:n(t)?i(t):o(t)}},{"./is-array-like-object":31,"./matches-property":45,"./property":50}],44:[function(t,e,r){"use strict";var n=t("./base/base-keys"),i=t("./to-object"),o=t("./support/support-keys");e.exports="es2015"!==o?function(t){return("es5"===o?Object.keys:n)(i(t))}:Object.keys},{"./base/base-keys":11,"./support/support-keys":53,"./to-object":57}],45:[function(t,e,r){"use strict";var n=t("./cast-path"),i=t("./base/base-get"),o=t("./constants").ERR;e.exports=function(t){var e=n(t[0]),r=t[1];if(!e.length)throw Error(o.NO_PATH);return function(t){return null!=t&&(e.length>1?i(t,e,0)===r:t[e[0]]===r)}}},{"./base/base-get":9,"./cast-path":16,"./constants":19}],46:[function(t,e,r){"use strict";var n=t("./is-plain-object"),i=t("./to-object"),o=t("./is-array"),s=t("./keys");e.exports=function t(e,r){var a,f,c,u,l,h,p,d,b=arguments.length,g=2;for("boolean"!=typeof e&&(r=e,e=!0,g=1),g===b&&(r=this,--g),r=i(r);g<b;++g)for(c=0,u=(a=s(f=i(arguments[g]))).length;c<u;++c)l=f[h=a[c]],e&&l!==f&&(n(l)||(p=o(l)))?(d=r[h],p?(o(d)||(d=[]),p=!1):n(d)||(d={}),r[h]=t(!0,d,l)):r[h]=l;return r}},{"./is-array":33,"./is-plain-object":38,"./keys":44,"./to-object":57}],47:[function(t,e,r){"use strict";e.exports=function(){}},{}],48:[function(t,e,r){"use strict";e.exports=Date.now||function(){return(new Date).getTime()}},{}],49:[function(t,e,r){"use strict";var n=t("./before");e.exports=function(t){return n(1,t)}},{"./before":14}],50:[function(t,e,r){"use strict";e.exports=t("./create/create-property")(t("./base/base-property"))},{"./base/base-property":12,"./create/create-property":23}],51:[function(t,e,r){"use strict";var n=t("./is-primitive"),i=t("./constants").ERR;e.exports=Object.setPrototypeOf||function(t,e){if(null==t)throw TypeError(i.UNDEFINED_OR_NULL);if(null!==e&&n(e))throw TypeError("Object prototype may only be an Object or null: "+e);return"__proto__"in t&&(t.__proto__=e),t}},{"./constants":19,"./is-primitive":39}],52:[function(t,e,r){"use strict";var n;function i(t){try{if(""in Object.defineProperty(t,"",{}))return!0}catch(t){}return!1}n=i({})?"full":"undefined"!=typeof document&&i(document.createElement("span"))?"dom":"not-supported",e.exports=n},{}],53:[function(t,e,r){"use strict";var n;if(Object.keys)try{n=Object.keys("")}catch(t){n="es5"}else n={toString:null}.propertyIsEnumerable("toString")?"not-supported":"has-a-bug";e.exports=n},{}],54:[function(t,e,r){"use strict";var n,i,o=t("./timestamp");if("undefined"!=typeof window&&(i=window.cancelAnimationFrame||window.webkitCancelAnimationFrame||window.webkitCancelRequestAnimationFrame||window.mozCancelAnimationFrame||window.mozCancelRequestAnimationFrame,n=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame),!n||!i||"undefined"!=typeof navigator&&/iP(ad|hone|od).*OS\s6/.test(navigator.userAgent)){var s=0;r.request=function(t){var e=o(),r=Math.max(s+1e3/60,e);return setTimeout(function(){s=r,t(e)},r-e)},r.cancel=clearTimeout}else r.request=function(t){return n(t)},r.cancel=function(t){return i(t)}},{"./timestamp":55}],55:[function(t,e,r){"use strict";var n,i=t("./now");"undefined"!=typeof performance&&performance.now?e.exports=function(){return performance.now()}:(n=i(),e.exports=function(){return i()-n})},{"./now":48}],56:[function(t,e,r){"use strict";var n=t("./_unescape"),i=t("./is-symbol");e.exports=function(t){var e;return"string"==typeof t?n(t):i(t)?t:"0"===(e=""+t)&&1/t==-1/0?"-0":n(e)}},{"./_unescape":4,"./is-symbol":40}],57:[function(t,e,r){"use strict";var n=t("./constants").ERR;e.exports=function(t){if(null==t)throw TypeError(n.UNDEFINED_OR_NULL);return Object(t)}},{"./constants":19}],58:[function(t,e,r){"use strict";var n=t("./create"),i={}.toString,o=n(null);e.exports=function(t){var e,r;return null===t?"null":"object"!==(e=typeof t)&&"function"!==e?e:(e=o[r=i.call(t)])||(o[r]=r.slice(8,-1).toLowerCase())}},{"./create":20}],59:[function(t,e,r){(function(t){(function(){"use strict";var n={function:!0,object:!0},i=n[typeof window]&&window||this,o=n[typeof r]&&r,s=n[typeof e]&&e&&!e.nodeType&&e,a=o&&s&&"object"==typeof t&&t;!a||a.global!==a&&a.window!==a&&a.self!==a||(i=a);var f=Math.pow(2,53)-1,c=/\bOpera/,u=Object.prototype,l=u.hasOwnProperty,h=u.toString;function p(t){return(t=String(t)).charAt(0).toUpperCase()+t.slice(1)}function d(t){return t=x(t),/^(?:webOS|i(?:OS|P))/.test(t)?t:p(t)}function b(t,e){for(var r in t)l.call(t,r)&&e(t[r],r,t)}function g(t){return null==t?p(t):h.call(t).slice(8,-1)}function m(t){return String(t).replace(/([ -])(?!$)/g,"$1?")}function y(t,e){var r=null;return function(t,e){var r=-1,n=t?t.length:0;if("number"==typeof n&&n>-1&&n<=f)for(;++r<n;)e(t[r],r,t);else b(t,e)}(t,function(n,i){r=e(r,n,i,t)}),r}function x(t){return String(t).replace(/^ +| +$/g,"")}var _=function t(e){var r=i,n=e&&"object"==typeof e&&"String"!=g(e);n&&(r=e,e=null);var o=r.navigator||{},s=o.userAgent||"";e||(e=s);var a,f,u,l,p,_=n?!!o.likeChrome:/\bChrome\b/.test(e)&&!/internal|\n/i.test(h.toString()),v=n?"Object":"ScriptBridgingProxyObject",w=n?"Object":"Environment",k=n&&r.java?"JavaPackage":g(r.java),S=n?"Object":"RuntimeObject",E=/\bJava/.test(k)&&r.java,O=E&&g(r.environment)==w,A=E?"a":"α",M=E?"b":"β",T=r.document||{},P=r.operamini||r.opera,R=c.test(R=n&&P?P["[[Class]]"]:g(P))?R:P=null,C=e,F=[],j=null,I=e==s,L=I&&P&&"function"==typeof P.version&&P.version(),D=y([{label:"EdgeHTML",pattern:"Edge"},"Trident",{label:"WebKit",pattern:"AppleWebKit"},"iCab","Presto","NetFront","Tasman","KHTML","Gecko"],function(t,r){return t||RegExp("\\b"+(r.pattern||m(r))+"\\b","i").exec(e)&&(r.label||r)}),B=function(t){return y(t,function(t,r){return t||RegExp("\\b"+(r.pattern||m(r))+"\\b","i").exec(e)&&(r.label||r)})}(["Adobe AIR","Arora","Avant Browser","Breach","Camino","Electron","Epiphany","Fennec","Flock","Galeon","GreenBrowser","iCab","Iceweasel","K-Meleon","Konqueror","Lunascape","Maxthon",{label:"Microsoft Edge",pattern:"Edge"},"Midori","Nook Browser","PaleMoon","PhantomJS","Raven","Rekonq","RockMelt",{label:"Samsung Internet",pattern:"SamsungBrowser"},"SeaMonkey",{label:"Silk",pattern:"(?:Cloud9|Silk-Accelerated)"},"Sleipnir","SlimBrowser",{label:"SRWare Iron",pattern:"Iron"},"Sunrise","Swiftfox","Waterfox","WebPositive","Opera Mini",{label:"Opera Mini",pattern:"OPiOS"},"Opera",{label:"Opera",pattern:"OPR"},"Chrome",{label:"Chrome Mobile",pattern:"(?:CriOS|CrMo)"},{label:"Firefox",pattern:"(?:Firefox|Minefield)"},{label:"Firefox for iOS",pattern:"FxiOS"},{label:"IE",pattern:"IEMobile"},{label:"IE",pattern:"MSIE"},"Safari"]),N=z([{label:"BlackBerry",pattern:"BB10"},"BlackBerry",{label:"Galaxy S",pattern:"GT-I9000"},{label:"Galaxy S2",pattern:"GT-I9100"},{label:"Galaxy S3",pattern:"GT-I9300"},{label:"Galaxy S4",pattern:"GT-I9500"},{label:"Galaxy S5",pattern:"SM-G900"},{label:"Galaxy S6",pattern:"SM-G920"},{label:"Galaxy S6 Edge",pattern:"SM-G925"},{label:"Galaxy S7",pattern:"SM-G930"},{label:"Galaxy S7 Edge",pattern:"SM-G935"},"Google TV","Lumia","iPad","iPod","iPhone","Kindle",{label:"Kindle Fire",pattern:"(?:Cloud9|Silk-Accelerated)"},"Nexus","Nook","PlayBook","PlayStation Vita","PlayStation","TouchPad","Transformer",{label:"Wii U",pattern:"WiiU"},"Wii","Xbox One",{label:"Xbox 360",pattern:"Xbox"},"Xoom"]),G=function(t){return y(t,function(t,r,n){return t||(r[N]||r[/^[a-z]+(?: +[a-z]+\b)*/i.exec(N)]||RegExp("\\b"+m(n)+"(?:\\b|\\w*\\d)","i").exec(e))&&n})}({Apple:{iPad:1,iPhone:1,iPod:1},Archos:{},Amazon:{Kindle:1,"Kindle Fire":1},Asus:{Transformer:1},"Barnes & Noble":{Nook:1},BlackBerry:{PlayBook:1},Google:{"Google TV":1,Nexus:1},HP:{TouchPad:1},HTC:{},LG:{},Microsoft:{Xbox:1,"Xbox One":1},Motorola:{Xoom:1},Nintendo:{"Wii U":1,Wii:1},Nokia:{Lumia:1},Samsung:{"Galaxy S":1,"Galaxy S2":1,"Galaxy S3":1,"Galaxy S4":1},Sony:{PlayStation:1,"PlayStation Vita":1}}),W=function(t){return y(t,function(t,r){var n=r.pattern||m(r);return!t&&(t=RegExp("\\b"+n+"(?:/[\\d.]+|[ \\w.]*)","i").exec(e))&&(t=function(t,e,r){var n={"10.0":"10",6.4:"10 Technical Preview",6.3:"8.1",6.2:"8",6.1:"Server 2008 R2 / 7","6.0":"Server 2008 / Vista",5.2:"Server 2003 / XP 64-bit",5.1:"XP",5.01:"2000 SP1","5.0":"2000","4.0":"NT","4.90":"ME"};return e&&r&&/^Win/i.test(t)&&!/^Windows Phone /i.test(t)&&(n=n[/[\d.]+$/.exec(t)])&&(t="Windows "+n),t=String(t),e&&r&&(t=t.replace(RegExp(e,"i"),r)),t=d(t.replace(/ ce$/i," CE").replace(/\bhpw/i,"web").replace(/\bMacintosh\b/,"Mac OS").replace(/_PowerPC\b/i," OS").replace(/\b(OS X) [^ \d]+/i,"$1").replace(/\bMac (OS X)\b/,"$1").replace(/\/(\d)/," $1").replace(/_/g,".").replace(/(?: BePC|[ .]*fc[ \d.]+)$/i,"").replace(/\bx86\.64\b/gi,"x86_64").replace(/\b(Windows Phone) OS\b/,"$1").replace(/\b(Chrome OS \w+) [\d.]+\b/,"$1").split(" on ")[0])}(t,n,r.label||r)),t})}(["Windows Phone","Android","CentOS",{label:"Chrome OS",pattern:"CrOS"},"Debian","Fedora","FreeBSD","Gentoo","Haiku","Kubuntu","Linux Mint","OpenBSD","Red Hat","SuSE","Ubuntu","Xubuntu","Cygwin","Symbian OS","hpwOS","webOS ","webOS","Tablet OS","Tizen","Linux","Mac OS X","Macintosh","Mac","Windows 98;","Windows "]);function z(t){return y(t,function(t,r){var n=r.pattern||m(r);return!t&&(t=RegExp("\\b"+n+" *\\d+[.\\w_]*","i").exec(e)||RegExp("\\b"+n+" *\\w+-[\\w]*","i").exec(e)||RegExp("\\b"+n+"(?:; *(?:[a-z]+[_-])?[a-z]+\\d+|[^ ();-]*)","i").exec(e))&&((t=String(r.label&&!RegExp(n,"i").test(r.label)?r.label:t).split("/"))[1]&&!/[\d.]+/.test(t[0])&&(t[0]+=" "+t[1]),r=r.label||r,t=d(t[0].replace(RegExp(n,"i"),r).replace(RegExp("; *(?:"+r+"[_-])?","i")," ").replace(RegExp("("+r+")[-_.]?(\\w)","i"),"$1 $2"))),t})}if(D&&(D=[D]),G&&!N&&(N=z([G])),(a=/\bGoogle TV\b/.exec(N))&&(N=a[0]),/\bSimulator\b/i.test(e)&&(N=(N?N+" ":"")+"Simulator"),"Opera Mini"==B&&/\bOPiOS\b/.test(e)&&F.push("running in Turbo/Uncompressed mode"),"IE"==B&&/\blike iPhone OS\b/.test(e)?(G=(a=t(e.replace(/like iPhone OS/,""))).manufacturer,N=a.product):/^iP/.test(N)?(B||(B="Safari"),W="iOS"+((a=/ OS ([\d_]+)/i.exec(e))?" "+a[1].replace(/_/g,"."):"")):"Konqueror"!=B||/buntu/i.test(W)?G&&"Google"!=G&&(/Chrome/.test(B)&&!/\bMobile Safari\b/i.test(e)||/\bVita\b/.test(N))||/\bAndroid\b/.test(W)&&/^Chrome/.test(B)&&/\bVersion\//i.test(e)?(B="Android Browser",W=/\bAndroid\b/.test(W)?W:"Android"):"Silk"==B?(/\bMobi/i.test(e)||(W="Android",F.unshift("desktop mode")),/Accelerated *= *true/i.test(e)&&F.unshift("accelerated")):"PaleMoon"==B&&(a=/\bFirefox\/([\d.]+)\b/.exec(e))?F.push("identifying as Firefox "+a[1]):"Firefox"==B&&(a=/\b(Mobile|Tablet|TV)\b/i.exec(e))?(W||(W="Firefox OS"),N||(N=a[1])):!B||(a=!/\bMinefield\b/i.test(e)&&/\b(?:Firefox|Safari)\b/.exec(B))?(B&&!N&&/[\/,]|^[^(]+?\)/.test(e.slice(e.indexOf(a+"/")+8))&&(B=null),(a=N||G||W)&&(N||G||/\b(?:Android|Symbian OS|Tablet OS|webOS)\b/.test(W))&&(B=/[a-z]+(?: Hat)?/i.exec(/\bAndroid\b/.test(W)?W:a)+" Browser")):"Electron"==B&&(a=(/\bChrome\/([\d.]+)\b/.exec(e)||0)[1])&&F.push("Chromium "+a):W="Kubuntu",L||(L=y(["(?:Cloud9|CriOS|CrMo|Edge|FxiOS|IEMobile|Iron|Opera ?Mini|OPiOS|OPR|Raven|SamsungBrowser|Silk(?!/[\\d.]+$))","Version",m(B),"(?:Firefox|Minefield|NetFront)"],function(t,r){return t||(RegExp(r+"(?:-[\\d.]+/|(?: for [\\w-]+)?[ /-])([\\d.]+[^ ();/_-]*)","i").exec(e)||0)[1]||null})),(a=("iCab"==D&&parseFloat(L)>3?"WebKit":/\bOpera\b/.test(B)&&(/\bOPR\b/.test(e)?"Blink":"Presto"))||/\b(?:Midori|Nook|Safari)\b/i.test(e)&&!/^(?:Trident|EdgeHTML)$/.test(D)&&"WebKit"||!D&&/\bMSIE\b/i.test(e)&&("Mac OS"==W?"Tasman":"Trident")||"WebKit"==D&&/\bPlayStation\b(?! Vita\b)/i.test(B)&&"NetFront")&&(D=[a]),"IE"==B&&(a=(/; *(?:XBLWP|ZuneWP)(\d+)/i.exec(e)||0)[1])?(B+=" Mobile",W="Windows Phone "+(/\+$/.test(a)?a:a+".x"),F.unshift("desktop mode")):/\bWPDesktop\b/i.test(e)?(B="IE Mobile",W="Windows Phone 8.x",F.unshift("desktop mode"),L||(L=(/\brv:([\d.]+)/.exec(e)||0)[1])):"IE"!=B&&"Trident"==D&&(a=/\brv:([\d.]+)/.exec(e))&&(B&&F.push("identifying as "+B+(L?" "+L:"")),B="IE",L=a[1]),I){if(l="global",p=null!=(u=r)?typeof u[l]:"number",/^(?:boolean|number|string|undefined)$/.test(p)||"object"==p&&!u[l])g(a=r.runtime)==v?(B="Adobe AIR",W=a.flash.system.Capabilities.os):g(a=r.phantom)==S?(B="PhantomJS",L=(a=a.version||null)&&a.major+"."+a.minor+"."+a.patch):"number"==typeof T.documentMode&&(a=/\bTrident\/(\d+)/i.exec(e))?(L=[L,T.documentMode],(a=+a[1]+4)!=L[1]&&(F.push("IE "+L[1]+" mode"),D&&(D[1]=""),L[1]=a),L="IE"==B?String(L[1].toFixed(1)):L[0]):"number"==typeof T.documentMode&&/^(?:Chrome|Firefox)\b/.test(B)&&(F.push("masking as "+B+" "+L),B="IE",L="11.0",D=["Trident"],W="Windows");else if(E&&(C=(a=E.lang.System).getProperty("os.arch"),W=W||a.getProperty("os.name")+" "+a.getProperty("os.version")),O){try{L=r.require("ringo/engine").version.join("."),B="RingoJS"}catch(t){(a=r.system)&&a.global.system==r.system&&(B="Narwhal",W||(W=a[0].os||null))}B||(B="Rhino")}else"object"==typeof r.process&&!r.process.browser&&(a=r.process)&&("object"==typeof a.versions&&("string"==typeof a.versions.electron?(F.push("Node "+a.versions.node),B="Electron",L=a.versions.electron):"string"==typeof a.versions.nw&&(F.push("Chromium "+L,"Node "+a.versions.node),B="NW.js",L=a.versions.nw)),B||(B="Node.js",C=a.arch,W=a.platform,L=(L=/[\d.]+/.exec(a.version))?L[0]:null));W=W&&d(W)}if(L&&(a=/(?:[ab]|dp|pre|[ab]\d+pre)(?:\d+\+?)?$/i.exec(L)||/(?:alpha|beta)(?: ?\d)?/i.exec(e+";"+(I&&o.appMinorVersion))||/\bMinefield\b/i.test(e)&&"a")&&(j=/b/i.test(a)?"beta":"alpha",L=L.replace(RegExp(a+"\\+?$"),"")+("beta"==j?M:A)+(/\d+\+?/.exec(a)||"")),"Fennec"==B||"Firefox"==B&&/\b(?:Android|Firefox OS)\b/.test(W))B="Firefox Mobile";else if("Maxthon"==B&&L)L=L.replace(/\.[\d.]+/,".x");else if(/\bXbox\b/i.test(N))"Xbox 360"==N&&(W=null),"Xbox 360"==N&&/\bIEMobile\b/.test(e)&&F.unshift("mobile mode");else if(!/^(?:Chrome|IE|Opera)$/.test(B)&&(!B||N||/Browser|Mobi/.test(B))||"Windows CE"!=W&&!/Mobi/i.test(e))if("IE"==B&&I)try{null===r.external&&F.unshift("platform preview")}catch(t){F.unshift("embedded")}else(/\bBlackBerry\b/.test(N)||/\bBB10\b/.test(e))&&(a=(RegExp(N.replace(/ +/g," *")+"/([.\\d]+)","i").exec(e)||0)[1]||L)?(W=((a=[a,/BB10/.test(e)])[1]?(N=null,G="BlackBerry"):"Device Software")+" "+a[0],L=null):this!=b&&"Wii"!=N&&(I&&P||/Opera/.test(B)&&/\b(?:MSIE|Firefox)\b/i.test(e)||"Firefox"==B&&/\bOS X (?:\d+\.){2,}/.test(W)||"IE"==B&&(W&&!/^Win/.test(W)&&L>5.5||/\bWindows XP\b/.test(W)&&L>8||8==L&&!/\bTrident\b/.test(e)))&&!c.test(a=t.call(b,e.replace(c,"")+";"))&&a.name&&(a="ing as "+a.name+((a=a.version)?" "+a:""),c.test(B)?(/\bIE\b/.test(a)&&"Mac OS"==W&&(W=null),a="identify"+a):(a="mask"+a,B=R?d(R.replace(/([a-z])([A-Z])/g,"$1 $2")):"Opera",/\bIE\b/.test(a)&&(W=null),I||(L=null)),D=["Presto"],F.push(a));else B+=" Mobile";(a=(/\bAppleWebKit\/([\d.]+\+?)/i.exec(e)||0)[1])&&(a=[parseFloat(a.replace(/\.(\d)$/,".0$1")),a],"Safari"==B&&"+"==a[1].slice(-1)?(B="WebKit Nightly",j="alpha",L=a[1].slice(0,-1)):L!=a[1]&&L!=(a[2]=(/\bSafari\/([\d.]+\+?)/i.exec(e)||0)[1])||(L=null),a[1]=(/\bChrome\/([\d.]+)/i.exec(e)||0)[1],537.36==a[0]&&537.36==a[2]&&parseFloat(a[1])>=28&&"WebKit"==D&&(D=["Blink"]),I&&(_||a[1])?(D&&(D[1]="like Chrome"),a=a[1]||((a=a[0])<530?1:a<532?2:a<532.05?3:a<533?4:a<534.03?5:a<534.07?6:a<534.1?7:a<534.13?8:a<534.16?9:a<534.24?10:a<534.3?11:a<535.01?12:a<535.02?"13+":a<535.07?15:a<535.11?16:a<535.19?17:a<536.05?18:a<536.1?19:a<537.01?20:a<537.11?"21+":a<537.13?23:a<537.18?24:a<537.24?25:a<537.36?26:"Blink"!=D?"27":"28")):(D&&(D[1]="like Safari"),a=(a=a[0])<400?1:a<500?2:a<526?3:a<533?4:a<534?"4+":a<535?5:a<537?6:a<538?7:a<601?8:"8"),D&&(D[1]+=" "+(a+="number"==typeof a?".x":/[.+]/.test(a)?"":"+")),"Safari"==B&&(!L||parseInt(L)>45)&&(L=a)),"Opera"==B&&(a=/\bzbov|zvav$/.exec(W))?(B+=" ",F.unshift("desktop mode"),"zvav"==a?(B+="Mini",L=null):B+="Mobile",W=W.replace(RegExp(" *"+a+"$"),"")):"Safari"==B&&/\bChrome\b/.exec(D&&D[1])&&(F.unshift("desktop mode"),B="Chrome Mobile",L=null,/\bOS X\b/.test(W)?(G="Apple",W="iOS 4.3+"):W=null),L&&0==L.indexOf(a=/[\d.]+$/.exec(W))&&e.indexOf("/"+a+"-")>-1&&(W=x(W.replace(a,""))),D&&!/\b(?:Avant|Nook)\b/.test(B)&&(/Browser|Lunascape|Maxthon/.test(B)||"Safari"!=B&&/^iOS/.test(W)&&/\bSafari\b/.test(D[1])||/^(?:Adobe|Arora|Breach|Midori|Opera|Phantom|Rekonq|Rock|Samsung Internet|Sleipnir|Web)/.test(B)&&D[1])&&(a=D[D.length-1])&&F.push(a),F.length&&(F=["("+F.join("; ")+")"]),G&&N&&N.indexOf(G)<0&&F.push("on "+G),N&&F.push((/^on /.test(F[F.length-1])?"":"on ")+N),W&&(a=/ ([\d.+]+)$/.exec(W),f=a&&"/"==W.charAt(W.length-a[0].length-1),W={architecture:32,family:a&&!f?W.replace(a[0],""):W,version:a?a[1]:null,toString:function(){var t=this.version;return this.family+(t&&!f?" "+t:"")+(64==this.architecture?" 64-bit":"")}}),(a=/\b(?:AMD|IA|Win|WOW|x86_|x)64\b/i.exec(C))&&!/\bi686\b/i.test(C)?(W&&(W.architecture=64,W.family=W.family.replace(RegExp(" *"+a),"")),B&&(/\bWOW64\b/i.test(e)||I&&/\w(?:86|32)$/.test(o.cpuClass||o.platform)&&!/\bWin64; x64\b/i.test(e))&&F.unshift("32-bit")):W&&/^OS X/.test(W.family)&&"Chrome"==B&&parseFloat(L)>=39&&(W.architecture=64),e||(e=null);var q={};return q.description=e,q.layout=D&&D[0],q.manufacturer=G,q.name=B,q.prerelease=j,q.product=N,q.ua=e,q.version=B&&L,q.os=W||{architecture:null,family:null,version:null,toString:function(){return"null"}},q.parse=t,q.toString=function(){return this.description||""},q.version&&F.unshift(L),q.name&&F.unshift(B),W&&B&&(W!=String(W).split(" ")[0]||W!=B.split(" ")[0]&&!N)&&F.push(N?"("+W+")":"on "+W),F.length&&(q.description=F.join(" ")),q}();"function"==typeof define&&"object"==typeof define.amd&&define.amd?(i.platform=_,define(function(){return _})):o&&s?b(_,function(t,e){o[e]=t}):i.platform=_}).call(this)}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}],60:[function(t,e,r){"use strict";var n=Object.prototype.toString;e.exports=function(t,e,r){return TypeError("`"+t+"` got unexpected `"+e+"` argument ("+typeof r+", "+n.call(r)+") with value: "+r)}},{}],61:[function(t,e,r){"use strict";e.exports=function(t,e){return Error("`"+t+"` "+e)}},{}],62:[function(t,e,r){"use strict";var n=t("peako/is-object-like"),i=t("peako/get-element-w"),o=t("peako/get-element-h"),s=t("peako/base/base-for-in"),a=t("./internal/_set-default-drawing-settings"),f=t("./internal/_copy-drawing-settings"),c=t("./internal/_get-gl-context-name"),u=t("./internal/_create-polygon"),l=t("./internal/_polygons"),h=t("./constants"),p=t("./options"),d=0;function b(t,e){var r={alpha:t.alpha};if(t.canvas?this.canvas=t.canvas:(this.canvas=document.createElement("canvas"),this.canvas.innerHTML="Unable to run the application."),t.append&&this.add(),e===h.MODE_2D)this.context=this.canvas.getContext("2d",r);else if(e===h.MODE_GL){if(!(e=c()))throw Error("Cannot get WebGL context. Try to use v6.constants.MODE_GL as the renderer mode or v6.Renderer2D instead of v6.RendererGL");this.context=this.canvas.getContext(e,r)}this.settings=t.settings,this.mode=e,this.index=d,this._stack=[],this._stackIndex=-1,this._vertices=[],a(this,this),"w"in t||"h"in t?this.resize(t.w,t.h):this.resizeTo(window),d+=1}b.prototype={add:function(t){return(t||document.body).appendChild(this.canvas),this},destroy:function(){return this.canvas.parentNode.removeChild(this.canvas),this},push:function(){return this._stack[++this._stackIndex]?f(this._stack[this._stackIndex],this):this._stack.push(a({},this)),this},pop:function(){return this._stackIndex>=0?f(this,this._stack[this._stackIndex--]):a(this,this),this},resize:function(t,e){var r=this.canvas;r.style.width=t+"px",r.style.height=e+"px";var n=this.settings.scale;return r.width=this.w=Math.floor(t*n),r.height=this.h=Math.floor(e*n),this},resizeTo:function(t){return this.resize(i(t),o(t))},rescale:function(){return this.resizeTo(this.canvas)},background:function(t,e,r,i){return n(t)?this.backgroundImage(t):this.backgroundColor(t,e,r,i)},_polygon:function(t,e,r,n,i,o,s){var a=l[i],f=this.matrix;return a||(a=l[i]=u(i)),s&&(o*=Math.PI/180),f.save(),f.translate(t,e),f.rotate(o),this.vertices(a,.5*a.length,null,r,n),f.restore(),this},polygon:function(t,e,r,n,i){return n%1&&(n=.01*Math.floor(100*n)),void 0!==i?this._polygon(t,e,r,r,n,i,p.degrees):this._polygon(t,e,r,r,n,.5*-Math.PI),this},noStroke:function(){return this._doStroke=!1,this},noFill:function(){return this._doFill=!1,this},setTransformFromCamera:function(t){var e=t.position,r=t.zoom;return this.matrix.setTransform(r,0,0,r,e[0]*r,e[1]*r),this},lineWidth:function(t){return this._lineW=t,this},constructor:b},s({stroke:"Stroke",fill:"Fill"},function(t,e){var r="_"+e+"Color",n="_do"+t,i="_"+e;b.prototype[e]=function(t,e,o,s){return void 0===t?this[i]():"boolean"!=typeof t?("string"==typeof t||this[r].type!==this.settings.color.prototype.type?this[r]=new this.settings.color(t,e,o,s):this[r].set(t,e,o,s),this[n]=!0):this[n]=t,this}},void 0,!0,["stroke","fill"]),["setTransform","transform","translate","restore","scale","save"].forEach(function(t){b.prototype[t]=Function("a, b, c, d, e, f","return this.matrix."+t+"( a, b, c, d, e, f ), this;")}),e.exports=b},{"./constants":72,"./internal/_copy-drawing-settings":73,"./internal/_create-polygon":74,"./internal/_get-gl-context-name":77,"./internal/_polygons":78,"./internal/_set-default-drawing-settings":79,"./options":84,"peako/base/base-for-in":8,"peako/get-element-h":28,"peako/get-element-w":29,"peako/is-object-like":36}],63:[function(t,e,r){"use strict";var n,i=t("peako/defaults"),o=t("./constants"),s=t("./Renderer"),a=t("./options"),f=t("./internal/align");function c(t){t=i(a,t),s.call(this,t,o.MODE_2D),this.smooth(this.settings.smooth),this.matrix=this.context,this._beginPath=!1}c.prototype=Object.create(s.prototype),c.prototype.smooth=(n=["webkitImageSmoothingEnabled","mozImageSmoothingEnabled","msImageSmoothingEnabled","oImageSmoothingEnabled","imageSmoothingEnabled"],function(t){var e;if("boolean"!=typeof t)throw TypeError("First argument in smooth( bool ) must be a boolean");for(e=n.length-1;e>=0;--e)n[e]in this.context&&(this.context[n[e]]=t);return this.settings.smooth=t,this}),c.prototype.backgroundColor=function(t,e,r,n){var i=this.context;return i.save(),i.setTransform(this.settings.scale,0,0,this.settings.scale,0,0),i.fillStyle=new this.settings.color(t,e,r,n),i.fillRect(0,0,this.w,this.h),i.restore(),this},c.prototype.backgroundImage=function(t){var e=this._rectAlignX,r=this._rectAlignY;return this._rectAlignX=o.CENTER,this._rectAlignY=o.MIDDLE,this.image(t,.5*this.w,.5*this.h),this._rectAlignX=e,this._rectAlignY=r,this},c.prototype.image=function(t,e,r,n,i){return t.get().loaded&&(void 0===n&&(n=t.dw),void 0===i&&(i=t.dh),e=Math.floor(f(e,n,this._rectAlignX)),r=Math.floor(f(r,i,this._rectAlignY)),this.context.drawImage(t.get().image,t.x,t.y,t.w,t.h,e,r,n,i)),this},c.prototype.clear=function(t,e,r,n){return void 0===t?(t=e=0,r=this.w,n=this.h):(t=Math.floor(f(t,r,this._rectAlignX)),e=Math.floor(f(e,n,this._rectAlignY))),this.context.clearRect(t,e,r,n),this},c.prototype.rect=function(t,e,r,n){return t=Math.floor(f(t,r,this._rectAlignX)),e=Math.floor(f(e,n,this._rectAlignY)),this._beginPath?this.context.rect(t,e,r,n):(this.context.beginPath(),this.context.rect(t,e,r,n),this._doFill&&this._fill(),this._doStroke&&this._stroke()),this},c.prototype.arc=function(t,e,r){return this._beginPath?this.context.arc(t,e,r,0,2*Math.PI,!1):(this.context.beginPath(),this.context.arc(t,e,r,0,2*Math.PI,!1),this._doFill&&this._fill(),this._doStroke&&this._stroke(!0)),this},c.prototype.vertices=function(t,e,r,n,i){var o,s=this.context;if(e<2)return this;for(null==n&&(n=i=1),s.beginPath(),s.moveTo(t[0]*n,t[1]*i),o=2,e*=2;o<e;o+=2)s.lineTo(t[o]*n,t[o+1]*i);return this._doFill&&this._fill(),this._doStroke&&this._lineW>0&&this._stroke(!0),this},c.prototype._fill=function(){this.context.fillStyle=this._fillColor,this.context.fill()},c.prototype._stroke=function(t){var e=this.context;t&&e.closePath(),e.strokeStyle=this._strokeColor,(e.lineWidth=this._lineW)<=1&&e.stroke(),e.stroke()},c.prototype.constructor=c,e.exports=c},{"./Renderer":62,"./constants":72,"./internal/align":80,"./options":84,"peako/defaults":25}],64:[function(t,e,r){"use strict";var n=t("peako/defaults"),i=t("./ShaderProgram"),o=t("./Transform"),s=t("./constants"),a=t("./Renderer"),f=t("./shaders"),c=t("./options"),u=t("./internal/align");function l(t){t=n(c,t),a.call(this,t,s.MODE_GL),this.matrix=new o,this.buffers={default:this.context.createBuffer(),rect:this.context.createBuffer()},this.context.bindBuffer(this.context.ARRAY_BUFFER,this.buffers.rect),this.context.bufferData(this.context.ARRAY_BUFFER,new Float32Array([0,0,1,0,1,1,0,1]),this.context.STATIC_DRAW),this.shaders={basic:new i(f.basicVert,f.basicFrag,this.context)},this.blending(t.blending)}l.prototype=Object.create(a.prototype),l.prototype.resize=function(t,e){return a.prototype.resize.call(this,t,e),this.context.viewport(0,0,this.w,this.h),this},l.prototype.blending=function(t){var e=this.context;return t?(e.enable(e.BLEND),e.disable(e.DEPTH_TEST),e.blendFunc(e.SRC_ALPHA,e.ONE_MINUS_SRC_ALPHA),e.blendEquation(e.FUNC_ADD)):(e.disable(e.BLEND),e.enable(e.DEPTH_TEST),e.depthFunc(e.LEQUAL)),this},l.prototype._clearColor=function(t,e,r,n){var i=this.context;i.clearColor(t,e,r,n),i.clear(i.COLOR_BUFFER_BIT|i.DEPTH_BUFFER_BIT)},l.prototype.backgroundColor=function(t,e,r,n){var i=new this.settings.color(t,e,r,n).rgba();return this._clearColor(i[0]/255,i[1]/255,i[2]/255,i[3]),this},l.prototype.clear=function(){return this._clearColor(0,0,0,0),this},l.prototype.vertices=function(t,e,r,n,i){var o=this.shaders.basic,s=this.context;return e<2?this:(t&&(null==r&&(r=s.STATIC_DRAW),s.bindBuffer(s.ARRAY_BUFFER,this.buffers.default),s.bufferData(s.ARRAY_BUFFER,t,r)),null!=n&&this.matrix.scale(n,i),o.use().uniform("utransform",this.matrix.matrix).uniform("ures",[this.w,this.h]).pointer("apos",2,s.FLOAT,!1,0,0),this._doFill&&(o.uniform("ucolor",this._fillColor.rgba()),s.drawArrays(s.TRIANGLE_FAN,0,e)),this._doStroke&&this._lineW>0&&(o.uniform("ucolor",this._strokeColor.rgba()),s.lineWidth(this._lineW),s.drawArrays(s.LINE_LOOP,0,e)),this)},l.prototype.arc=function(t,e,r){return this._polygon(t,e,r,r,24,0)},l.prototype.rect=function(t,e,r,n){return t=u(t,r,this._rectAlignX),e=u(e,n,this._rectAlignY),this.matrix.save(),this.matrix.translate(t,e),this.matrix.scale(r,n),this.context.bindBuffer(this.context.ARRAY_BUFFER,this.buffers.rect),this.vertices(null,4),this.matrix.restore(),this},l.prototype.constructor=l,e.exports=l},{"./Renderer":62,"./ShaderProgram":65,"./Transform":67,"./constants":72,"./internal/align":80,"./options":84,"./shaders":88,"peako/defaults":25}],65:[function(t,e,r){"use strict";var n=t("./internal/_create-program"),i=t("./internal/_create-shader");function o(t,e,r){"string"==typeof t&&(t=i(t,r.VERTEX_SHADER,r)),"string"==typeof e&&(e=i(e,r.FRAGMENT_SHADER,r)),this._program=n(t,e,r),this._gl=r,this.attributes=function(t,e){for(var r,n=t.getProgramParameter(e,t.ACTIVE_ATTRIBUTES)-1,i={};n>=0;--n)(r=t.getActiveAttrib(e,n)).location=t.getAttribLocation(e,r.name),i[r.name]=r;return i}(r,this._program),this.uniforms=function(t,e){for(var r,n,i,o=t.getProgramParameter(e,t.ACTIVE_UNIFORMS)-1,s={};o>=0;--o)i=t.getActiveUniform(e,o),r={location:t.getUniformLocation(e,i.name),size:i.size,type:i.type},i.size>1&&~(n=i.name.indexOf("[0]"))?r.name=i.name.slice(0,n):r.name=i.name,s[r.name]=r;return s}(r,this._program)}o.prototype={use:function(){return this._gl.useProgram(this._program),this},pointer:function(t,e,r,n,i,o){var s=this.attributes[t].location,a=this._gl;return a.enableVertexAttribArray(s),a.vertexAttribPointer(s,e,r,n,i,o),this},constructor:o},o.prototype.uniform=function(t,e){var r=this.uniforms[t],n=this._gl;switch(r.type){case n.BOOL:case n.INT:r.size>1?n.uniform1iv(r.location,e):n.uniform1i(r.location,e);break;case n.FLOAT:r.size>1?n.uniform1fv(r.location,e):n.uniform1f(r.location,e);break;case n.FLOAT_MAT2:n.uniformMatrix2fv(r.location,!1,e);break;case n.FLOAT_MAT3:n.uniformMatrix3fv(r.location,!1,e);break;case n.FLOAT_MAT4:n.uniformMatrix4fv(r.location,!1,e);break;case n.FLOAT_VEC2:r.size>1?n.uniform2fv(r.location,e):n.uniform2f(r.location,e[0],e[1]);break;case n.FLOAT_VEC3:r.size>1?n.uniform3fv(r.location,e):n.uniform3f(r.location,e[0],e[1],e[2]);break;case n.FLOAT_VEC4:r.size>1?n.uniform4fv(r.location,e):n.uniform4f(r.location,e[0],e[1],e[2],e[3]);break;default:throw TypeError("The uniform type is not supported")}return this},e.exports=o},{"./internal/_create-program":75,"./internal/_create-shader":76}],66:[function(t,e,r){"use strict";var n=t("light_emitter"),i=t("extend"),o=t("peako/timestamp"),s=t("peako/timer"),a=i(n,{constructor:function(){var t=this;this.__super__.call(this),this.lastRequestAnimationFrameID=0,this.lastRequestTime=0,this.skippedTime=0,this.totalTime=0,this.running=!1,this.tick=function e(r){var n;if(!t.running)return r||(t.lastRequestAnimationFrameID=s.request(e),t.lastRequestTime=o(),t.running=!0),this;for(r||(r=o()),n=Math.min(1,.001*(r-t.lastRequestTime)),t.skippedTime+=n,t.totalTime+=n;t.skippedTime>=t.step&&t.running;)t.skippedTime-=t.step,t.emit("update",t.step,r);return t.emit("render",n,r),t.lastRequestTime=r,t.lastRequestAnimationFrameID=s.request(e),this},this.setFPS(60)},setFPS:function(t){return this.step=1/t,this},clear:function(){return this.skippedTime=0,this},stop:function(){return this.running=!1,this}});e.exports=a},{extend:83,light_emitter:1,"peako/timer":54,"peako/timestamp":55}],67:[function(t,e,r){"use strict";var n=t("./mat3");function i(){this.matrix=n.identity(),this._index=-1,this._stack=[]}i.prototype={save:function(){++this._index<this._stack.length?n.copy(this._stack[this._index],this.matrix):this._stack.push(n.clone(this.matrix))},restore:function(){this._index>=0?n.copy(this.matrix,this._stack[this._index--]):n.setIdentity(this.matrix)},setTransform:function(t,e,r,i,o,s){n.setTransform(this.matrix,t,e,r,i,o,s)},translate:function(t,e){n.translate(this.matrix,t,e)},rotate:function(t){n.rotate(this.matrix,t)},scale:function(t,e){n.scale(this.matrix,t,e)},transform:function(t,e,r,i,o,s){n.transform(this.matrix,t,e,r,i,o,s)},constructor:i},e.exports=i},{"./mat3":81}],68:[function(t,e,r){"use strict";e.exports=s;var n=t("peako/clamp"),i=t("./RGBA"),o=t("./internal/parse");function s(t,e,r,n){this.set(t,e,r,n)}function a(t,e,r){return t<1/6?Math.round(255*(e+6*(r-e)*t)):t<.5?Math.round(255*r):t<2/3?Math.round(255*(e+(r-e)*(2/3-t)*6)):Math.round(255*e)}s.prototype={perceivedBrightness:function(){return this.rgba().perceivedBrightness()},luminance:function(){return this.rgba().luminance()},brightness:function(){return this.rgba().brightness()},toString:function(){return"hsla("+this[0]+", "+this[1]+"%, "+this[2]+"%, "+this[3]+")"},set:function(t,e,r,n){switch(!0){case"string"==typeof t:t=o(t);case"object"==typeof t&&null!=t:t.type!==this.type&&(t=t[this.type]()),this[0]=t[0],this[1]=t[1],this[2]=t[2],this[3]=t[3];break;default:switch(void 0){case t:n=1,r=e=t=0;break;case e:n=1,r=Math.floor(t),e=t=0;break;case r:n=e,r=Math.floor(t),e=t=0;break;case n:n=1;default:t=Math.floor(t),e=Math.floor(e),r=Math.floor(r)}this[0]=t,this[1]=e,this[2]=r,this[3]=n}return this},rgba:function(){var t,e=new i,r=this[0]%360/360,n=.01*this[1],o=.01*this[2],s=r+1/3,f=r,c=r-1/3,u=2*o-(t=o<.5?o*(1+n):o+n-o*n);return s<0&&++s,f<0&&++f,c<0&&++c,s>1&&--s,f>1&&--f,c>1&&--c,e[0]=a(s,u,t),e[1]=a(f,u,t),e[2]=a(c,u,t),e[3]=this[3],e},lerp:function(t,e,r,n){var i=new s;return i[0]=t,i[1]=e,i[2]=r,this.lerpColor(i,n)},lerpColor:function(t,e){return this.rgba().lerpColor(t,e).hsla()},shade:function(t){var e=new s;return e[0]=this[0],e[1]=this[1],e[2]=n(this[2]+t,0,100),e[3]=this[3],e},constructor:s,type:"hsla"}},{"./RGBA":69,"./internal/parse":71,"peako/clamp":17}],69:[function(t,e,r){"use strict";e.exports=o;var n=t("./HSLA"),i=t("./internal/parse");function o(t,e,r,n){this.set(t,e,r,n)}o.prototype={perceivedBrightness:function(){var t=this[0],e=this[1],r=this[2];return Math.sqrt(.299*t*t+.587*e*e+.114*r*r)},luminance:function(){return.2126*this[0]+.7152*this[1]+.0722*this[2]},brightness:function(){return.299*this[0]+.587*this[1]+.114*this[2]},toString:function(){return"rgba("+this[0]+", "+this[1]+", "+this[2]+", "+this[3]+")"},set:function(t,e,r,n){switch(!0){case"string"==typeof t:t=i(t);case"object"==typeof t&&null!=t:t.type!==this.type&&(t=t[this.type]()),this[0]=t[0],this[1]=t[1],this[2]=t[2],this[3]=t[3];break;default:switch(void 0){case t:n=1,r=e=t=0;break;case e:n=1,r=e=t=Math.floor(t);break;case r:n=e,r=e=t=Math.floor(t);break;case n:n=1;default:t=Math.floor(t),e=Math.floor(e),r=Math.floor(r)}this[0]=t,this[1]=e,this[2]=r,this[3]=n}return this},hsla:function(){var t,e,r=new n,i=this[0]/255,o=this[1]/255,s=this[2]/255,a=Math.max(i,o,s),f=Math.min(i,o,s),c=50*(a+f),u=a-f;if(u){switch(e=c>50?u/(2-a-f):u/(a+f),a){case i:t=o<s?1.0472*(o-s)/u+6.2832:1.0472*(o-s)/u;break;case o:t=1.0472*(s-i)/u+2.0944;break;default:t=1.0472*(i-o)/u+4.1888}t=Math.round(360*t/6.2832),e=Math.round(100*e)}else t=e=0;return r[0]=t,r[1]=e,r[2]=Math.round(c),r[3]=this[3],r},rgba:function(){return this},lerp:function t(e,r,n,i){return new o(e=t(this[0],e,i),r=t(this[0],r,i),n=t(this[0],n,i),this[3])},lerpColor:function(t,e){var r,n,o;return"object"!=typeof t&&(t=i(t)),"rgba"!==t.type&&(t=t.rgba()),r=t[0],n=t[1],o=t[2],this.lerp(r,n,o,e)},shade:function(t){return this.hsla().shade(t).rgba()},constructor:o,type:"rgba"}},{"./HSLA":68,"./internal/parse":71}],70:[function(t,e,r){"use strict";e.exports={aliceblue:"f0f8ffff",antiquewhite:"faebd7ff",aqua:"00ffffff",aquamarine:"7fffd4ff",azure:"f0ffffff",beige:"f5f5dcff",bisque:"ffe4c4ff",black:"000000ff",blanchedalmond:"ffebcdff",blue:"0000ffff",blueviolet:"8a2be2ff",brown:"a52a2aff",burlywood:"deb887ff",cadetblue:"5f9ea0ff",chartreuse:"7fff00ff",chocolate:"d2691eff",coral:"ff7f50ff",cornflowerblue:"6495edff",cornsilk:"fff8dcff",crimson:"dc143cff",cyan:"00ffffff",darkblue:"00008bff",darkcyan:"008b8bff",darkgoldenrod:"b8860bff",darkgray:"a9a9a9ff",darkgreen:"006400ff",darkkhaki:"bdb76bff",darkmagenta:"8b008bff",darkolivegreen:"556b2fff",darkorange:"ff8c00ff",darkorchid:"9932ccff",darkred:"8b0000ff",darksalmon:"e9967aff",darkseagreen:"8fbc8fff",darkslateblue:"483d8bff",darkslategray:"2f4f4fff",darkturquoise:"00ced1ff",darkviolet:"9400d3ff",deeppink:"ff1493ff",deepskyblue:"00bfffff",dimgray:"696969ff",dodgerblue:"1e90ffff",feldspar:"d19275ff",firebrick:"b22222ff",floralwhite:"fffaf0ff",forestgreen:"228b22ff",fuchsia:"ff00ffff",gainsboro:"dcdcdcff",ghostwhite:"f8f8ffff",gold:"ffd700ff",goldenrod:"daa520ff",gray:"808080ff",green:"008000ff",greenyellow:"adff2fff",honeydew:"f0fff0ff",hotpink:"ff69b4ff",indianred:"cd5c5cff",indigo:"4b0082ff",ivory:"fffff0ff",khaki:"f0e68cff",lavender:"e6e6faff",lavenderblush:"fff0f5ff",lawngreen:"7cfc00ff",lemonchiffon:"fffacdff",lightblue:"add8e6ff",lightcoral:"f08080ff",lightcyan:"e0ffffff",lightgoldenrodyellow:"fafad2ff",lightgrey:"d3d3d3ff",lightgreen:"90ee90ff",lightpink:"ffb6c1ff",lightsalmon:"ffa07aff",lightseagreen:"20b2aaff",lightskyblue:"87cefaff",lightslateblue:"8470ffff",lightslategray:"778899ff",lightsteelblue:"b0c4deff",lightyellow:"ffffe0ff",lime:"00ff00ff",limegreen:"32cd32ff",linen:"faf0e6ff",magenta:"ff00ffff",maroon:"800000ff",mediumaquamarine:"66cdaaff",mediumblue:"0000cdff",mediumorchid:"ba55d3ff",mediumpurple:"9370d8ff",mediumseagreen:"3cb371ff",mediumslateblue:"7b68eeff",mediumspringgreen:"00fa9aff",mediumturquoise:"48d1ccff",mediumvioletred:"c71585ff",midnightblue:"191970ff",mintcream:"f5fffaff",mistyrose:"ffe4e1ff",moccasin:"ffe4b5ff",navajowhite:"ffdeadff",navy:"000080ff",oldlace:"fdf5e6ff",olive:"808000ff",olivedrab:"6b8e23ff",orange:"ffa500ff",orangered:"ff4500ff",orchid:"da70d6ff",palegoldenrod:"eee8aaff",palegreen:"98fb98ff",paleturquoise:"afeeeeff",palevioletred:"d87093ff",papayawhip:"ffefd5ff",peachpuff:"ffdab9ff",peru:"cd853fff",pink:"ffc0cbff",plum:"dda0ddff",powderblue:"b0e0e6ff",purple:"800080ff",red:"ff0000ff",rosybrown:"bc8f8fff",royalblue:"4169e1ff",saddlebrown:"8b4513ff",salmon:"fa8072ff",sandybrown:"f4a460ff",seagreen:"2e8b57ff",seashell:"fff5eeff",sienna:"a0522dff",silver:"c0c0c0ff",skyblue:"87ceebff",slateblue:"6a5acdff",slategray:"708090ff",snow:"fffafaff",springgreen:"00ff7fff",steelblue:"4682b4ff",tan:"d2b48cff",teal:"008080ff",thistle:"d8bfd8ff",tomato:"ff6347ff",turquoise:"40e0d0ff",violet:"ee82eeff",violetred:"d02090ff",wheat:"f5deb3ff",white:"ffffffff",whitesmoke:"f5f5f5ff",yellow:"ffff00ff",yellowgreen:"9acd32ff",transparent:"00000000"}},{}],71:[function(t,e,r){"use strict";e.exports=function(t){var e=s[t]||s[t=t.trim().toLowerCase()];if(!e){if(e=o[t])e=new h(u(e),n);else if(e=f.hex.exec(t))e=new h(u(c(e)),n);else if(e=f.rgb.exec(t))e=new h(l(e),n);else if(e=f.hsl.exec(t))e=new h(l(e),i);else{if(!(e=f.hex3.exec(t)))throw SyntaxError(t+" is not a valid syntax");e=new h(u(c(e,!0)),n)}s[t]=e}return new e.color(e[0],e[1],e[2],e[3])};var n=t("../RGBA"),i=t("../HSLA"),o=t("./colors"),s=Object.create(null),a=[0,0,0,0],f={hex3:/^#([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])?$/,hex:/^#([0-9a-f]{6})([0-9a-f]{2})?$/,rgb:/^rgb\s*\(\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*\)$|^\s*rgba\s*\(\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*\)$/,hsl:/^hsl\s*\(\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\u0025\s*,\s*(\d+|\d*\.\d+)\u0025\s*\)$|^\s*hsla\s*\(\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\u0025\s*,\s*(\d+|\d*\.\d+)\u0025\s*,\s*(\d+|\d*\.\d+)\s*\)$/};function c(t,e){var r,n,i,o;return e?(r=t[1])+r+(n=t[2])+n+(i=t[3])+i+(o=t[4]||"f")+o:t[1]+(t[2]||"ff")}function u(t){return 0==t?a:[(t=parseInt(t,16))>>24&255,t>>16&255,t>>8&255,(255&t)/255]}function l(t){return t[7]?[+t[4],+t[5],+t[6],+t[7]]:[+t[1],+t[2],+t[3]]}function h(t,e){this[0]=t[0],this[1]=t[1],this[2]=t[2],this[3]=t[3],this.color=e}},{"../HSLA":68,"../RGBA":69,"./colors":70}],72:[function(t,e,r){"use strict";e.exports={MODE_AUTO:1,MODE_GL:2,MODE_2D:3,SELF_CONTEXT:6,BOTTOM:7,RIGHT:8,LEFT:9,TOP:10,CENTER:11,MIDDLE:12}},{}],73:[function(t,e,r){"use strict";e.exports=function(t,e,r){return r&&(t._fillColor[0]=e._fillColor[0],t._fillColor[1]=e._fillColor[1],t._fillColor[2]=e._fillColor[2],t._fillColor[3]=e._fillColor[3],t._font.style=e._font.style,t._font.variant=e._font.variant,t._font.weight=e._font.weight,t._font.size=e._font.size,t._font.family=e._font.family,t._strokeColor[0]=e._strokeColor[0],t._strokeColor[1]=e._strokeColor[1],t._strokeColor[2]=e._strokeColor[2],t._strokeColor[3]=e._strokeColor[3]),t._rectAlignX=e._rectAlignX,t._rectAlignY=e._rectAlignY,t._textAlignX=e._textAlignX,t._textAlignY=e._textAlignY,t._doStroke=e._doStroke,t._doFill=e._doFill,t._lineH=e._lineH,t._lineW=e._lineW,t}},{}],74:[function(t,e,r){"use strict";e.exports=function(t){for(var e=Math.floor(t),r=new Float32Array(2*e+2),n=2*Math.PI/t;e>=0;--e)r[2*e]=Math.cos(n*e),r[1+2*e]=Math.sin(n*e);return r}},{}],75:[function(t,e,r){"use strict";e.exports=function(t,e,r){var n=r.createProgram();if(r.attachShader(n,t),r.attachShader(n,e),r.linkProgram(n),!r.getProgramParameter(n,r.LINK_STATUS))throw Error("Unable to initialize the shader program: "+r.getProgramInfoLog(n));if(r.validateProgram(n),!r.getProgramParameter(n,r.VALIDATE_STATUS))throw Error("Unable to validate the shader program: "+r.getProgramInfoLog(n));return n}},{}],76:[function(t,e,r){"use strict";e.exports=function(t,e,r){var n=r.createShader(e);if(r.shaderSource(n,t),r.compileShader(n),!r.getShaderParameter(n,r.COMPILE_STATUS))throw SyntaxError("An error occurred compiling the shaders: "+r.getShaderInfoLog(n));return n}},{}],77:[function(t,e,r){"use strict";var n=t("peako/once");e.exports=n(function(){var t,e,r=document.createElement("canvas");if("function"==typeof r.getContext)for(e=(t=["webkit-3d","moz-webgl","experimental-webgl","webgl"]).length-1;e>=0;--e)if(r.getContext(t[e]))return t[e]})},{"peako/once":49}],78:[function(t,e,r){"use strict"},{}],79:[function(t,e,r){"use strict";var n=t("./_copy-drawing-settings"),i=t("../constants"),o={_rectAlignX:i.LEFT,_rectAlignY:i.TOP,_textAlignX:i.LEFT,_textAlineY:i.TOP,_doStroke:!0,_doFill:!0,_lineH:14,_lineW:2};e.exports=function(t,e){return n(t,o),t._strokeColor=new e.settings.color,t._fillColor=new e.settings.color,t._font=null,t}},{"../constants":72,"./_copy-drawing-settings":73}],80:[function(t,e,r){"use strict";var n=t("../constants");e.exports=function(t,e,r){switch(r){case n.LEFT:case n.TOP:return t;case n.CENTER:case n.MIDDLE:return t-.5*e;case n.RIGHT:case n.BOTTOM:return t-e}return 0}},{"../constants":72}],81:[function(t,e,r){"use strict";r.identity=function(){return[1,0,0,0,1,0,0,0,1]},r.setIdentity=function(t){t[0]=t[4]=t[8]=1,t[1]=t[2]=t[3]=t[5]=t[6]=t[7]=0},r.copy=function(t,e){t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t[4]=e[4],t[5]=e[5],t[6]=e[6],t[7]=e[7],t[8]=e[8]},r.clone=function(t){return[t[0],t[1],t[2],t[3],t[4],t[5],t[6],t[7],t[8]]},r.translate=function(t,e,r){t[6]=e*t[0]+r*t[3]+t[6],t[7]=e*t[1]+r*t[4]+t[7],t[8]=e*t[2]+r*t[5]+t[8]},r.rotate=function(t,e){var r=t[0],n=t[1],i=t[2],o=t[3],s=t[4],a=t[5],f=Math.cos(e),c=Math.sin(e);t[0]=f*r+c*o,t[1]=f*n+c*s,t[2]=f*i+c*a,t[3]=f*o-c*r,t[4]=f*s-c*n,t[5]=f*a-c*i},r.scale=function(t,e,r){t[0]*=e,t[1]*=e,t[2]*=e,t[3]*=r,t[4]*=r,t[5]*=r},r.transform=function(t,e,r,n,i,o,s){t[0]*=e,t[1]*=n,t[2]*=o,t[3]*=r,t[4]*=i,t[5]*=s,t[6]=0,t[7]=0},r.setTransform=function(t,e,r,n,i,o,s){t[0]=e,t[1]=r,t[3]=n,t[4]=i,t[6]=o,t[7]=s}},{}],82:[function(t,e,r){"use strict";var n=t("../settings");function i(t,e){this.set(t,e)}i.prototype={set:function(t,e){return this.x=t||0,this.y=e||0,this},setVector:function(t){return this.set(t.x,t.y)},lerp:function(t,e,r){return this.x+=(t-this.x)*r||0,this.y+=(e-this.y)*r||0,this},lerpVector:function(t,e){var r=t.x||0,n=t.y||0;return this.lerp(r,n,e)},add:function(t,e){return this.x+=t||0,this.y+=e||0,this},addVector:function(t){return this.add(t.x,t.y)},sub:function(t,e){return this.x-=t||0,this.y-=e||0,this},subVector:function(t){return this.sub(t.x,t.y)},mul:function(t){return this.x*=t||0,this.y*=t||0,this},mulVector:function(t){return this.x*=t.x||0,this.y*=t.y||0,this},div:function(t){return this.x/=t||0,this.y/=t||0,this},divVector:function(t){return this.x/=t.x||0,this.y/=t.y||0,this},angle:function(){return n.degrees?180*Math.atan2(this.y,this.x)/Math.PI:Math.atan2(this.y,this.x)},mag:function(){return Math.sqrt(this.magSquare())},magSquare:function(){return this.x*this.x+this.y*this.y},setMag:function(t){return this.normalize().mul(t)},normalize:function(){var t=this.mag();return t&&1!==t&&this.div(t),this},dot:function(t,e){return this.x*(t||0)+this.y*(e||0)},dotVector:function(t){return this.x*(t.x||0)+this.y*(t.y||0)},clone:function(){return new i(this.x,this.y)},dist:function t(e){return t(this.x,this.y,e.x,e.y)},limit:function(t){var e=this.magSquare();return e>t*t&&this.div(Math.sqrt(e)).mul(t),this},cross:function(t){return i.cross(this,t)},toString:function(){return"vec2("+this.x.toFixed(2)+", "+this.y.toFixed(2)+")"},rotate:function(t){var e,r,i=this.x,o=this.y;return n.degrees&&(t*=Math.PI/180),e=Math.cos(t),r=Math.sin(t),this.x=i*e-o*r,this.y=i*r+o*e,this},setAngle:function(t){var e=this.mag();return n.degrees&&(t*=Math.PI/180),this.x=e*Math.cos(t),this.y=e*Math.sin(t),this},constructor:i},["normalize","setMag","rotate","limit","lerp","mul","div","add","sub","set"].forEach(function(t){i[t]=Function("vector, x, y, z, value","return vector.copy()."+t+"( x, y, z, value );")}),i.random=function(){var t;return t=n.degrees?360:2*Math.PI,i.fromAngle(Math.random()*t)},i.fromAngle=function(t){return n.degrees&&(t*=Math.PI/180),new i(Math.cos(t),Math.sin(t))},i.cross=function(t,e){return t.x*e.y-t.y*e.x},i.clone=function(t){return new i(t.x,t.y)},e.exports=i},{"../settings":87}],83:[function(t,e,r){"use strict";var n=t("utils/lib/ArgumentException"),i=t("utils/lib/LogicalError"),o=Object.prototype.hasOwnProperty;e.exports=function(t,e){var r,s,a;if("function"!=typeof t)throw n("extend(__super__: function, __proto__: object): function","__super__",t);if(("object"!=typeof e||null===e)&&"function"!=typeof e)throw n("extend(__super__: function, __proto__: object): function","__proto__",e);if(!o.call(e,"constructor"))throw i("extend(__super__: function, __proto__: object): function","cannot find `constructor` function in `__proto__`");if("function"!=typeof e.constructor)throw i("extend(__super__: function, __proto__: object): function","`__proto__.constructor` is not a function");if("object"!=typeof t.prototype)throw i("extend(__super__: function, __proto__: object): function","`__super__.prototype` must be an object or null");for(e.constructor.prototype=Object.create(t.prototype),e.constructor.prototype.__super__=t,s=0,a=(r=Object.keys(e)).length;s<a;++s)e.constructor.prototype[r[s]]=e[r[s]];return e.constructor}},{"utils/lib/ArgumentException":60,"utils/lib/LogicalError":61}],84:[function(t,e,r){"use strict";e.exports={settings:{color:t("./colors/RGBA"),smooth:!1,scale:1},antialias:!0,blending:!0,degrees:!1,append:!0,alpha:!0,mode:t("./constants").MODE_2D}},{"./colors/RGBA":69,"./constants":72}],85:[function(t,e,r){"use strict";var n;if(void 0===n)try{n=t("platform")}catch(t){}var i=t("peako/once"),o=t("./internal/_get-gl-context-name"),s=t("./options"),a=t("./RendererGL"),f=t("./Renderer2D"),c=t("./constants"),u=t("./report"),l=i(function(){var t,e;return"undefined"!=typeof window&&(t="ontouchstart"in window&&"ontouchmove"in window&&"ontouchend"in window),n&&(e=n.os&&"iOS"===n.os.family&&"Safari"===n.name),t&&!e?c.MODE_GL:c.MODE_2D});e.exports=function(t){var e=t&&t.mode||s.mode;if(e===c.MODE_AUTO&&(e=l()),e===c.MODE_GL){if(o())return new a(t);u("Cannot create WebGL context, fallback to 2D.")}if(e===c.MODE_2D||e===c.MODE_GL)return new f(t)}},{"./Renderer2D":63,"./RendererGL":64,"./constants":72,"./internal/_get-gl-context-name":77,"./options":84,"./report":86,"peako/once":49,platform:59}],86:[function(t,e,r){"use strict";var n,i;"undefined"!=typeof console&&console.warn?(i={},n=function(t){i[t]||(console.warn(t),i[t]=!0)}):n=t("peako/noop"),e.exports=n},{"peako/noop":47}],87:[function(t,e,r){"use strict";e.exports={degress:!1}},{}],88:[function(t,e,r){"use strict";e.exports={basicVert:"precision mediump float;attribute vec2 apos;uniform vec2 ures;uniform mat3 utransform;void main(){gl_Position=vec4(((utransform*vec3(apos,1.0)).xy/ures*2.0-1.0)*vec2(1,-1),0,1);}",basicFrag:"precision mediump float;uniform vec4 ucolor;void main(){gl_FragColor=vec4(ucolor.rgb/255.0,ucolor.a);}",backgroundVert:"precision mediump float;attribute vec2 apos;void main(){gl_Position = vec4(apos,0,1);}",backgroundFrag:"precision mediump float;uniform vec4 ucolor;void main(){gl_FragColor=ucolor;}"}},{}],89:[function(t,e,r){"use strict";var n=t("v6.js/math/Vector2D");function i(){this.pos=new n,this.r=20}i.prototype={render:function(t){t.polygon(this.pos.x,this.pos.y,this.r,3)},constructor:i},e.exports=i},{"v6.js/math/Vector2D":82}],90:[function(t,e,r){"use strict";var n=t("./Bird"),i={init:function(){this.bird=new n},bird:null};e.exports=i},{"./Bird":89}],91:[function(t,e,r){(function(e){"use strict";var r=t("v6.js/renderer"),n=t("v6.js/Ticker"),i=t("v6.js/constants"),o=t("./game");o.init();var s=e.renderer=r({mode:i.MODE_AUTO}).fill(255);(new n).on("render",function(){s.backgroundColor(0),o.bird.render(s)}).on("update",function(){o.bird.pos.add(1,1)}).tick()}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{"./game":90,"v6.js/Ticker":66,"v6.js/constants":72,"v6.js/renderer":85}]},{},[91]);
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+'use strict';
+
+var hasOwn = Object.prototype.hasOwnProperty;
+var toStr = Object.prototype.toString;
+var defineProperty = Object.defineProperty;
+var gOPD = Object.getOwnPropertyDescriptor;
+
+var isArray = function isArray(arr) {
+	if (typeof Array.isArray === 'function') {
+		return Array.isArray(arr);
+	}
+
+	return toStr.call(arr) === '[object Array]';
+};
+
+var isPlainObject = function isPlainObject(obj) {
+	if (!obj || toStr.call(obj) !== '[object Object]') {
+		return false;
+	}
+
+	var hasOwnConstructor = hasOwn.call(obj, 'constructor');
+	var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
+	// Not own constructor property must be Object
+	if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
+		return false;
+	}
+
+	// Own properties are enumerated firstly, so to speed up,
+	// if last one is own, then all properties are own.
+	var key;
+	for (key in obj) { /**/ }
+
+	return typeof key === 'undefined' || hasOwn.call(obj, key);
+};
+
+// If name is '__proto__', and Object.defineProperty is available, define __proto__ as an own property on target
+var setProperty = function setProperty(target, options) {
+	if (defineProperty && options.name === '__proto__') {
+		defineProperty(target, options.name, {
+			enumerable: true,
+			configurable: true,
+			value: options.newValue,
+			writable: true
+		});
+	} else {
+		target[options.name] = options.newValue;
+	}
+};
+
+// Return undefined instead of __proto__ if '__proto__' is not an own property
+var getProperty = function getProperty(obj, name) {
+	if (name === '__proto__') {
+		if (!hasOwn.call(obj, name)) {
+			return void 0;
+		} else if (gOPD) {
+			// In early versions of node, obj['__proto__'] is buggy when obj has
+			// __proto__ as an own property. Object.getOwnPropertyDescriptor() works.
+			return gOPD(obj, name).value;
+		}
+	}
+
+	return obj[name];
+};
+
+module.exports = function extend() {
+	var options, name, src, copy, copyIsArray, clone;
+	var target = arguments[0];
+	var i = 1;
+	var length = arguments.length;
+	var deep = false;
+
+	// Handle a deep copy situation
+	if (typeof target === 'boolean') {
+		deep = target;
+		target = arguments[1] || {};
+		// skip the boolean and the target
+		i = 2;
+	}
+	if (target == null || (typeof target !== 'object' && typeof target !== 'function')) {
+		target = {};
+	}
+
+	for (; i < length; ++i) {
+		options = arguments[i];
+		// Only deal with non-null/undefined values
+		if (options != null) {
+			// Extend the base object
+			for (name in options) {
+				src = getProperty(target, name);
+				copy = getProperty(options, name);
+
+				// Prevent never-ending loop
+				if (target !== copy) {
+					// Recurse if we're merging plain objects or arrays
+					if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
+						if (copyIsArray) {
+							copyIsArray = false;
+							clone = src && isArray(src) ? src : [];
+						} else {
+							clone = src && isPlainObject(src) ? src : {};
+						}
+
+						// Never move original objects, clone them
+						setProperty(target, { name: name, newValue: extend(deep, clone, copy) });
+
+					// Don't bring in undefined values
+					} else if (typeof copy !== 'undefined') {
+						setProperty(target, { name: name, newValue: copy });
+					}
+				}
+			}
+		}
+	}
+
+	// Return the modified object
+	return target;
+};
+
+},{}],2:[function(require,module,exports){
+'use strict';
+
+/**
+ * A lightweight implementation of Node.js EventEmitter.
+ * @constructor LightEmitter
+ * @example
+ * var LightEmitter = require( 'light_emitter' );
+ */
+function LightEmitter () {}
+
+LightEmitter.prototype = {
+  /**
+   * @method LightEmitter#emit
+   * @param {string} type
+   * @param {...any} [data]
+   * @chainable
+   */
+  emit: function emit ( type ) {
+    var list = _getList( this, type );
+    var data, i, l;
+
+    if ( ! list ) {
+      return this;
+    }
+
+    if ( arguments.length > 1 ) {
+      data = [].slice.call( arguments, 1 );
+    }
+
+    for ( i = 0, l = list.length; i < l; ++i ) {
+      if ( ! list[ i ].active ) {
+        continue;
+      }
+
+      if ( list[ i ].once ) {
+        list[ i ].active = false;
+      }
+
+      if ( data ) {
+        list[ i ].listener.apply( this, data );
+      } else {
+        list[ i ].listener.call( this );
+      }
+    }
+
+    return this;
+  },
+
+  /**
+   * @method LightEmitter#off
+   * @param {string}   [type]
+   * @param {function} [listener]
+   * @chainable
+   */
+  off: function off ( type, listener ) {
+    var list, i;
+
+    if ( ! type ) {
+      this._events = null;
+    } else if ( ( list = _getList( this, type ) ) ) {
+      if ( listener ) {
+        for ( i = list.length - 1; i >= 0; --i ) {
+          if ( list[ i ].listener === listener && list[ i ].active ) {
+            list[ i ].active = false;
+          }
+        }
+      } else {
+        list.length = 0;
+      }
+    }
+
+    return this;
+  },
+
+  /**
+   * @method LightEmitter#on
+   * @param {string}   type
+   * @param {function} listener
+   * @chainable
+   */
+  on: function on ( type, listener ) {
+    _on( this, type, listener );
+    return this;
+  },
+
+  /**
+   * @method LightEmitter#once
+   * @param {string}   type
+   * @param {function} listener
+   * @chainable
+   */
+  once: function once ( type, listener ) {
+    _on( this, type, listener, true );
+    return this;
+  },
+
+  constructor: LightEmitter
+};
+
+/**
+ * @private
+ * @method _on
+ * @param  {LightEmitter} self
+ * @param  {string}       type
+ * @param  {function}     listener
+ * @param  {boolean}      once
+ * @return {void}
+ */
+function _on ( self, type, listener, once ) {
+  var entity = {
+    listener: listener,
+    active:   true,
+    type:     type,
+    once:     once
+  };
+
+  if ( ! self._events ) {
+    self._events = Object.create( null );
+  }
+
+  if ( ! self._events[ type ] ) {
+    self._events[ type ] = [];
+  }
+
+  self._events[ type ].push( entity );
+}
+
+/**
+ * @private
+ * @method _getList
+ * @param  {LightEmitter}   self
+ * @param  {string}         type
+ * @return {array<object>?}
+ */
+function _getList ( self, type ) {
+  return self._events && self._events[ type ];
+}
+
+module.exports = LightEmitter;
+
+},{}],3:[function(require,module,exports){
+'use strict';
+var toString = Object.prototype.toString;
+module.exports = function _throwArgumentException(unexpected, expected) {
+    throw Error('"' + toString.call(unexpected) + '" is not ' + expected);
+};
+},{}],4:[function(require,module,exports){
+'use strict';
+var type = require('./type');
+var lastRes = 'undefined';
+var lastVal;
+module.exports = function _type(val) {
+    if (val === lastVal) {
+        return lastRes;
+    }
+    return lastRes = type(lastVal = val);
+};
+},{"./type":61}],5:[function(require,module,exports){
+'use strict';
+module.exports = function _unescape(string) {
+    return string.replace(/\\(\\)?/g, '$1');
+};
+},{}],6:[function(require,module,exports){
+'use strict';
+var isset = require('../isset');
+var undefined;
+var defineGetter = Object.prototype.__defineGetter__, defineSetter = Object.prototype.__defineSetter__;
+function baseDefineProperty(object, key, descriptor) {
+    var hasGetter = isset('get', descriptor), hasSetter = isset('set', descriptor), get, set;
+    if (hasGetter || hasSetter) {
+        if (hasGetter && typeof (get = descriptor.get) !== 'function') {
+            throw TypeError('Getter must be a function: ' + get);
+        }
+        if (hasSetter && typeof (set = descriptor.set) !== 'function') {
+            throw TypeError('Setter must be a function: ' + set);
+        }
+        if (isset('writable', descriptor)) {
+            throw TypeError('Invalid property descriptor. Cannot both specify accessors and a value or writable attribute');
+        }
+        if (defineGetter) {
+            if (hasGetter) {
+                defineGetter.call(object, key, get);
+            }
+            if (hasSetter) {
+                defineSetter.call(object, key, set);
+            }
+        } else {
+            throw Error('Cannot define getter or setter');
+        }
+    } else if (isset('value', descriptor)) {
+        object[key] = descriptor.value;
+    } else if (!isset(key, object)) {
+        object[key] = undefined;
+    }
+    return object;
+}
+module.exports = baseDefineProperty;
+},{"../isset":44}],7:[function(require,module,exports){
+'use strict';
+module.exports = function baseExec(regexp, string) {
+    var result = [], value;
+    regexp.lastIndex = 0;
+    while (value = regexp.exec(string)) {
+        result.push(value);
+    }
+    return result;
+};
+},{}],8:[function(require,module,exports){
+'use strict';
+var callIteratee = require('../call-iteratee'), isset = require('../isset');
+module.exports = function baseForEach(arr, fn, ctx, fromRight) {
+    var i, j, idx;
+    for (i = -1, j = arr.length - 1; j >= 0; --j) {
+        if (fromRight) {
+            idx = j;
+        } else {
+            idx = ++i;
+        }
+        if (isset(idx, arr) && callIteratee(fn, ctx, arr[idx], idx, arr) === false) {
+            break;
+        }
+    }
+    return arr;
+};
+},{"../call-iteratee":17,"../isset":44}],9:[function(require,module,exports){
+'use strict';
+var callIteratee = require('../call-iteratee');
+module.exports = function baseForIn(obj, fn, ctx, fromRight, keys) {
+    var i, j, key;
+    for (i = -1, j = keys.length - 1; j >= 0; --j) {
+        if (fromRight) {
+            key = keys[j];
+        } else {
+            key = keys[++i];
+        }
+        if (callIteratee(fn, ctx, obj[key], key, obj) === false) {
+            break;
+        }
+    }
+    return obj;
+};
+},{"../call-iteratee":17}],10:[function(require,module,exports){
+'use strict';
+var isset = require('../isset');
+module.exports = function baseGet(obj, path, off) {
+    var l = path.length - off, i = 0, key;
+    for (; i < l; ++i) {
+        key = path[i];
+        if (isset(key, obj)) {
+            obj = obj[key];
+        } else {
+            return;
+        }
+    }
+    return obj;
+};
+},{"../isset":44}],11:[function(require,module,exports){
+'use strict';
+var baseToIndex = require('./base-to-index');
+var indexOf = Array.prototype.indexOf, lastIndexOf = Array.prototype.lastIndexOf;
+function baseIndexOf(arr, search, fromIndex, fromRight) {
+    var l, i, j, idx, val;
+    if (search === search && (idx = fromRight ? lastIndexOf : indexOf)) {
+        return idx.call(arr, search, fromIndex);
+    }
+    l = arr.length;
+    if (!l) {
+        return -1;
+    }
+    j = l - 1;
+    if (typeof fromIndex !== 'undefined') {
+        fromIndex = baseToIndex(fromIndex, l);
+        if (fromRight) {
+            j = Math.min(j, fromIndex);
+        } else {
+            j = Math.max(0, fromIndex);
+        }
+        i = j - 1;
+    } else {
+        i = -1;
+    }
+    for (; j >= 0; --j) {
+        if (fromRight) {
+            idx = j;
+        } else {
+            idx = ++i;
+        }
+        val = arr[idx];
+        if (val === search || search !== search && val !== val) {
+            return idx;
+        }
+    }
+    return -1;
+}
+module.exports = baseIndexOf;
+},{"./base-to-index":15}],12:[function(require,module,exports){
+'use strict';
+var baseIndexOf = require('./base-index-of');
+var support = require('../support/support-keys');
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var k, fixKeys;
+if (support === 'not-supported') {
+    k = [
+        'toString',
+        'toLocaleString',
+        'valueOf',
+        'hasOwnProperty',
+        'isPrototypeOf',
+        'propertyIsEnumerable',
+        'constructor'
+    ];
+    fixKeys = function fixKeys(keys, object) {
+        var i, key;
+        for (i = k.length - 1; i >= 0; --i) {
+            if (baseIndexOf(keys, key = k[i]) < 0 && hasOwnProperty.call(object, key)) {
+                keys.push(key);
+            }
+        }
+        return keys;
+    };
+}
+module.exports = function baseKeys(object) {
+    var keys = [];
+    var key;
+    for (key in object) {
+        if (hasOwnProperty.call(object, key)) {
+            keys.push(key);
+        }
+    }
+    if (support !== 'not-supported') {
+        return keys;
+    }
+    return fixKeys(keys, object);
+};
+},{"../support/support-keys":56,"./base-index-of":11}],13:[function(require,module,exports){
+'use strict';
+var get = require('./base-get');
+module.exports = function baseProperty(object, path) {
+    if (object != null) {
+        if (path.length > 1) {
+            return get(object, path, 0);
+        }
+        return object[path[0]];
+    }
+};
+},{"./base-get":10}],14:[function(require,module,exports){
+'use strict';
+module.exports = function baseRandom(lower, upper) {
+    return lower + Math.random() * (upper - lower);
+};
+},{}],15:[function(require,module,exports){
+'use strict';
+module.exports = function baseToIndex(v, l) {
+    if (!l || !v) {
+        return 0;
+    }
+    if (v < 0) {
+        v += l;
+    }
+    return v || 0;
+};
+},{}],16:[function(require,module,exports){
+'use strict';
+var _throwArgumentException = require('./_throw-argument-exception');
+var defaultTo = require('./default-to');
+module.exports = function before(n, fn) {
+    var value;
+    if (typeof fn !== 'function') {
+        _throwArgumentException(fn, 'a function');
+    }
+    n = defaultTo(n, 1);
+    return function () {
+        if (--n >= 0) {
+            value = fn.apply(this, arguments);
+        }
+        return value;
+    };
+};
+},{"./_throw-argument-exception":3,"./default-to":26}],17:[function(require,module,exports){
+'use strict';
+module.exports = function callIteratee(fn, ctx, val, key, obj) {
+    if (typeof ctx === 'undefined') {
+        return fn(val, key, obj);
+    }
+    return fn.call(ctx, val, key, obj);
+};
+},{}],18:[function(require,module,exports){
+'use strict';
+var baseExec = require('./base/base-exec'), _unescape = require('./_unescape'), isKey = require('./is-key'), toKey = require('./to-key'), _type = require('./_type');
+var rProperty = /(^|\.)\s*([_a-z]\w*)\s*|\[\s*((?:-)?(?:\d+|\d*\.\d+)|("|')(([^\\]\\(\\\\)*|[^\4])*)\4)\s*\]/gi;
+function stringToPath(str) {
+    var path = baseExec(rProperty, str), i = path.length - 1, val;
+    for (; i >= 0; --i) {
+        val = path[i];
+        if (val[2]) {
+            path[i] = val[2];
+        } else if (val[5] != null) {
+            path[i] = _unescape(val[5]);
+        } else {
+            path[i] = val[3];
+        }
+    }
+    return path;
+}
+function castPath(val) {
+    var path, l, i;
+    if (isKey(val)) {
+        return [toKey(val)];
+    }
+    if (_type(val) === 'array') {
+        path = Array(l = val.length);
+        for (i = l - 1; i >= 0; --i) {
+            path[i] = toKey(val[i]);
+        }
+    } else {
+        path = stringToPath('' + val);
+    }
+    return path;
+}
+module.exports = castPath;
+},{"./_type":4,"./_unescape":5,"./base/base-exec":7,"./is-key":36,"./to-key":59}],19:[function(require,module,exports){
+'use strict';
+module.exports = function clamp(value, lower, upper) {
+    if (value >= upper) {
+        return upper;
+    }
+    if (value <= lower) {
+        return lower;
+    }
+    return value;
+};
+},{}],20:[function(require,module,exports){
+'use strict';
+var create = require('./create'), getPrototypeOf = require('./get-prototype-of'), toObject = require('./to-object'), each = require('./each'), isObjectLike = require('./is-object-like');
+module.exports = function clone(deep, target, guard) {
+    var cln;
+    if (typeof target === 'undefined' || guard) {
+        target = deep;
+        deep = true;
+    }
+    cln = create(getPrototypeOf(target = toObject(target)));
+    each(target, function (value, key, target) {
+        if (value === target) {
+            this[key] = this;
+        } else if (deep && isObjectLike(value)) {
+            this[key] = clone(deep, value);
+        } else {
+            this[key] = value;
+        }
+    }, cln);
+    return cln;
+};
+},{"./create":22,"./each":29,"./get-prototype-of":32,"./is-object-like":38,"./to-object":60}],21:[function(require,module,exports){
+'use strict';
+module.exports = {
+    ERR: {
+        INVALID_ARGS: 'Invalid arguments',
+        FUNCTION_EXPECTED: 'Expected a function',
+        STRING_EXPECTED: 'Expected a string',
+        UNDEFINED_OR_NULL: 'Cannot convert undefined or null to object',
+        REDUCE_OF_EMPTY_ARRAY: 'Reduce of empty array with no initial value',
+        NO_PATH: 'No path was given'
+    },
+    MAX_ARRAY_LENGTH: 4294967295,
+    MAX_SAFE_INT: 9007199254740991,
+    MIN_SAFE_INT: -9007199254740991,
+    DEEP: 1,
+    DEEP_KEEP_FN: 2,
+    PLACEHOLDER: {}
+};
+},{}],22:[function(require,module,exports){
+'use strict';
+var defineProperties = require('./define-properties');
+var setPrototypeOf = require('./set-prototype-of');
+var isPrimitive = require('./is-primitive');
+function C() {
+}
+module.exports = Object.create || function create(prototype, descriptors) {
+    var object;
+    if (prototype !== null && isPrimitive(prototype)) {
+        throw TypeError('Object prototype may only be an Object or null: ' + prototype);
+    }
+    C.prototype = prototype;
+    object = new C();
+    C.prototype = null;
+    if (prototype === null) {
+        setPrototypeOf(object, null);
+    }
+    if (arguments.length >= 2) {
+        defineProperties(object, descriptors);
+    }
+    return object;
+};
+},{"./define-properties":28,"./is-primitive":41,"./set-prototype-of":54}],23:[function(require,module,exports){
+'use strict';
+var baseForEach = require('../base/base-for-each'), baseForIn = require('../base/base-for-in'), isArrayLike = require('../is-array-like'), toObject = require('../to-object'), iteratee = require('../iteratee').iteratee, keys = require('../keys');
+module.exports = function createEach(fromRight) {
+    return function each(obj, fn, ctx) {
+        obj = toObject(obj);
+        fn = iteratee(fn);
+        if (isArrayLike(obj)) {
+            return baseForEach(obj, fn, ctx, fromRight);
+        }
+        return baseForIn(obj, fn, ctx, fromRight, keys(obj));
+    };
+};
+},{"../base/base-for-each":8,"../base/base-for-in":9,"../is-array-like":34,"../iteratee":45,"../keys":46,"../to-object":60}],24:[function(require,module,exports){
+'use strict';
+module.exports = function createGetElementDimension(name) {
+    return function (e) {
+        var v, b, d;
+        if (e.window === e) {
+            v = Math.max(e['inner' + name] || 0, e.document.documentElement['client' + name]);
+        } else if (e.nodeType === 9) {
+            b = e.body;
+            d = e.documentElement;
+            v = Math.max(b['scroll' + name], d['scroll' + name], b['offset' + name], d['offset' + name], b['client' + name], d['client' + name]);
+        } else {
+            v = e['client' + name];
+        }
+        return v;
+    };
+};
+},{}],25:[function(require,module,exports){
+'use strict';
+var castPath = require('../cast-path'), noop = require('../noop');
+module.exports = function createProperty(baseProperty, useArgs) {
+    return function (path) {
+        var args;
+        if (!(path = castPath(path)).length) {
+            return noop;
+        }
+        if (useArgs) {
+            args = Array.prototype.slice.call(arguments, 1);
+        }
+        return function (object) {
+            return baseProperty(object, path, args);
+        };
+    };
+};
+},{"../cast-path":18,"../noop":49}],26:[function(require,module,exports){
+'use strict';
+module.exports = function defaultTo(value, defaultValue) {
+    if (value != null && value === value) {
+        return value;
+    }
+    return defaultValue;
+};
+},{}],27:[function(require,module,exports){
+'use strict';
+var mixin = require('./mixin'), clone = require('./clone');
+module.exports = function defaults(defaults, object) {
+    if (object == null) {
+        return clone(true, defaults);
+    }
+    return mixin(true, clone(true, defaults), object);
+};
+},{"./clone":20,"./mixin":48}],28:[function(require,module,exports){
+'use strict';
+var support = require('./support/support-define-property');
+var defineProperties, baseDefineProperty, isPrimitive, each;
+if (support !== 'full') {
+    isPrimitive = require('./is-primitive');
+    each = require('./each');
+    baseDefineProperty = require('./base/base-define-property');
+    defineProperties = function defineProperties(object, descriptors) {
+        if (support !== 'not-supported') {
+            try {
+                return Object.defineProperties(object, descriptors);
+            } catch (e) {
+            }
+        }
+        if (isPrimitive(object)) {
+            throw TypeError('defineProperties called on non-object');
+        }
+        if (isPrimitive(descriptors)) {
+            throw TypeError('Property description must be an object: ' + descriptors);
+        }
+        each(descriptors, function (descriptor, key) {
+            if (isPrimitive(descriptor)) {
+                throw TypeError('Property description must be an object: ' + descriptor);
+            }
+            baseDefineProperty(this, key, descriptor);
+        }, object);
+        return object;
+    };
+} else {
+    defineProperties = Object.defineProperties;
+}
+module.exports = defineProperties;
+},{"./base/base-define-property":6,"./each":29,"./is-primitive":41,"./support/support-define-property":55}],29:[function(require,module,exports){
+'use strict';
+module.exports = require('./create/create-each')();
+},{"./create/create-each":23}],30:[function(require,module,exports){
+'use strict';
+module.exports = require('./create/create-get-element-dimension')('Height');
+},{"./create/create-get-element-dimension":24}],31:[function(require,module,exports){
+'use strict';
+module.exports = require('./create/create-get-element-dimension')('Width');
+},{"./create/create-get-element-dimension":24}],32:[function(require,module,exports){
+'use strict';
+var ERR = require('./constants').ERR;
+var toString = Object.prototype.toString;
+module.exports = Object.getPrototypeOf || function getPrototypeOf(obj) {
+    var prototype;
+    if (obj == null) {
+        throw TypeError(ERR.UNDEFINED_OR_NULL);
+    }
+    prototype = obj.__proto__;
+    if (typeof prototype !== 'undefined') {
+        return prototype;
+    }
+    if (toString.call(obj.constructor) === '[object Function]') {
+        return obj.constructor.prototype;
+    }
+    return obj;
+};
+},{"./constants":21}],33:[function(require,module,exports){
+'use strict';
+var isObjectLike = require('./is-object-like'), isLength = require('./is-length'), isWindowLike = require('./is-window-like');
+module.exports = function isArrayLikeObject(value) {
+    return isObjectLike(value) && isLength(value.length) && !isWindowLike(value);
+};
+},{"./is-length":37,"./is-object-like":38,"./is-window-like":43}],34:[function(require,module,exports){
+'use strict';
+var isLength = require('./is-length'), isWindowLike = require('./is-window-like');
+module.exports = function isArrayLike(value) {
+    if (value == null) {
+        return false;
+    }
+    if (typeof value === 'object') {
+        return isLength(value.length) && !isWindowLike(value);
+    }
+    return typeof value === 'string';
+};
+},{"./is-length":37,"./is-window-like":43}],35:[function(require,module,exports){
+'use strict';
+var isObjectLike = require('./is-object-like'), isLength = require('./is-length');
+var toString = {}.toString;
+module.exports = Array.isArray || function isArray(value) {
+    return isObjectLike(value) && isLength(value.length) && toString.call(value) === '[object Array]';
+};
+},{"./is-length":37,"./is-object-like":38}],36:[function(require,module,exports){
+'use strict';
+var _type = require('./_type');
+var rDeepKey = /(^|[^\\])(\\\\)*(\.|\[)/;
+function isKey(val) {
+    var type;
+    if (!val) {
+        return true;
+    }
+    if (_type(val) === 'array') {
+        return false;
+    }
+    type = typeof val;
+    if (type === 'number' || type === 'boolean' || _type(val) === 'symbol') {
+        return true;
+    }
+    return !rDeepKey.test(val);
+}
+module.exports = isKey;
+},{"./_type":4}],37:[function(require,module,exports){
+'use strict';
+var MAX_ARRAY_LENGTH = require('./constants').MAX_ARRAY_LENGTH;
+module.exports = function isLength(value) {
+    return typeof value === 'number' && value >= 0 && value <= MAX_ARRAY_LENGTH && value % 1 === 0;
+};
+},{"./constants":21}],38:[function(require,module,exports){
+'use strict';
+module.exports = function isObjectLike(value) {
+    return !!value && typeof value === 'object';
+};
+},{}],39:[function(require,module,exports){
+'use strict';
+var isObjectLike = require('./is-object-like');
+var toString = {}.toString;
+module.exports = function isObject(value) {
+    return isObjectLike(value) && toString.call(value) === '[object Object]';
+};
+},{"./is-object-like":38}],40:[function(require,module,exports){
+'use strict';
+var getPrototypeOf = require('./get-prototype-of');
+var isObject = require('./is-object');
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var toString = Function.prototype.toString;
+var OBJECT = toString.call(Object);
+module.exports = function isPlainObject(v) {
+    var p, c;
+    if (!isObject(v)) {
+        return false;
+    }
+    p = getPrototypeOf(v);
+    if (p === null) {
+        return true;
+    }
+    if (!hasOwnProperty.call(p, 'constructor')) {
+        return false;
+    }
+    c = p.constructor;
+    return typeof c === 'function' && toString.call(c) === OBJECT;
+};
+},{"./get-prototype-of":32,"./is-object":39}],41:[function(require,module,exports){
+'use strict';
+module.exports = function isPrimitive(value) {
+    return !value || typeof value !== 'object' && typeof value !== 'function';
+};
+},{}],42:[function(require,module,exports){
+'use strict';
+var type = require('./type');
+module.exports = function isSymbol(value) {
+    return type(value) === 'symbol';
+};
+},{"./type":61}],43:[function(require,module,exports){
+'use strict';
+var isObjectLike = require('./is-object-like');
+module.exports = function isWindowLike(value) {
+    return isObjectLike(value) && value.window === value;
+};
+},{"./is-object-like":38}],44:[function(require,module,exports){
+'use strict';
+module.exports = function isset(key, obj) {
+    if (obj == null) {
+        return false;
+    }
+    return typeof obj[key] !== 'undefined' || key in obj;
+};
+},{}],45:[function(require,module,exports){
+'use strict';
+var isArrayLikeObject = require('./is-array-like-object'), matchesProperty = require('./matches-property'), property = require('./property');
+exports.iteratee = function iteratee(value) {
+    if (typeof value === 'function') {
+        return value;
+    }
+    if (isArrayLikeObject(value)) {
+        return matchesProperty(value);
+    }
+    return property(value);
+};
+},{"./is-array-like-object":33,"./matches-property":47,"./property":52}],46:[function(require,module,exports){
+'use strict';
+var baseKeys = require('./base/base-keys');
+var toObject = require('./to-object');
+var support = require('./support/support-keys');
+if (support !== 'es2015') {
+    module.exports = function keys(v) {
+        var _keys;
+        if (support === 'es5') {
+            _keys = Object.keys;
+        } else {
+            _keys = baseKeys;
+        }
+        return _keys(toObject(v));
+    };
+} else {
+    module.exports = Object.keys;
+}
+},{"./base/base-keys":12,"./support/support-keys":56,"./to-object":60}],47:[function(require,module,exports){
+'use strict';
+var castPath = require('./cast-path'), get = require('./base/base-get'), ERR = require('./constants').ERR;
+module.exports = function matchesProperty(property) {
+    var path = castPath(property[0]), value = property[1];
+    if (!path.length) {
+        throw Error(ERR.NO_PATH);
+    }
+    return function (object) {
+        if (object == null) {
+            return false;
+        }
+        if (path.length > 1) {
+            return get(object, path, 0) === value;
+        }
+        return object[path[0]] === value;
+    };
+};
+},{"./base/base-get":10,"./cast-path":18,"./constants":21}],48:[function(require,module,exports){
+'use strict';
+var isPlainObject = require('./is-plain-object');
+var toObject = require('./to-object');
+var isArray = require('./is-array');
+var keys = require('./keys');
+module.exports = function mixin(deep, object) {
+    var l = arguments.length;
+    var i = 2;
+    var names, exp, j, k, val, key, nowArray, src;
+    if (typeof deep !== 'boolean') {
+        object = deep;
+        deep = true;
+        i = 1;
+    }
+    if (i === l) {
+        object = this;
+        --i;
+    }
+    object = toObject(object);
+    for (; i < l; ++i) {
+        names = keys(exp = toObject(arguments[i]));
+        for (j = 0, k = names.length; j < k; ++j) {
+            val = exp[key = names[j]];
+            if (deep && val !== exp && (isPlainObject(val) || (nowArray = isArray(val)))) {
+                src = object[key];
+                if (nowArray) {
+                    if (!isArray(src)) {
+                        src = [];
+                    }
+                    nowArray = false;
+                } else if (!isPlainObject(src)) {
+                    src = {};
+                }
+                object[key] = mixin(true, src, val);
+            } else {
+                object[key] = val;
+            }
+        }
+    }
+    return object;
+};
+},{"./is-array":35,"./is-plain-object":40,"./keys":46,"./to-object":60}],49:[function(require,module,exports){
+'use strict';
+module.exports = function noop() {
+};
+},{}],50:[function(require,module,exports){
+'use strict';
+module.exports = Date.now || function now() {
+    return new Date().getTime();
+};
+},{}],51:[function(require,module,exports){
+'use strict';
+var before = require('./before');
+module.exports = function once(target) {
+    return before(1, target);
+};
+},{"./before":16}],52:[function(require,module,exports){
+'use strict';
+module.exports = require('./create/create-property')(require('./base/base-property'));
+},{"./base/base-property":13,"./create/create-property":25}],53:[function(require,module,exports){
+'use strict';
+var baseRandom = require('./base/base-random');
+module.exports = function random(lower, upper, floating) {
+    if (typeof lower === 'undefined') {
+        floating = false;
+        upper = 1;
+        lower = 0;
+    } else if (typeof upper === 'undefined') {
+        if (typeof lower === 'boolean') {
+            floating = lower;
+            upper = 1;
+        } else {
+            floating = false;
+            upper = lower;
+        }
+        lower = 0;
+    } else if (typeof floating === 'undefined') {
+        if (typeof upper === 'boolean') {
+            floating = upper;
+            upper = lower;
+            lower = 0;
+        } else {
+            floating = false;
+        }
+    }
+    if (floating || lower % 1 || upper % 1) {
+        return baseRandom(lower, upper);
+    }
+    return Math.round(baseRandom(lower, upper));
+};
+},{"./base/base-random":14}],54:[function(require,module,exports){
+'use strict';
+var isPrimitive = require('./is-primitive'), ERR = require('./constants').ERR;
+module.exports = Object.setPrototypeOf || function setPrototypeOf(target, prototype) {
+    if (target == null) {
+        throw TypeError(ERR.UNDEFINED_OR_NULL);
+    }
+    if (prototype !== null && isPrimitive(prototype)) {
+        throw TypeError('Object prototype may only be an Object or null: ' + prototype);
+    }
+    if ('__proto__' in target) {
+        target.__proto__ = prototype;
+    }
+    return target;
+};
+},{"./constants":21,"./is-primitive":41}],55:[function(require,module,exports){
+'use strict';
+var support;
+function test(target) {
+    try {
+        if ('' in Object.defineProperty(target, '', {})) {
+            return true;
+        }
+    } catch (e) {
+    }
+    return false;
+}
+if (test({})) {
+    support = 'full';
+} else if (typeof document !== 'undefined' && test(document.createElement('span'))) {
+    support = 'dom';
+} else {
+    support = 'not-supported';
+}
+module.exports = support;
+},{}],56:[function(require,module,exports){
+'use strict';
+var support;
+if (Object.keys) {
+    try {
+        support = Object.keys(''), 'es2015';
+    } catch (e) {
+        support = 'es5';
+    }
+} else if ({ toString: null }.propertyIsEnumerable('toString')) {
+    support = 'not-supported';
+} else {
+    support = 'has-a-bug';
+}
+module.exports = support;
+},{}],57:[function(require,module,exports){
+'use strict';
+var timestamp = require('./timestamp');
+var requestAF, cancelAF;
+if (typeof window !== 'undefined') {
+    cancelAF = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelAnimationFrame || window.mozCancelRequestAnimationFrame;
+    requestAF = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
+}
+var noRequestAnimationFrame = !requestAF || !cancelAF || typeof navigator !== 'undefined' && /iP(ad|hone|od).*OS\s6/.test(navigator.userAgent);
+if (noRequestAnimationFrame) {
+    var lastRequestTime = 0, frameDuration = 1000 / 60;
+    exports.request = function request(animate) {
+        var now = timestamp(), nextRequestTime = Math.max(lastRequestTime + frameDuration, now);
+        return setTimeout(function () {
+            lastRequestTime = nextRequestTime;
+            animate(now);
+        }, nextRequestTime - now);
+    };
+    exports.cancel = clearTimeout;
+} else {
+    exports.request = function request(animate) {
+        return requestAF(animate);
+    };
+    exports.cancel = function cancel(id) {
+        return cancelAF(id);
+    };
+}
+},{"./timestamp":58}],58:[function(require,module,exports){
+'use strict';
+var now = require('./now');
+var navigatorStart;
+if (typeof performance === 'undefined' || !performance.now) {
+    navigatorStart = now();
+    module.exports = function timestamp() {
+        return now() - navigatorStart;
+    };
+} else {
+    module.exports = function timestamp() {
+        return performance.now();
+    };
+}
+},{"./now":50}],59:[function(require,module,exports){
+'use strict';
+var _unescape = require('./_unescape'), isSymbol = require('./is-symbol');
+module.exports = function toKey(val) {
+    var key;
+    if (typeof val === 'string') {
+        return _unescape(val);
+    }
+    if (isSymbol(val)) {
+        return val;
+    }
+    key = '' + val;
+    if (key === '0' && 1 / val === -Infinity) {
+        return '-0';
+    }
+    return _unescape(key);
+};
+},{"./_unescape":5,"./is-symbol":42}],60:[function(require,module,exports){
+'use strict';
+var ERR = require('./constants').ERR;
+module.exports = function toObject(value) {
+    if (value == null) {
+        throw TypeError(ERR.UNDEFINED_OR_NULL);
+    }
+    return Object(value);
+};
+},{"./constants":21}],61:[function(require,module,exports){
+'use strict';
+var create = require('./create');
+var toString = {}.toString, types = create(null);
+module.exports = function getType(value) {
+    var type, tag;
+    if (value === null) {
+        return 'null';
+    }
+    type = typeof value;
+    if (type !== 'object' && type !== 'function') {
+        return type;
+    }
+    type = types[tag = toString.call(value)];
+    if (type) {
+        return type;
+    }
+    return types[tag] = tag.slice(8, -1).toLowerCase();
+};
+},{"./create":22}],62:[function(require,module,exports){
+(function (global){
+/*!
+ * Platform.js <https://mths.be/platform>
+ * Copyright 2014-2018 Benjamin Tan <https://bnjmnt4n.now.sh/>
+ * Copyright 2011-2013 John-David Dalton <http://allyoucanleet.com/>
+ * Available under MIT license <https://mths.be/mit>
+ */
+;(function() {
+  'use strict';
+
+  /** Used to determine if values are of the language type `Object`. */
+  var objectTypes = {
+    'function': true,
+    'object': true
+  };
+
+  /** Used as a reference to the global object. */
+  var root = (objectTypes[typeof window] && window) || this;
+
+  /** Backup possible global object. */
+  var oldRoot = root;
+
+  /** Detect free variable `exports`. */
+  var freeExports = objectTypes[typeof exports] && exports;
+
+  /** Detect free variable `module`. */
+  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
+
+  /** Detect free variable `global` from Node.js or Browserified code and use it as `root`. */
+  var freeGlobal = freeExports && freeModule && typeof global == 'object' && global;
+  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal || freeGlobal.self === freeGlobal)) {
+    root = freeGlobal;
+  }
+
+  /**
+   * Used as the maximum length of an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
+
+  /** Regular expression to detect Opera. */
+  var reOpera = /\bOpera/;
+
+  /** Possible global object. */
+  var thisBinding = this;
+
+  /** Used for native method references. */
+  var objectProto = Object.prototype;
+
+  /** Used to check for own properties of an object. */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
+  /** Used to resolve the internal `[[Class]]` of values. */
+  var toString = objectProto.toString;
+
+  /*--------------------------------------------------------------------------*/
+
+  /**
+   * Capitalizes a string value.
+   *
+   * @private
+   * @param {string} string The string to capitalize.
+   * @returns {string} The capitalized string.
+   */
+  function capitalize(string) {
+    string = String(string);
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  /**
+   * A utility function to clean up the OS name.
+   *
+   * @private
+   * @param {string} os The OS name to clean up.
+   * @param {string} [pattern] A `RegExp` pattern matching the OS name.
+   * @param {string} [label] A label for the OS.
+   */
+  function cleanupOS(os, pattern, label) {
+    // Platform tokens are defined at:
+    // http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx
+    // http://web.archive.org/web/20081122053950/http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx
+    var data = {
+      '10.0': '10',
+      '6.4':  '10 Technical Preview',
+      '6.3':  '8.1',
+      '6.2':  '8',
+      '6.1':  'Server 2008 R2 / 7',
+      '6.0':  'Server 2008 / Vista',
+      '5.2':  'Server 2003 / XP 64-bit',
+      '5.1':  'XP',
+      '5.01': '2000 SP1',
+      '5.0':  '2000',
+      '4.0':  'NT',
+      '4.90': 'ME'
+    };
+    // Detect Windows version from platform tokens.
+    if (pattern && label && /^Win/i.test(os) && !/^Windows Phone /i.test(os) &&
+        (data = data[/[\d.]+$/.exec(os)])) {
+      os = 'Windows ' + data;
+    }
+    // Correct character case and cleanup string.
+    os = String(os);
+
+    if (pattern && label) {
+      os = os.replace(RegExp(pattern, 'i'), label);
+    }
+
+    os = format(
+      os.replace(/ ce$/i, ' CE')
+        .replace(/\bhpw/i, 'web')
+        .replace(/\bMacintosh\b/, 'Mac OS')
+        .replace(/_PowerPC\b/i, ' OS')
+        .replace(/\b(OS X) [^ \d]+/i, '$1')
+        .replace(/\bMac (OS X)\b/, '$1')
+        .replace(/\/(\d)/, ' $1')
+        .replace(/_/g, '.')
+        .replace(/(?: BePC|[ .]*fc[ \d.]+)$/i, '')
+        .replace(/\bx86\.64\b/gi, 'x86_64')
+        .replace(/\b(Windows Phone) OS\b/, '$1')
+        .replace(/\b(Chrome OS \w+) [\d.]+\b/, '$1')
+        .split(' on ')[0]
+    );
+
+    return os;
+  }
+
+  /**
+   * An iteration utility for arrays and objects.
+   *
+   * @private
+   * @param {Array|Object} object The object to iterate over.
+   * @param {Function} callback The function called per iteration.
+   */
+  function each(object, callback) {
+    var index = -1,
+        length = object ? object.length : 0;
+
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
+      while (++index < length) {
+        callback(object[index], index, object);
+      }
+    } else {
+      forOwn(object, callback);
+    }
+  }
+
+  /**
+   * Trim and conditionally capitalize string values.
+   *
+   * @private
+   * @param {string} string The string to format.
+   * @returns {string} The formatted string.
+   */
+  function format(string) {
+    string = trim(string);
+    return /^(?:webOS|i(?:OS|P))/.test(string)
+      ? string
+      : capitalize(string);
+  }
+
+  /**
+   * Iterates over an object's own properties, executing the `callback` for each.
+   *
+   * @private
+   * @param {Object} object The object to iterate over.
+   * @param {Function} callback The function executed per own property.
+   */
+  function forOwn(object, callback) {
+    for (var key in object) {
+      if (hasOwnProperty.call(object, key)) {
+        callback(object[key], key, object);
+      }
+    }
+  }
+
+  /**
+   * Gets the internal `[[Class]]` of a value.
+   *
+   * @private
+   * @param {*} value The value.
+   * @returns {string} The `[[Class]]`.
+   */
+  function getClassOf(value) {
+    return value == null
+      ? capitalize(value)
+      : toString.call(value).slice(8, -1);
+  }
+
+  /**
+   * Host objects can return type values that are different from their actual
+   * data type. The objects we are concerned with usually return non-primitive
+   * types of "object", "function", or "unknown".
+   *
+   * @private
+   * @param {*} object The owner of the property.
+   * @param {string} property The property to check.
+   * @returns {boolean} Returns `true` if the property value is a non-primitive, else `false`.
+   */
+  function isHostType(object, property) {
+    var type = object != null ? typeof object[property] : 'number';
+    return !/^(?:boolean|number|string|undefined)$/.test(type) &&
+      (type == 'object' ? !!object[property] : true);
+  }
+
+  /**
+   * Prepares a string for use in a `RegExp` by making hyphens and spaces optional.
+   *
+   * @private
+   * @param {string} string The string to qualify.
+   * @returns {string} The qualified string.
+   */
+  function qualify(string) {
+    return String(string).replace(/([ -])(?!$)/g, '$1?');
+  }
+
+  /**
+   * A bare-bones `Array#reduce` like utility function.
+   *
+   * @private
+   * @param {Array} array The array to iterate over.
+   * @param {Function} callback The function called per iteration.
+   * @returns {*} The accumulated result.
+   */
+  function reduce(array, callback) {
+    var accumulator = null;
+    each(array, function(value, index) {
+      accumulator = callback(accumulator, value, index, array);
+    });
+    return accumulator;
+  }
+
+  /**
+   * Removes leading and trailing whitespace from a string.
+   *
+   * @private
+   * @param {string} string The string to trim.
+   * @returns {string} The trimmed string.
+   */
+  function trim(string) {
+    return String(string).replace(/^ +| +$/g, '');
+  }
+
+  /*--------------------------------------------------------------------------*/
+
+  /**
+   * Creates a new platform object.
+   *
+   * @memberOf platform
+   * @param {Object|string} [ua=navigator.userAgent] The user agent string or
+   *  context object.
+   * @returns {Object} A platform object.
+   */
+  function parse(ua) {
+
+    /** The environment context object. */
+    var context = root;
+
+    /** Used to flag when a custom context is provided. */
+    var isCustomContext = ua && typeof ua == 'object' && getClassOf(ua) != 'String';
+
+    // Juggle arguments.
+    if (isCustomContext) {
+      context = ua;
+      ua = null;
+    }
+
+    /** Browser navigator object. */
+    var nav = context.navigator || {};
+
+    /** Browser user agent string. */
+    var userAgent = nav.userAgent || '';
+
+    ua || (ua = userAgent);
+
+    /** Used to flag when `thisBinding` is the [ModuleScope]. */
+    var isModuleScope = isCustomContext || thisBinding == oldRoot;
+
+    /** Used to detect if browser is like Chrome. */
+    var likeChrome = isCustomContext
+      ? !!nav.likeChrome
+      : /\bChrome\b/.test(ua) && !/internal|\n/i.test(toString.toString());
+
+    /** Internal `[[Class]]` value shortcuts. */
+    var objectClass = 'Object',
+        airRuntimeClass = isCustomContext ? objectClass : 'ScriptBridgingProxyObject',
+        enviroClass = isCustomContext ? objectClass : 'Environment',
+        javaClass = (isCustomContext && context.java) ? 'JavaPackage' : getClassOf(context.java),
+        phantomClass = isCustomContext ? objectClass : 'RuntimeObject';
+
+    /** Detect Java environments. */
+    var java = /\bJava/.test(javaClass) && context.java;
+
+    /** Detect Rhino. */
+    var rhino = java && getClassOf(context.environment) == enviroClass;
+
+    /** A character to represent alpha. */
+    var alpha = java ? 'a' : '\u03b1';
+
+    /** A character to represent beta. */
+    var beta = java ? 'b' : '\u03b2';
+
+    /** Browser document object. */
+    var doc = context.document || {};
+
+    /**
+     * Detect Opera browser (Presto-based).
+     * http://www.howtocreate.co.uk/operaStuff/operaObject.html
+     * http://dev.opera.com/articles/view/opera-mini-web-content-authoring-guidelines/#operamini
+     */
+    var opera = context.operamini || context.opera;
+
+    /** Opera `[[Class]]`. */
+    var operaClass = reOpera.test(operaClass = (isCustomContext && opera) ? opera['[[Class]]'] : getClassOf(opera))
+      ? operaClass
+      : (opera = null);
+
+    /*------------------------------------------------------------------------*/
+
+    /** Temporary variable used over the script's lifetime. */
+    var data;
+
+    /** The CPU architecture. */
+    var arch = ua;
+
+    /** Platform description array. */
+    var description = [];
+
+    /** Platform alpha/beta indicator. */
+    var prerelease = null;
+
+    /** A flag to indicate that environment features should be used to resolve the platform. */
+    var useFeatures = ua == userAgent;
+
+    /** The browser/environment version. */
+    var version = useFeatures && opera && typeof opera.version == 'function' && opera.version();
+
+    /** A flag to indicate if the OS ends with "/ Version" */
+    var isSpecialCasedOS;
+
+    /* Detectable layout engines (order is important). */
+    var layout = getLayout([
+      { 'label': 'EdgeHTML', 'pattern': 'Edge' },
+      'Trident',
+      { 'label': 'WebKit', 'pattern': 'AppleWebKit' },
+      'iCab',
+      'Presto',
+      'NetFront',
+      'Tasman',
+      'KHTML',
+      'Gecko'
+    ]);
+
+    /* Detectable browser names (order is important). */
+    var name = getName([
+      'Adobe AIR',
+      'Arora',
+      'Avant Browser',
+      'Breach',
+      'Camino',
+      'Electron',
+      'Epiphany',
+      'Fennec',
+      'Flock',
+      'Galeon',
+      'GreenBrowser',
+      'iCab',
+      'Iceweasel',
+      'K-Meleon',
+      'Konqueror',
+      'Lunascape',
+      'Maxthon',
+      { 'label': 'Microsoft Edge', 'pattern': 'Edge' },
+      'Midori',
+      'Nook Browser',
+      'PaleMoon',
+      'PhantomJS',
+      'Raven',
+      'Rekonq',
+      'RockMelt',
+      { 'label': 'Samsung Internet', 'pattern': 'SamsungBrowser' },
+      'SeaMonkey',
+      { 'label': 'Silk', 'pattern': '(?:Cloud9|Silk-Accelerated)' },
+      'Sleipnir',
+      'SlimBrowser',
+      { 'label': 'SRWare Iron', 'pattern': 'Iron' },
+      'Sunrise',
+      'Swiftfox',
+      'Waterfox',
+      'WebPositive',
+      'Opera Mini',
+      { 'label': 'Opera Mini', 'pattern': 'OPiOS' },
+      'Opera',
+      { 'label': 'Opera', 'pattern': 'OPR' },
+      'Chrome',
+      { 'label': 'Chrome Mobile', 'pattern': '(?:CriOS|CrMo)' },
+      { 'label': 'Firefox', 'pattern': '(?:Firefox|Minefield)' },
+      { 'label': 'Firefox for iOS', 'pattern': 'FxiOS' },
+      { 'label': 'IE', 'pattern': 'IEMobile' },
+      { 'label': 'IE', 'pattern': 'MSIE' },
+      'Safari'
+    ]);
+
+    /* Detectable products (order is important). */
+    var product = getProduct([
+      { 'label': 'BlackBerry', 'pattern': 'BB10' },
+      'BlackBerry',
+      { 'label': 'Galaxy S', 'pattern': 'GT-I9000' },
+      { 'label': 'Galaxy S2', 'pattern': 'GT-I9100' },
+      { 'label': 'Galaxy S3', 'pattern': 'GT-I9300' },
+      { 'label': 'Galaxy S4', 'pattern': 'GT-I9500' },
+      { 'label': 'Galaxy S5', 'pattern': 'SM-G900' },
+      { 'label': 'Galaxy S6', 'pattern': 'SM-G920' },
+      { 'label': 'Galaxy S6 Edge', 'pattern': 'SM-G925' },
+      { 'label': 'Galaxy S7', 'pattern': 'SM-G930' },
+      { 'label': 'Galaxy S7 Edge', 'pattern': 'SM-G935' },
+      'Google TV',
+      'Lumia',
+      'iPad',
+      'iPod',
+      'iPhone',
+      'Kindle',
+      { 'label': 'Kindle Fire', 'pattern': '(?:Cloud9|Silk-Accelerated)' },
+      'Nexus',
+      'Nook',
+      'PlayBook',
+      'PlayStation Vita',
+      'PlayStation',
+      'TouchPad',
+      'Transformer',
+      { 'label': 'Wii U', 'pattern': 'WiiU' },
+      'Wii',
+      'Xbox One',
+      { 'label': 'Xbox 360', 'pattern': 'Xbox' },
+      'Xoom'
+    ]);
+
+    /* Detectable manufacturers. */
+    var manufacturer = getManufacturer({
+      'Apple': { 'iPad': 1, 'iPhone': 1, 'iPod': 1 },
+      'Archos': {},
+      'Amazon': { 'Kindle': 1, 'Kindle Fire': 1 },
+      'Asus': { 'Transformer': 1 },
+      'Barnes & Noble': { 'Nook': 1 },
+      'BlackBerry': { 'PlayBook': 1 },
+      'Google': { 'Google TV': 1, 'Nexus': 1 },
+      'HP': { 'TouchPad': 1 },
+      'HTC': {},
+      'LG': {},
+      'Microsoft': { 'Xbox': 1, 'Xbox One': 1 },
+      'Motorola': { 'Xoom': 1 },
+      'Nintendo': { 'Wii U': 1,  'Wii': 1 },
+      'Nokia': { 'Lumia': 1 },
+      'Samsung': { 'Galaxy S': 1, 'Galaxy S2': 1, 'Galaxy S3': 1, 'Galaxy S4': 1 },
+      'Sony': { 'PlayStation': 1, 'PlayStation Vita': 1 }
+    });
+
+    /* Detectable operating systems (order is important). */
+    var os = getOS([
+      'Windows Phone',
+      'Android',
+      'CentOS',
+      { 'label': 'Chrome OS', 'pattern': 'CrOS' },
+      'Debian',
+      'Fedora',
+      'FreeBSD',
+      'Gentoo',
+      'Haiku',
+      'Kubuntu',
+      'Linux Mint',
+      'OpenBSD',
+      'Red Hat',
+      'SuSE',
+      'Ubuntu',
+      'Xubuntu',
+      'Cygwin',
+      'Symbian OS',
+      'hpwOS',
+      'webOS ',
+      'webOS',
+      'Tablet OS',
+      'Tizen',
+      'Linux',
+      'Mac OS X',
+      'Macintosh',
+      'Mac',
+      'Windows 98;',
+      'Windows '
+    ]);
+
+    /*------------------------------------------------------------------------*/
+
+    /**
+     * Picks the layout engine from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An array of guesses.
+     * @returns {null|string} The detected layout engine.
+     */
+    function getLayout(guesses) {
+      return reduce(guesses, function(result, guess) {
+        return result || RegExp('\\b' + (
+          guess.pattern || qualify(guess)
+        ) + '\\b', 'i').exec(ua) && (guess.label || guess);
+      });
+    }
+
+    /**
+     * Picks the manufacturer from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An object of guesses.
+     * @returns {null|string} The detected manufacturer.
+     */
+    function getManufacturer(guesses) {
+      return reduce(guesses, function(result, value, key) {
+        // Lookup the manufacturer by product or scan the UA for the manufacturer.
+        return result || (
+          value[product] ||
+          value[/^[a-z]+(?: +[a-z]+\b)*/i.exec(product)] ||
+          RegExp('\\b' + qualify(key) + '(?:\\b|\\w*\\d)', 'i').exec(ua)
+        ) && key;
+      });
+    }
+
+    /**
+     * Picks the browser name from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An array of guesses.
+     * @returns {null|string} The detected browser name.
+     */
+    function getName(guesses) {
+      return reduce(guesses, function(result, guess) {
+        return result || RegExp('\\b' + (
+          guess.pattern || qualify(guess)
+        ) + '\\b', 'i').exec(ua) && (guess.label || guess);
+      });
+    }
+
+    /**
+     * Picks the OS name from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An array of guesses.
+     * @returns {null|string} The detected OS name.
+     */
+    function getOS(guesses) {
+      return reduce(guesses, function(result, guess) {
+        var pattern = guess.pattern || qualify(guess);
+        if (!result && (result =
+              RegExp('\\b' + pattern + '(?:/[\\d.]+|[ \\w.]*)', 'i').exec(ua)
+            )) {
+          result = cleanupOS(result, pattern, guess.label || guess);
+        }
+        return result;
+      });
+    }
+
+    /**
+     * Picks the product name from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An array of guesses.
+     * @returns {null|string} The detected product name.
+     */
+    function getProduct(guesses) {
+      return reduce(guesses, function(result, guess) {
+        var pattern = guess.pattern || qualify(guess);
+        if (!result && (result =
+              RegExp('\\b' + pattern + ' *\\d+[.\\w_]*', 'i').exec(ua) ||
+              RegExp('\\b' + pattern + ' *\\w+-[\\w]*', 'i').exec(ua) ||
+              RegExp('\\b' + pattern + '(?:; *(?:[a-z]+[_-])?[a-z]+\\d+|[^ ();-]*)', 'i').exec(ua)
+            )) {
+          // Split by forward slash and append product version if needed.
+          if ((result = String((guess.label && !RegExp(pattern, 'i').test(guess.label)) ? guess.label : result).split('/'))[1] && !/[\d.]+/.test(result[0])) {
+            result[0] += ' ' + result[1];
+          }
+          // Correct character case and cleanup string.
+          guess = guess.label || guess;
+          result = format(result[0]
+            .replace(RegExp(pattern, 'i'), guess)
+            .replace(RegExp('; *(?:' + guess + '[_-])?', 'i'), ' ')
+            .replace(RegExp('(' + guess + ')[-_.]?(\\w)', 'i'), '$1 $2'));
+        }
+        return result;
+      });
+    }
+
+    /**
+     * Resolves the version using an array of UA patterns.
+     *
+     * @private
+     * @param {Array} patterns An array of UA patterns.
+     * @returns {null|string} The detected version.
+     */
+    function getVersion(patterns) {
+      return reduce(patterns, function(result, pattern) {
+        return result || (RegExp(pattern +
+          '(?:-[\\d.]+/|(?: for [\\w-]+)?[ /-])([\\d.]+[^ ();/_-]*)', 'i').exec(ua) || 0)[1] || null;
+      });
+    }
+
+    /**
+     * Returns `platform.description` when the platform object is coerced to a string.
+     *
+     * @name toString
+     * @memberOf platform
+     * @returns {string} Returns `platform.description` if available, else an empty string.
+     */
+    function toStringPlatform() {
+      return this.description || '';
+    }
+
+    /*------------------------------------------------------------------------*/
+
+    // Convert layout to an array so we can add extra details.
+    layout && (layout = [layout]);
+
+    // Detect product names that contain their manufacturer's name.
+    if (manufacturer && !product) {
+      product = getProduct([manufacturer]);
+    }
+    // Clean up Google TV.
+    if ((data = /\bGoogle TV\b/.exec(product))) {
+      product = data[0];
+    }
+    // Detect simulators.
+    if (/\bSimulator\b/i.test(ua)) {
+      product = (product ? product + ' ' : '') + 'Simulator';
+    }
+    // Detect Opera Mini 8+ running in Turbo/Uncompressed mode on iOS.
+    if (name == 'Opera Mini' && /\bOPiOS\b/.test(ua)) {
+      description.push('running in Turbo/Uncompressed mode');
+    }
+    // Detect IE Mobile 11.
+    if (name == 'IE' && /\blike iPhone OS\b/.test(ua)) {
+      data = parse(ua.replace(/like iPhone OS/, ''));
+      manufacturer = data.manufacturer;
+      product = data.product;
+    }
+    // Detect iOS.
+    else if (/^iP/.test(product)) {
+      name || (name = 'Safari');
+      os = 'iOS' + ((data = / OS ([\d_]+)/i.exec(ua))
+        ? ' ' + data[1].replace(/_/g, '.')
+        : '');
+    }
+    // Detect Kubuntu.
+    else if (name == 'Konqueror' && !/buntu/i.test(os)) {
+      os = 'Kubuntu';
+    }
+    // Detect Android browsers.
+    else if ((manufacturer && manufacturer != 'Google' &&
+        ((/Chrome/.test(name) && !/\bMobile Safari\b/i.test(ua)) || /\bVita\b/.test(product))) ||
+        (/\bAndroid\b/.test(os) && /^Chrome/.test(name) && /\bVersion\//i.test(ua))) {
+      name = 'Android Browser';
+      os = /\bAndroid\b/.test(os) ? os : 'Android';
+    }
+    // Detect Silk desktop/accelerated modes.
+    else if (name == 'Silk') {
+      if (!/\bMobi/i.test(ua)) {
+        os = 'Android';
+        description.unshift('desktop mode');
+      }
+      if (/Accelerated *= *true/i.test(ua)) {
+        description.unshift('accelerated');
+      }
+    }
+    // Detect PaleMoon identifying as Firefox.
+    else if (name == 'PaleMoon' && (data = /\bFirefox\/([\d.]+)\b/.exec(ua))) {
+      description.push('identifying as Firefox ' + data[1]);
+    }
+    // Detect Firefox OS and products running Firefox.
+    else if (name == 'Firefox' && (data = /\b(Mobile|Tablet|TV)\b/i.exec(ua))) {
+      os || (os = 'Firefox OS');
+      product || (product = data[1]);
+    }
+    // Detect false positives for Firefox/Safari.
+    else if (!name || (data = !/\bMinefield\b/i.test(ua) && /\b(?:Firefox|Safari)\b/.exec(name))) {
+      // Escape the `/` for Firefox 1.
+      if (name && !product && /[\/,]|^[^(]+?\)/.test(ua.slice(ua.indexOf(data + '/') + 8))) {
+        // Clear name of false positives.
+        name = null;
+      }
+      // Reassign a generic name.
+      if ((data = product || manufacturer || os) &&
+          (product || manufacturer || /\b(?:Android|Symbian OS|Tablet OS|webOS)\b/.test(os))) {
+        name = /[a-z]+(?: Hat)?/i.exec(/\bAndroid\b/.test(os) ? os : data) + ' Browser';
+      }
+    }
+    // Add Chrome version to description for Electron.
+    else if (name == 'Electron' && (data = (/\bChrome\/([\d.]+)\b/.exec(ua) || 0)[1])) {
+      description.push('Chromium ' + data);
+    }
+    // Detect non-Opera (Presto-based) versions (order is important).
+    if (!version) {
+      version = getVersion([
+        '(?:Cloud9|CriOS|CrMo|Edge|FxiOS|IEMobile|Iron|Opera ?Mini|OPiOS|OPR|Raven|SamsungBrowser|Silk(?!/[\\d.]+$))',
+        'Version',
+        qualify(name),
+        '(?:Firefox|Minefield|NetFront)'
+      ]);
+    }
+    // Detect stubborn layout engines.
+    if ((data =
+          layout == 'iCab' && parseFloat(version) > 3 && 'WebKit' ||
+          /\bOpera\b/.test(name) && (/\bOPR\b/.test(ua) ? 'Blink' : 'Presto') ||
+          /\b(?:Midori|Nook|Safari)\b/i.test(ua) && !/^(?:Trident|EdgeHTML)$/.test(layout) && 'WebKit' ||
+          !layout && /\bMSIE\b/i.test(ua) && (os == 'Mac OS' ? 'Tasman' : 'Trident') ||
+          layout == 'WebKit' && /\bPlayStation\b(?! Vita\b)/i.test(name) && 'NetFront'
+        )) {
+      layout = [data];
+    }
+    // Detect Windows Phone 7 desktop mode.
+    if (name == 'IE' && (data = (/; *(?:XBLWP|ZuneWP)(\d+)/i.exec(ua) || 0)[1])) {
+      name += ' Mobile';
+      os = 'Windows Phone ' + (/\+$/.test(data) ? data : data + '.x');
+      description.unshift('desktop mode');
+    }
+    // Detect Windows Phone 8.x desktop mode.
+    else if (/\bWPDesktop\b/i.test(ua)) {
+      name = 'IE Mobile';
+      os = 'Windows Phone 8.x';
+      description.unshift('desktop mode');
+      version || (version = (/\brv:([\d.]+)/.exec(ua) || 0)[1]);
+    }
+    // Detect IE 11 identifying as other browsers.
+    else if (name != 'IE' && layout == 'Trident' && (data = /\brv:([\d.]+)/.exec(ua))) {
+      if (name) {
+        description.push('identifying as ' + name + (version ? ' ' + version : ''));
+      }
+      name = 'IE';
+      version = data[1];
+    }
+    // Leverage environment features.
+    if (useFeatures) {
+      // Detect server-side environments.
+      // Rhino has a global function while others have a global object.
+      if (isHostType(context, 'global')) {
+        if (java) {
+          data = java.lang.System;
+          arch = data.getProperty('os.arch');
+          os = os || data.getProperty('os.name') + ' ' + data.getProperty('os.version');
+        }
+        if (rhino) {
+          try {
+            version = context.require('ringo/engine').version.join('.');
+            name = 'RingoJS';
+          } catch(e) {
+            if ((data = context.system) && data.global.system == context.system) {
+              name = 'Narwhal';
+              os || (os = data[0].os || null);
+            }
+          }
+          if (!name) {
+            name = 'Rhino';
+          }
+        }
+        else if (
+          typeof context.process == 'object' && !context.process.browser &&
+          (data = context.process)
+        ) {
+          if (typeof data.versions == 'object') {
+            if (typeof data.versions.electron == 'string') {
+              description.push('Node ' + data.versions.node);
+              name = 'Electron';
+              version = data.versions.electron;
+            } else if (typeof data.versions.nw == 'string') {
+              description.push('Chromium ' + version, 'Node ' + data.versions.node);
+              name = 'NW.js';
+              version = data.versions.nw;
+            }
+          }
+          if (!name) {
+            name = 'Node.js';
+            arch = data.arch;
+            os = data.platform;
+            version = /[\d.]+/.exec(data.version);
+            version = version ? version[0] : null;
+          }
+        }
+      }
+      // Detect Adobe AIR.
+      else if (getClassOf((data = context.runtime)) == airRuntimeClass) {
+        name = 'Adobe AIR';
+        os = data.flash.system.Capabilities.os;
+      }
+      // Detect PhantomJS.
+      else if (getClassOf((data = context.phantom)) == phantomClass) {
+        name = 'PhantomJS';
+        version = (data = data.version || null) && (data.major + '.' + data.minor + '.' + data.patch);
+      }
+      // Detect IE compatibility modes.
+      else if (typeof doc.documentMode == 'number' && (data = /\bTrident\/(\d+)/i.exec(ua))) {
+        // We're in compatibility mode when the Trident version + 4 doesn't
+        // equal the document mode.
+        version = [version, doc.documentMode];
+        if ((data = +data[1] + 4) != version[1]) {
+          description.push('IE ' + version[1] + ' mode');
+          layout && (layout[1] = '');
+          version[1] = data;
+        }
+        version = name == 'IE' ? String(version[1].toFixed(1)) : version[0];
+      }
+      // Detect IE 11 masking as other browsers.
+      else if (typeof doc.documentMode == 'number' && /^(?:Chrome|Firefox)\b/.test(name)) {
+        description.push('masking as ' + name + ' ' + version);
+        name = 'IE';
+        version = '11.0';
+        layout = ['Trident'];
+        os = 'Windows';
+      }
+      os = os && format(os);
+    }
+    // Detect prerelease phases.
+    if (version && (data =
+          /(?:[ab]|dp|pre|[ab]\d+pre)(?:\d+\+?)?$/i.exec(version) ||
+          /(?:alpha|beta)(?: ?\d)?/i.exec(ua + ';' + (useFeatures && nav.appMinorVersion)) ||
+          /\bMinefield\b/i.test(ua) && 'a'
+        )) {
+      prerelease = /b/i.test(data) ? 'beta' : 'alpha';
+      version = version.replace(RegExp(data + '\\+?$'), '') +
+        (prerelease == 'beta' ? beta : alpha) + (/\d+\+?/.exec(data) || '');
+    }
+    // Detect Firefox Mobile.
+    if (name == 'Fennec' || name == 'Firefox' && /\b(?:Android|Firefox OS)\b/.test(os)) {
+      name = 'Firefox Mobile';
+    }
+    // Obscure Maxthon's unreliable version.
+    else if (name == 'Maxthon' && version) {
+      version = version.replace(/\.[\d.]+/, '.x');
+    }
+    // Detect Xbox 360 and Xbox One.
+    else if (/\bXbox\b/i.test(product)) {
+      if (product == 'Xbox 360') {
+        os = null;
+      }
+      if (product == 'Xbox 360' && /\bIEMobile\b/.test(ua)) {
+        description.unshift('mobile mode');
+      }
+    }
+    // Add mobile postfix.
+    else if ((/^(?:Chrome|IE|Opera)$/.test(name) || name && !product && !/Browser|Mobi/.test(name)) &&
+        (os == 'Windows CE' || /Mobi/i.test(ua))) {
+      name += ' Mobile';
+    }
+    // Detect IE platform preview.
+    else if (name == 'IE' && useFeatures) {
+      try {
+        if (context.external === null) {
+          description.unshift('platform preview');
+        }
+      } catch(e) {
+        description.unshift('embedded');
+      }
+    }
+    // Detect BlackBerry OS version.
+    // http://docs.blackberry.com/en/developers/deliverables/18169/HTTP_headers_sent_by_BB_Browser_1234911_11.jsp
+    else if ((/\bBlackBerry\b/.test(product) || /\bBB10\b/.test(ua)) && (data =
+          (RegExp(product.replace(/ +/g, ' *') + '/([.\\d]+)', 'i').exec(ua) || 0)[1] ||
+          version
+        )) {
+      data = [data, /BB10/.test(ua)];
+      os = (data[1] ? (product = null, manufacturer = 'BlackBerry') : 'Device Software') + ' ' + data[0];
+      version = null;
+    }
+    // Detect Opera identifying/masking itself as another browser.
+    // http://www.opera.com/support/kb/view/843/
+    else if (this != forOwn && product != 'Wii' && (
+          (useFeatures && opera) ||
+          (/Opera/.test(name) && /\b(?:MSIE|Firefox)\b/i.test(ua)) ||
+          (name == 'Firefox' && /\bOS X (?:\d+\.){2,}/.test(os)) ||
+          (name == 'IE' && (
+            (os && !/^Win/.test(os) && version > 5.5) ||
+            /\bWindows XP\b/.test(os) && version > 8 ||
+            version == 8 && !/\bTrident\b/.test(ua)
+          ))
+        ) && !reOpera.test((data = parse.call(forOwn, ua.replace(reOpera, '') + ';'))) && data.name) {
+      // When "identifying", the UA contains both Opera and the other browser's name.
+      data = 'ing as ' + data.name + ((data = data.version) ? ' ' + data : '');
+      if (reOpera.test(name)) {
+        if (/\bIE\b/.test(data) && os == 'Mac OS') {
+          os = null;
+        }
+        data = 'identify' + data;
+      }
+      // When "masking", the UA contains only the other browser's name.
+      else {
+        data = 'mask' + data;
+        if (operaClass) {
+          name = format(operaClass.replace(/([a-z])([A-Z])/g, '$1 $2'));
+        } else {
+          name = 'Opera';
+        }
+        if (/\bIE\b/.test(data)) {
+          os = null;
+        }
+        if (!useFeatures) {
+          version = null;
+        }
+      }
+      layout = ['Presto'];
+      description.push(data);
+    }
+    // Detect WebKit Nightly and approximate Chrome/Safari versions.
+    if ((data = (/\bAppleWebKit\/([\d.]+\+?)/i.exec(ua) || 0)[1])) {
+      // Correct build number for numeric comparison.
+      // (e.g. "532.5" becomes "532.05")
+      data = [parseFloat(data.replace(/\.(\d)$/, '.0$1')), data];
+      // Nightly builds are postfixed with a "+".
+      if (name == 'Safari' && data[1].slice(-1) == '+') {
+        name = 'WebKit Nightly';
+        prerelease = 'alpha';
+        version = data[1].slice(0, -1);
+      }
+      // Clear incorrect browser versions.
+      else if (version == data[1] ||
+          version == (data[2] = (/\bSafari\/([\d.]+\+?)/i.exec(ua) || 0)[1])) {
+        version = null;
+      }
+      // Use the full Chrome version when available.
+      data[1] = (/\bChrome\/([\d.]+)/i.exec(ua) || 0)[1];
+      // Detect Blink layout engine.
+      if (data[0] == 537.36 && data[2] == 537.36 && parseFloat(data[1]) >= 28 && layout == 'WebKit') {
+        layout = ['Blink'];
+      }
+      // Detect JavaScriptCore.
+      // http://stackoverflow.com/questions/6768474/how-can-i-detect-which-javascript-engine-v8-or-jsc-is-used-at-runtime-in-androi
+      if (!useFeatures || (!likeChrome && !data[1])) {
+        layout && (layout[1] = 'like Safari');
+        data = (data = data[0], data < 400 ? 1 : data < 500 ? 2 : data < 526 ? 3 : data < 533 ? 4 : data < 534 ? '4+' : data < 535 ? 5 : data < 537 ? 6 : data < 538 ? 7 : data < 601 ? 8 : '8');
+      } else {
+        layout && (layout[1] = 'like Chrome');
+        data = data[1] || (data = data[0], data < 530 ? 1 : data < 532 ? 2 : data < 532.05 ? 3 : data < 533 ? 4 : data < 534.03 ? 5 : data < 534.07 ? 6 : data < 534.10 ? 7 : data < 534.13 ? 8 : data < 534.16 ? 9 : data < 534.24 ? 10 : data < 534.30 ? 11 : data < 535.01 ? 12 : data < 535.02 ? '13+' : data < 535.07 ? 15 : data < 535.11 ? 16 : data < 535.19 ? 17 : data < 536.05 ? 18 : data < 536.10 ? 19 : data < 537.01 ? 20 : data < 537.11 ? '21+' : data < 537.13 ? 23 : data < 537.18 ? 24 : data < 537.24 ? 25 : data < 537.36 ? 26 : layout != 'Blink' ? '27' : '28');
+      }
+      // Add the postfix of ".x" or "+" for approximate versions.
+      layout && (layout[1] += ' ' + (data += typeof data == 'number' ? '.x' : /[.+]/.test(data) ? '' : '+'));
+      // Obscure version for some Safari 1-2 releases.
+      if (name == 'Safari' && (!version || parseInt(version) > 45)) {
+        version = data;
+      }
+    }
+    // Detect Opera desktop modes.
+    if (name == 'Opera' &&  (data = /\bzbov|zvav$/.exec(os))) {
+      name += ' ';
+      description.unshift('desktop mode');
+      if (data == 'zvav') {
+        name += 'Mini';
+        version = null;
+      } else {
+        name += 'Mobile';
+      }
+      os = os.replace(RegExp(' *' + data + '$'), '');
+    }
+    // Detect Chrome desktop mode.
+    else if (name == 'Safari' && /\bChrome\b/.exec(layout && layout[1])) {
+      description.unshift('desktop mode');
+      name = 'Chrome Mobile';
+      version = null;
+
+      if (/\bOS X\b/.test(os)) {
+        manufacturer = 'Apple';
+        os = 'iOS 4.3+';
+      } else {
+        os = null;
+      }
+    }
+    // Strip incorrect OS versions.
+    if (version && version.indexOf((data = /[\d.]+$/.exec(os))) == 0 &&
+        ua.indexOf('/' + data + '-') > -1) {
+      os = trim(os.replace(data, ''));
+    }
+    // Add layout engine.
+    if (layout && !/\b(?:Avant|Nook)\b/.test(name) && (
+        /Browser|Lunascape|Maxthon/.test(name) ||
+        name != 'Safari' && /^iOS/.test(os) && /\bSafari\b/.test(layout[1]) ||
+        /^(?:Adobe|Arora|Breach|Midori|Opera|Phantom|Rekonq|Rock|Samsung Internet|Sleipnir|Web)/.test(name) && layout[1])) {
+      // Don't add layout details to description if they are falsey.
+      (data = layout[layout.length - 1]) && description.push(data);
+    }
+    // Combine contextual information.
+    if (description.length) {
+      description = ['(' + description.join('; ') + ')'];
+    }
+    // Append manufacturer to description.
+    if (manufacturer && product && product.indexOf(manufacturer) < 0) {
+      description.push('on ' + manufacturer);
+    }
+    // Append product to description.
+    if (product) {
+      description.push((/^on /.test(description[description.length - 1]) ? '' : 'on ') + product);
+    }
+    // Parse the OS into an object.
+    if (os) {
+      data = / ([\d.+]+)$/.exec(os);
+      isSpecialCasedOS = data && os.charAt(os.length - data[0].length - 1) == '/';
+      os = {
+        'architecture': 32,
+        'family': (data && !isSpecialCasedOS) ? os.replace(data[0], '') : os,
+        'version': data ? data[1] : null,
+        'toString': function() {
+          var version = this.version;
+          return this.family + ((version && !isSpecialCasedOS) ? ' ' + version : '') + (this.architecture == 64 ? ' 64-bit' : '');
+        }
+      };
+    }
+    // Add browser/OS architecture.
+    if ((data = /\b(?:AMD|IA|Win|WOW|x86_|x)64\b/i.exec(arch)) && !/\bi686\b/i.test(arch)) {
+      if (os) {
+        os.architecture = 64;
+        os.family = os.family.replace(RegExp(' *' + data), '');
+      }
+      if (
+          name && (/\bWOW64\b/i.test(ua) ||
+          (useFeatures && /\w(?:86|32)$/.test(nav.cpuClass || nav.platform) && !/\bWin64; x64\b/i.test(ua)))
+      ) {
+        description.unshift('32-bit');
+      }
+    }
+    // Chrome 39 and above on OS X is always 64-bit.
+    else if (
+        os && /^OS X/.test(os.family) &&
+        name == 'Chrome' && parseFloat(version) >= 39
+    ) {
+      os.architecture = 64;
+    }
+
+    ua || (ua = null);
+
+    /*------------------------------------------------------------------------*/
+
+    /**
+     * The platform object.
+     *
+     * @name platform
+     * @type Object
+     */
+    var platform = {};
+
+    /**
+     * The platform description.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.description = ua;
+
+    /**
+     * The name of the browser's layout engine.
+     *
+     * The list of common layout engines include:
+     * "Blink", "EdgeHTML", "Gecko", "Trident" and "WebKit"
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.layout = layout && layout[0];
+
+    /**
+     * The name of the product's manufacturer.
+     *
+     * The list of manufacturers include:
+     * "Apple", "Archos", "Amazon", "Asus", "Barnes & Noble", "BlackBerry",
+     * "Google", "HP", "HTC", "LG", "Microsoft", "Motorola", "Nintendo",
+     * "Nokia", "Samsung" and "Sony"
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.manufacturer = manufacturer;
+
+    /**
+     * The name of the browser/environment.
+     *
+     * The list of common browser names include:
+     * "Chrome", "Electron", "Firefox", "Firefox for iOS", "IE",
+     * "Microsoft Edge", "PhantomJS", "Safari", "SeaMonkey", "Silk",
+     * "Opera Mini" and "Opera"
+     *
+     * Mobile versions of some browsers have "Mobile" appended to their name:
+     * eg. "Chrome Mobile", "Firefox Mobile", "IE Mobile" and "Opera Mobile"
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.name = name;
+
+    /**
+     * The alpha/beta release indicator.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.prerelease = prerelease;
+
+    /**
+     * The name of the product hosting the browser.
+     *
+     * The list of common products include:
+     *
+     * "BlackBerry", "Galaxy S4", "Lumia", "iPad", "iPod", "iPhone", "Kindle",
+     * "Kindle Fire", "Nexus", "Nook", "PlayBook", "TouchPad" and "Transformer"
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.product = product;
+
+    /**
+     * The browser's user agent string.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.ua = ua;
+
+    /**
+     * The browser/environment version.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.version = name && version;
+
+    /**
+     * The name of the operating system.
+     *
+     * @memberOf platform
+     * @type Object
+     */
+    platform.os = os || {
+
+      /**
+       * The CPU architecture the OS is built for.
+       *
+       * @memberOf platform.os
+       * @type number|null
+       */
+      'architecture': null,
+
+      /**
+       * The family of the OS.
+       *
+       * Common values include:
+       * "Windows", "Windows Server 2008 R2 / 7", "Windows Server 2008 / Vista",
+       * "Windows XP", "OS X", "Ubuntu", "Debian", "Fedora", "Red Hat", "SuSE",
+       * "Android", "iOS" and "Windows Phone"
+       *
+       * @memberOf platform.os
+       * @type string|null
+       */
+      'family': null,
+
+      /**
+       * The version of the OS.
+       *
+       * @memberOf platform.os
+       * @type string|null
+       */
+      'version': null,
+
+      /**
+       * Returns the OS string.
+       *
+       * @memberOf platform.os
+       * @returns {string} The OS string.
+       */
+      'toString': function() { return 'null'; }
+    };
+
+    platform.parse = parse;
+    platform.toString = toStringPlatform;
+
+    if (platform.version) {
+      description.unshift(version);
+    }
+    if (platform.name) {
+      description.unshift(name);
+    }
+    if (os && name && !(os == String(os).split(' ')[0] && (os == name.split(' ')[0] || product))) {
+      description.push(product ? '(' + os + ')' : 'on ' + os);
+    }
+    if (description.length) {
+      platform.description = description.join(' ');
+    }
+    return platform;
+  }
+
+  /*--------------------------------------------------------------------------*/
+
+  // Export platform.
+  var platform = parse();
+
+  // Some AMD build optimizers, like r.js, check for condition patterns like the following:
+  if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+    // Expose platform on the global object to prevent errors when platform is
+    // loaded by a script tag in the presence of an AMD loader.
+    // See http://requirejs.org/docs/errors.html#mismatch for more details.
+    root.platform = platform;
+
+    // Define as an anonymous module so platform can be aliased through path mapping.
+    define(function() {
+      return platform;
+    });
+  }
+  // Check for `exports` after `define` in case a build optimizer adds an `exports` object.
+  else if (freeExports && freeModule) {
+    // Export for CommonJS support.
+    forOwn(platform, function(value, key) {
+      freeExports[key] = value;
+    });
+  }
+  else {
+    // Export to the global object.
+    root.platform = platform;
+  }
+}.call(this));
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],63:[function(require,module,exports){
+'use strict';
+
+var toString = Object.prototype.toString;
+
+/**
+ * @method module:utils.ArgumentException
+ * @param  {string}    method
+ * @param  {string}    argument
+ * @param  {any}       value
+ * @return {TypeError}
+ */
+function ArgumentException ( method, argument, value )
+{
+  return TypeError( '`' + method + '` got unexpected `' + argument + '` argument (' + typeof value + ', ' + toString.call( value ) + ') with value: ' + value );
+}
+
+module.exports = ArgumentException;
+
+},{}],64:[function(require,module,exports){
+'use strict';
+
+/**
+ * @method module:utils.LogicalError
+ * @param  {string} method
+ * @param  {string} message
+ * @return {Error}
+ */
+function LogicalError ( method, message )
+{
+  return Error( '`' + method + '` ' + message );
+}
+
+module.exports = LogicalError;
+
+},{}],65:[function(require,module,exports){
+'use strict';
+var isObjectLike = require('peako/is-object-like');
+var getElementW = require('peako/get-element-w');
+var getElementH = require('peako/get-element-h');
+var baseForIn = require('peako/base/base-for-in');
+var _setDefaultDrawingSettings = require('./internal/_set-default-drawing-settings');
+var _copyDrawingSettings = require('./internal/_copy-drawing-settings');
+var _getGLContextName = require('./internal/_get-gl-context-name');
+var _createPolygon = require('./internal/_create-polygon');
+var _polygons = require('./internal/_polygons');
+var constants = require('./constants');
+var options = require('./options');
+var rendererIndex = 0;
+function Renderer(options, mode) {
+    var getContextOptions = { alpha: options.alpha };
+    if (options.canvas) {
+        this.canvas = options.canvas;
+    } else {
+        this.canvas = document.createElement('canvas');
+        this.canvas.innerHTML = 'Unable to run the application.';
+    }
+    if (options.append) {
+        this.add();
+    }
+    if (mode === constants.MODE_2D) {
+        this.context = this.canvas.getContext('2d', getContextOptions);
+    } else if (mode === constants.MODE_GL) {
+        if (mode = _getGLContextName()) {
+            this.context = this.canvas.getContext(mode, getContextOptions);
+        } else {
+            throw Error('Cannot get WebGL context. Try to use v6.constants.MODE_GL as the renderer mode or v6.Renderer2D instead of v6.RendererGL');
+        }
+    }
+    this.settings = options.settings;
+    this.mode = mode;
+    this.index = rendererIndex;
+    this._stack = [];
+    this._stackIndex = -1;
+    this._vertices = [];
+    _setDefaultDrawingSettings(this, this);
+    if ('w' in options || 'h' in options) {
+        this.resize(options.w, options.h);
+    } else {
+        this.resizeTo(window);
+    }
+    rendererIndex += 1;
+}
+Renderer.prototype = {
+    add: function add(parent) {
+        (parent || document.body).appendChild(this.canvas);
+        return this;
+    },
+    destroy: function destroy() {
+        this.canvas.parentNode.removeChild(this.canvas);
+        return this;
+    },
+    push: function push() {
+        if (this._stack[++this._stackIndex]) {
+            _copyDrawingSettings(this._stack[this._stackIndex], this);
+        } else {
+            this._stack.push(_setDefaultDrawingSettings({}, this));
+        }
+        return this;
+    },
+    pop: function pop() {
+        if (this._stackIndex >= 0) {
+            _copyDrawingSettings(this, this._stack[this._stackIndex--]);
+        } else {
+            _setDefaultDrawingSettings(this, this);
+        }
+        return this;
+    },
+    resize: function resize(w, h) {
+        var canvas = this.canvas;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        var scale = this.settings.scale;
+        canvas.width = this.w = Math.floor(w * scale);
+        canvas.height = this.h = Math.floor(h * scale);
+        return this;
+    },
+    resizeTo: function resizeTo(element) {
+        return this.resize(getElementW(element), getElementH(element));
+    },
+    rescale: function rescale() {
+        return this.resizeTo(this.canvas);
+    },
+    background: function background(r, g, b, a) {
+        if (isObjectLike(r)) {
+            return this.backgroundImage(r);
+        }
+        return this.backgroundColor(r, g, b, a);
+    },
+    _polygon: function _polygon(x, y, rx, ry, n, a, degrees) {
+        var polygon = _polygons[n];
+        var matrix = this.matrix;
+        if (!polygon) {
+            polygon = _polygons[n] = _createPolygon(n);
+        }
+        if (degrees) {
+            a *= Math.PI / 180;
+        }
+        matrix.save();
+        matrix.translate(x, y);
+        matrix.rotate(a);
+        this.vertices(polygon, polygon.length * 0.5, null, rx, ry);
+        matrix.restore();
+        return this;
+    },
+    polygon: function polygon(x, y, r, n, a) {
+        if (n % 1) {
+            n = Math.floor(n * 100) * 0.01;
+        }
+        if (typeof a !== 'undefined') {
+            this._polygon(x, y, r, r, n, a, options.degrees);
+        } else {
+            this._polygon(x, y, r, r, n, -Math.PI * 0.5);
+        }
+        return this;
+    },
+    noStroke: function noStroke() {
+        this._doStroke = false;
+        return this;
+    },
+    noFill: function noFill() {
+        this._doFill = false;
+        return this;
+    },
+    setTransformFromCamera: function setTransformFromCamera(camera) {
+        var position = camera.position;
+        var zoom = camera.zoom;
+        this.matrix.setTransform(zoom, 0, 0, zoom, position[0] * zoom, position[1] * zoom);
+        return this;
+    },
+    lineWidth: function lineWidth(number) {
+        this._lineW = number;
+        return this;
+    },
+    constructor: Renderer
+};
+baseForIn({
+    stroke: 'Stroke',
+    fill: 'Fill'
+}, function (Name, name) {
+    var _nameColor = '_' + name + 'Color', _doName = '_do' + Name, _name = '_' + name;
+    Renderer.prototype[name] = function (r, g, b, a) {
+        if (typeof r === 'undefined') {
+            this[_name]();
+        } else if (typeof r !== 'boolean') {
+            if (typeof r === 'string' || this[_nameColor].type !== this.settings.color.prototype.type) {
+                this[_nameColor] = new this.settings.color(r, g, b, a);
+            } else {
+                this[_nameColor].set(r, g, b, a);
+            }
+            this[_doName] = true;
+        } else {
+            this[_doName] = r;
+        }
+        return this;
+    };
+}, void 0, true, [
+    'stroke',
+    'fill'
+]);
+[
+    'setTransform',
+    'transform',
+    'translate',
+    'restore',
+    'scale',
+    'save'
+].forEach(function (name) {
+    Renderer.prototype[name] = Function('a, b, c, d, e, f', 'return this.matrix.' + name + '( a, b, c, d, e, f ), this;');
+});
+module.exports = Renderer;
+},{"./constants":75,"./internal/_copy-drawing-settings":76,"./internal/_create-polygon":77,"./internal/_get-gl-context-name":80,"./internal/_polygons":81,"./internal/_set-default-drawing-settings":82,"./options":87,"peako/base/base-for-in":9,"peako/get-element-h":30,"peako/get-element-w":31,"peako/is-object-like":38}],66:[function(require,module,exports){
+'use strict';
+var defaults = require('peako/defaults');
+var constants = require('./constants');
+var Renderer = require('./Renderer');
+var _options = require('./options');
+var align = require('./internal/align');
+function Renderer2D(options) {
+    options = defaults(_options, options);
+    Renderer.call(this, options, constants.MODE_2D);
+    this.smooth(this.settings.smooth);
+    this.matrix = this.context;
+    this._beginPath = false;
+}
+Renderer2D.prototype = Object.create(Renderer.prototype);
+Renderer2D.prototype.smooth = function () {
+    var names = [
+            'webkitImageSmoothingEnabled',
+            'mozImageSmoothingEnabled',
+            'msImageSmoothingEnabled',
+            'oImageSmoothingEnabled',
+            'imageSmoothingEnabled'
+        ];
+    return function smooth(bool) {
+        var i;
+        if (typeof bool !== 'boolean') {
+            throw TypeError('First argument in smooth( bool ) must be a boolean');
+        }
+        for (i = names.length - 1; i >= 0; --i) {
+            if (names[i] in this.context) {
+                this.context[names[i]] = bool;
+            }
+        }
+        this.settings.smooth = bool;
+        return this;
+    };
+}();
+Renderer2D.prototype.backgroundColor = function backgroundColor(r, g, b, a) {
+    var context = this.context;
+    context.save();
+    context.setTransform(this.settings.scale, 0, 0, this.settings.scale, 0, 0);
+    context.fillStyle = new this.settings.color(r, g, b, a);
+    context.fillRect(0, 0, this.w, this.h);
+    context.restore();
+    return this;
+};
+Renderer2D.prototype.backgroundImage = function backgroundImage(image) {
+    var _rectAlignX = this._rectAlignX, _rectAlignY = this._rectAlignY;
+    this._rectAlignX = constants.CENTER;
+    this._rectAlignY = constants.MIDDLE;
+    this.image(image, this.w * 0.5, this.h * 0.5);
+    this._rectAlignX = _rectAlignX;
+    this._rectAlignY = _rectAlignY;
+    return this;
+};
+Renderer2D.prototype.image = function image(image, x, y, w, h) {
+    if (image.get().loaded) {
+        if (typeof w === 'undefined') {
+            w = image.dw;
+        }
+        if (typeof h === 'undefined') {
+            h = image.dh;
+        }
+        x = Math.floor(align(x, w, this._rectAlignX));
+        y = Math.floor(align(y, h, this._rectAlignY));
+        this.context.drawImage(image.get().image, image.x, image.y, image.w, image.h, x, y, w, h);
+    }
+    return this;
+};
+Renderer2D.prototype.clear = function clear(x, y, w, h) {
+    if (typeof x === 'undefined') {
+        x = y = 0;
+        w = this.w;
+        h = this.h;
+    } else {
+        x = Math.floor(align(x, w, this._rectAlignX));
+        y = Math.floor(align(y, h, this._rectAlignY));
+    }
+    this.context.clearRect(x, y, w, h);
+    return this;
+};
+Renderer2D.prototype.rect = function rect(x, y, w, h) {
+    x = Math.floor(align(x, w, this._rectAlignX));
+    y = Math.floor(align(y, h, this._rectAlignY));
+    if (this._beginPath) {
+        this.context.rect(x, y, w, h);
+    } else {
+        this.context.beginPath();
+        this.context.rect(x, y, w, h);
+        if (this._doFill) {
+            this._fill();
+        }
+        if (this._doStroke) {
+            this._stroke();
+        }
+    }
+    return this;
+};
+Renderer2D.prototype.arc = function arc(x, y, r) {
+    if (this._beginPath) {
+        this.context.arc(x, y, r, 0, Math.PI * 2, false);
+    } else {
+        this.context.beginPath();
+        this.context.arc(x, y, r, 0, Math.PI * 2, false);
+        if (this._doFill) {
+            this._fill();
+        }
+        if (this._doStroke) {
+            this._stroke(true);
+        }
+    }
+    return this;
+};
+Renderer2D.prototype.vertices = function vertices(verts, count, _mode, _sx, _sy) {
+    var context = this.context, i;
+    if (count < 2) {
+        return this;
+    }
+    if (_sx == null) {
+        _sx = _sy = 1;
+    }
+    context.beginPath();
+    context.moveTo(verts[0] * _sx, verts[1] * _sy);
+    for (i = 2, count *= 2; i < count; i += 2) {
+        context.lineTo(verts[i] * _sx, verts[i + 1] * _sy);
+    }
+    if (this._doFill) {
+        this._fill();
+    }
+    if (this._doStroke && this._lineW > 0) {
+        this._stroke(true);
+    }
+    return this;
+};
+Renderer2D.prototype._fill = function _fill() {
+    this.context.fillStyle = this._fillColor;
+    this.context.fill();
+};
+Renderer2D.prototype._stroke = function (close) {
+    var context = this.context;
+    if (close) {
+        context.closePath();
+    }
+    context.strokeStyle = this._strokeColor;
+    if ((context.lineWidth = this._lineW) <= 1) {
+        context.stroke();
+    }
+    context.stroke();
+};
+Renderer2D.prototype.constructor = Renderer2D;
+module.exports = Renderer2D;
+},{"./Renderer":65,"./constants":75,"./internal/align":83,"./options":87,"peako/defaults":27}],67:[function(require,module,exports){
+'use strict';
+var defaults = require('peako/defaults');
+var ShaderProgram = require('./ShaderProgram'), Transform = require('./Transform'), constants = require('./constants'), Renderer = require('./Renderer'), shaders = require('./shaders'), _options = require('./options');
+var align = require('./internal/align');
+function RendererGL(options) {
+    options = defaults(_options, options);
+    Renderer.call(this, options, constants.MODE_GL);
+    this.matrix = new Transform();
+    this.buffers = {
+        default: this.context.createBuffer(),
+        rect: this.context.createBuffer()
+    };
+    this.context.bindBuffer(this.context.ARRAY_BUFFER, this.buffers.rect);
+    this.context.bufferData(this.context.ARRAY_BUFFER, new Float32Array([
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1
+    ]), this.context.STATIC_DRAW);
+    this.shaders = { basic: new ShaderProgram(shaders.basicVert, shaders.basicFrag, this.context) };
+    this.blending(options.blending);
+}
+RendererGL.prototype = Object.create(Renderer.prototype);
+RendererGL.prototype.resize = function resize(w, h) {
+    Renderer.prototype.resize.call(this, w, h);
+    this.context.viewport(0, 0, this.w, this.h);
+    return this;
+};
+RendererGL.prototype.blending = function blending(blending) {
+    var gl = this.context;
+    if (blending) {
+        gl.enable(gl.BLEND);
+        gl.disable(gl.DEPTH_TEST);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+        gl.blendEquation(gl.FUNC_ADD);
+    } else {
+        gl.disable(gl.BLEND);
+        gl.enable(gl.DEPTH_TEST);
+        gl.depthFunc(gl.LEQUAL);
+    }
+    return this;
+};
+RendererGL.prototype._clearColor = function _clearColor(r, g, b, a) {
+    var gl = this.context;
+    gl.clearColor(r, g, b, a);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+};
+RendererGL.prototype.backgroundColor = function backgroundColor(r, g, b, a) {
+    var rgba = new this.settings.color(r, g, b, a).rgba();
+    this._clearColor(rgba[0] / 255, rgba[1] / 255, rgba[2] / 255, rgba[3]);
+    return this;
+};
+RendererGL.prototype.clear = function clear() {
+    this._clearColor(0, 0, 0, 0);
+    return this;
+};
+RendererGL.prototype.vertices = function vertices(verts, count, mode, _sx, _sy) {
+    var program = this.shaders.basic, gl = this.context;
+    if (count < 2) {
+        return this;
+    }
+    if (verts) {
+        if (mode == null) {
+            mode = gl.STATIC_DRAW;
+        }
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.default);
+        gl.bufferData(gl.ARRAY_BUFFER, verts, mode);
+    }
+    if (_sx != null) {
+        this.matrix.scale(_sx, _sy);
+    }
+    program.use().uniform('utransform', this.matrix.matrix).uniform('ures', [
+        this.w,
+        this.h
+    ]).pointer('apos', 2, gl.FLOAT, false, 0, 0);
+    if (this._doFill) {
+        program.uniform('ucolor', this._fillColor.rgba());
+        gl.drawArrays(gl.TRIANGLE_FAN, 0, count);
+    }
+    if (this._doStroke && this._lineW > 0) {
+        program.uniform('ucolor', this._strokeColor.rgba());
+        gl.lineWidth(this._lineW);
+        gl.drawArrays(gl.LINE_LOOP, 0, count);
+    }
+    return this;
+};
+RendererGL.prototype.arc = function arc(x, y, r) {
+    return this._polygon(x, y, r, r, 24, 0);
+};
+RendererGL.prototype.rect = function rect(x, y, w, h) {
+    x = align(x, w, this._rectAlignX);
+    y = align(y, h, this._rectAlignY);
+    this.matrix.save();
+    this.matrix.translate(x, y);
+    this.matrix.scale(w, h);
+    this.context.bindBuffer(this.context.ARRAY_BUFFER, this.buffers.rect);
+    this.vertices(null, 4);
+    this.matrix.restore();
+    return this;
+};
+RendererGL.prototype.constructor = RendererGL;
+module.exports = RendererGL;
+},{"./Renderer":65,"./ShaderProgram":68,"./Transform":70,"./constants":75,"./internal/align":83,"./options":87,"./shaders":91,"peako/defaults":27}],68:[function(require,module,exports){
+'use strict';
+var _createProgram = require('./internal/_create-program'), _createShader = require('./internal/_create-shader');
+function ShaderProgram(vert, frag, gl) {
+    if (typeof vert === 'string') {
+        vert = _createShader(vert, gl.VERTEX_SHADER, gl);
+    }
+    if (typeof frag === 'string') {
+        frag = _createShader(frag, gl.FRAGMENT_SHADER, gl);
+    }
+    this._program = _createProgram(vert, frag, gl);
+    this._gl = gl;
+    this.attributes = attributes(gl, this._program);
+    this.uniforms = uniforms(gl, this._program);
+}
+ShaderProgram.prototype = {
+    use: function use() {
+        this._gl.useProgram(this._program);
+        return this;
+    },
+    pointer: function pointer(name, size, type, normalized, stride, offset) {
+        var location = this.attributes[name].location;
+        var _gl = this._gl;
+        _gl.enableVertexAttribArray(location);
+        _gl.vertexAttribPointer(location, size, type, normalized, stride, offset);
+        return this;
+    },
+    constructor: ShaderProgram
+};
+ShaderProgram.prototype.uniform = function uniform(name, value) {
+    var uniform = this.uniforms[name];
+    var _gl = this._gl;
+    switch (uniform.type) {
+    case _gl.BOOL:
+    case _gl.INT:
+        if (uniform.size > 1) {
+            _gl.uniform1iv(uniform.location, value);
+        } else {
+            _gl.uniform1i(uniform.location, value);
+        }
+        break;
+    case _gl.FLOAT:
+        if (uniform.size > 1) {
+            _gl.uniform1fv(uniform.location, value);
+        } else {
+            _gl.uniform1f(uniform.location, value);
+        }
+        break;
+    case _gl.FLOAT_MAT2:
+        _gl.uniformMatrix2fv(uniform.location, false, value);
+        break;
+    case _gl.FLOAT_MAT3:
+        _gl.uniformMatrix3fv(uniform.location, false, value);
+        break;
+    case _gl.FLOAT_MAT4:
+        _gl.uniformMatrix4fv(uniform.location, false, value);
+        break;
+    case _gl.FLOAT_VEC2:
+        if (uniform.size > 1) {
+            _gl.uniform2fv(uniform.location, value);
+        } else {
+            _gl.uniform2f(uniform.location, value[0], value[1]);
+        }
+        break;
+    case _gl.FLOAT_VEC3:
+        if (uniform.size > 1) {
+            _gl.uniform3fv(uniform.location, value);
+        } else {
+            _gl.uniform3f(uniform.location, value[0], value[1], value[2]);
+        }
+        break;
+    case _gl.FLOAT_VEC4:
+        if (uniform.size > 1) {
+            _gl.uniform4fv(uniform.location, value);
+        } else {
+            _gl.uniform4f(uniform.location, value[0], value[1], value[2], value[3]);
+        }
+        break;
+    default:
+        throw TypeError('The uniform type is not supported');
+    }
+    return this;
+};
+function attributes(gl, program) {
+    var i = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES) - 1;
+    var attributes = {};
+    var attribute;
+    for (; i >= 0; --i) {
+        attribute = gl.getActiveAttrib(program, i);
+        attribute.location = gl.getAttribLocation(program, attribute.name);
+        attributes[attribute.name] = attribute;
+    }
+    return attributes;
+}
+function uniforms(gl, program) {
+    var i = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS) - 1;
+    var uniforms = {};
+    var uniform, index, info;
+    for (; i >= 0; --i) {
+        info = gl.getActiveUniform(program, i);
+        uniform = {
+            location: gl.getUniformLocation(program, info.name),
+            size: info.size,
+            type: info.type
+        };
+        if (info.size > 1 && ~(index = info.name.indexOf('[0]'))) {
+            uniform.name = info.name.slice(0, index);
+        } else {
+            uniform.name = info.name;
+        }
+        uniforms[uniform.name] = uniform;
+    }
+    return uniforms;
+}
+module.exports = ShaderProgram;
+},{"./internal/_create-program":78,"./internal/_create-shader":79}],69:[function(require,module,exports){
+'use strict';
+var LightEmitter = require('light_emitter');
+var extend = require('extend');
+var timestamp = require('peako/timestamp');
+var timer = require('peako/timer');
+var Ticker = extend(LightEmitter, {
+        constructor: function Ticker() {
+            var self = this;
+            this.__super__.call(this);
+            this.lastRequestAnimationFrameID = 0;
+            this.lastRequestTime = 0;
+            this.skippedTime = 0;
+            this.totalTime = 0;
+            this.running = false;
+            function tick(now) {
+                var elapsedTime;
+                if (!self.running) {
+                    if (!now) {
+                        self.lastRequestAnimationFrameID = timer.request(tick);
+                        self.lastRequestTime = timestamp();
+                        self.running = true;
+                    }
+                    return this;
+                }
+                if (!now) {
+                    now = timestamp();
+                }
+                elapsedTime = Math.min(1, (now - self.lastRequestTime) * 0.001);
+                self.skippedTime += elapsedTime;
+                self.totalTime += elapsedTime;
+                while (self.skippedTime >= self.step && self.running) {
+                    self.skippedTime -= self.step;
+                    self.emit('update', self.step, now);
+                }
+                self.emit('render', elapsedTime, now);
+                self.lastRequestTime = now;
+                self.lastRequestAnimationFrameID = timer.request(tick);
+                return this;
+            }
+            this.tick = tick;
+            this.setFPS(60);
+        },
+        setFPS: function setFPS(fps) {
+            this.step = 1 / fps;
+            return this;
+        },
+        clear: function clear() {
+            this.skippedTime = 0;
+            return this;
+        },
+        stop: function stop() {
+            this.running = false;
+            return this;
+        }
+    });
+module.exports = Ticker;
+},{"extend":86,"light_emitter":2,"peako/timer":57,"peako/timestamp":58}],70:[function(require,module,exports){
+'use strict';
+var mat3 = require('./mat3');
+function Transform() {
+    this.matrix = mat3.identity();
+    this._index = -1;
+    this._stack = [];
+}
+Transform.prototype = {
+    save: function save() {
+        if (++this._index < this._stack.length) {
+            mat3.copy(this._stack[this._index], this.matrix);
+        } else {
+            this._stack.push(mat3.clone(this.matrix));
+        }
+    },
+    restore: function restore() {
+        if (this._index >= 0) {
+            mat3.copy(this.matrix, this._stack[this._index--]);
+        } else {
+            mat3.setIdentity(this.matrix);
+        }
+    },
+    setTransform: function setTransform(m11, m12, m21, m22, dx, dy) {
+        mat3.setTransform(this.matrix, m11, m12, m21, m22, dx, dy);
+    },
+    translate: function translate(x, y) {
+        mat3.translate(this.matrix, x, y);
+    },
+    rotate: function rotate(angle) {
+        mat3.rotate(this.matrix, angle);
+    },
+    scale: function scale(x, y) {
+        mat3.scale(this.matrix, x, y);
+    },
+    transform: function transform(m11, m12, m21, m22, dx, dy) {
+        mat3.transform(this.matrix, m11, m12, m21, m22, dx, dy);
+    },
+    constructor: Transform
+};
+module.exports = Transform;
+},{"./mat3":84}],71:[function(require,module,exports){
+'use strict';
+module.exports = HSLA;
+var clamp = require('peako/clamp');
+var RGBA = require('./RGBA');
+var parse = require('./internal/parse');
+function HSLA(h, s, l, a) {
+    this.set(h, s, l, a);
+}
+HSLA.prototype = {
+    perceivedBrightness: function perceivedBrightness() {
+        return this.rgba().perceivedBrightness();
+    },
+    luminance: function luminance() {
+        return this.rgba().luminance();
+    },
+    brightness: function brightness() {
+        return this.rgba().brightness();
+    },
+    toString: function toString() {
+        return 'hsla(' + this[0] + ', ' + this[1] + '%, ' + this[2] + '%, ' + this[3] + ')';
+    },
+    set: function set(h, s, l, a) {
+        switch (true) {
+        case typeof h === 'string':
+            h = parse(h);
+        case typeof h === 'object' && h != null:
+            if (h.type !== this.type) {
+                h = h[this.type]();
+            }
+            this[0] = h[0];
+            this[1] = h[1];
+            this[2] = h[2];
+            this[3] = h[3];
+            break;
+        default:
+            switch (void 0) {
+            case h:
+                a = 1;
+                l = s = h = 0;
+                break;
+            case s:
+                a = 1;
+                l = Math.floor(h);
+                s = h = 0;
+                break;
+            case l:
+                a = s;
+                l = Math.floor(h);
+                s = h = 0;
+                break;
+            case a:
+                a = 1;
+            default:
+                h = Math.floor(h);
+                s = Math.floor(s);
+                l = Math.floor(l);
+            }
+            this[0] = h;
+            this[1] = s;
+            this[2] = l;
+            this[3] = a;
+        }
+        return this;
+    },
+    rgba: function rgba() {
+        var rgba = new RGBA();
+        var h = this[0] % 360 / 360, s = this[1] * 0.01, l = this[2] * 0.01;
+        var tr = h + 1 / 3, tg = h, tb = h - 1 / 3;
+        var q;
+        if (l < 0.5) {
+            q = l * (1 + s);
+        } else {
+            q = l + s - l * s;
+        }
+        var p = 2 * l - q;
+        if (tr < 0) {
+            ++tr;
+        }
+        if (tg < 0) {
+            ++tg;
+        }
+        if (tb < 0) {
+            ++tb;
+        }
+        if (tr > 1) {
+            --tr;
+        }
+        if (tg > 1) {
+            --tg;
+        }
+        if (tb > 1) {
+            --tb;
+        }
+        rgba[0] = foo(tr, p, q);
+        rgba[1] = foo(tg, p, q);
+        rgba[2] = foo(tb, p, q);
+        rgba[3] = this[3];
+        return rgba;
+    },
+    lerp: function lerp(h, s, l, value) {
+        var color = new HSLA();
+        color[0] = h;
+        color[1] = s;
+        color[2] = l;
+        return this.lerpColor(color, value);
+    },
+    lerpColor: function lerpColor(color, value) {
+        return this.rgba().lerpColor(color, value).hsla();
+    },
+    shade: function shade(value) {
+        var hsla = new HSLA();
+        hsla[0] = this[0];
+        hsla[1] = this[1];
+        hsla[2] = clamp(this[2] + value, 0, 100);
+        hsla[3] = this[3];
+        return hsla;
+    },
+    constructor: HSLA,
+    type: 'hsla'
+};
+function foo(t, p, q) {
+    if (t < 1 / 6) {
+        return Math.round((p + (q - p) * 6 * t) * 255);
+    }
+    if (t < 0.5) {
+        return Math.round(q * 255);
+    }
+    if (t < 2 / 3) {
+        return Math.round((p + (q - p) * (2 / 3 - t) * 6) * 255);
+    }
+    return Math.round(p * 255);
+}
+},{"./RGBA":72,"./internal/parse":74,"peako/clamp":19}],72:[function(require,module,exports){
+'use strict';
+module.exports = RGBA;
+var HSLA = require('./HSLA');
+var parse = require('./internal/parse');
+function RGBA(r, g, b, a) {
+    this.set(r, g, b, a);
+}
+RGBA.prototype = {
+    perceivedBrightness: function perceivedBrightness() {
+        var r = this[0], g = this[1], b = this[2];
+        return Math.sqrt(0.299 * r * r + 0.587 * g * g + 0.114 * b * b);
+    },
+    luminance: function luminance() {
+        return this[0] * 0.2126 + this[1] * 0.7152 + this[2] * 0.0722;
+    },
+    brightness: function brightness() {
+        return 0.299 * this[0] + 0.587 * this[1] + 0.114 * this[2];
+    },
+    toString: function toString() {
+        return 'rgba(' + this[0] + ', ' + this[1] + ', ' + this[2] + ', ' + this[3] + ')';
+    },
+    set: function set(r, g, b, a) {
+        switch (true) {
+        case typeof r === 'string':
+            r = parse(r);
+        case typeof r === 'object' && r != null:
+            if (r.type !== this.type) {
+                r = r[this.type]();
+            }
+            this[0] = r[0];
+            this[1] = r[1];
+            this[2] = r[2];
+            this[3] = r[3];
+            break;
+        default:
+            switch (void 0) {
+            case r:
+                a = 1;
+                b = g = r = 0;
+                break;
+            case g:
+                a = 1;
+                b = g = r = Math.floor(r);
+                break;
+            case b:
+                a = g;
+                b = g = r = Math.floor(r);
+                break;
+            case a:
+                a = 1;
+            default:
+                r = Math.floor(r);
+                g = Math.floor(g);
+                b = Math.floor(b);
+            }
+            this[0] = r;
+            this[1] = g;
+            this[2] = b;
+            this[3] = a;
+        }
+        return this;
+    },
+    hsla: function hsla() {
+        var hsla = new HSLA();
+        var r = this[0] / 255, g = this[1] / 255, b = this[2] / 255;
+        var max = Math.max(r, g, b), min = Math.min(r, g, b);
+        var l = (max + min) * 50, h, s;
+        var diff = max - min;
+        if (diff) {
+            if (l > 50) {
+                s = diff / (2 - max - min);
+            } else {
+                s = diff / (max + min);
+            }
+            switch (max) {
+            case r:
+                if (g < b) {
+                    h = 1.0472 * (g - b) / diff + 6.2832;
+                } else {
+                    h = 1.0472 * (g - b) / diff;
+                }
+                break;
+            case g:
+                h = 1.0472 * (b - r) / diff + 2.0944;
+                break;
+            default:
+                h = 1.0472 * (r - g) / diff + 4.1888;
+            }
+            h = Math.round(h * 360 / 6.2832);
+            s = Math.round(s * 100);
+        } else {
+            h = s = 0;
+        }
+        hsla[0] = h;
+        hsla[1] = s;
+        hsla[2] = Math.round(l);
+        hsla[3] = this[3];
+        return hsla;
+    },
+    rgba: function rgba() {
+        return this;
+    },
+    lerp: function lerp(r, g, b, value) {
+        r = lerp(this[0], r, value);
+        g = lerp(this[0], g, value);
+        b = lerp(this[0], b, value);
+        return new RGBA(r, g, b, this[3]);
+    },
+    lerpColor: function lerpColor(color, value) {
+        var r, g, b;
+        if (typeof color !== 'object') {
+            color = parse(color);
+        }
+        if (color.type !== 'rgba') {
+            color = color.rgba();
+        }
+        r = color[0];
+        g = color[1];
+        b = color[2];
+        return this.lerp(r, g, b, value);
+    },
+    shade: function shade(value) {
+        return this.hsla().shade(value).rgba();
+    },
+    constructor: RGBA,
+    type: 'rgba'
+};
+},{"./HSLA":71,"./internal/parse":74}],73:[function(require,module,exports){
+'use strict';
+module.exports = {
+    aliceblue: 'f0f8ffff',
+    antiquewhite: 'faebd7ff',
+    aqua: '00ffffff',
+    aquamarine: '7fffd4ff',
+    azure: 'f0ffffff',
+    beige: 'f5f5dcff',
+    bisque: 'ffe4c4ff',
+    black: '000000ff',
+    blanchedalmond: 'ffebcdff',
+    blue: '0000ffff',
+    blueviolet: '8a2be2ff',
+    brown: 'a52a2aff',
+    burlywood: 'deb887ff',
+    cadetblue: '5f9ea0ff',
+    chartreuse: '7fff00ff',
+    chocolate: 'd2691eff',
+    coral: 'ff7f50ff',
+    cornflowerblue: '6495edff',
+    cornsilk: 'fff8dcff',
+    crimson: 'dc143cff',
+    cyan: '00ffffff',
+    darkblue: '00008bff',
+    darkcyan: '008b8bff',
+    darkgoldenrod: 'b8860bff',
+    darkgray: 'a9a9a9ff',
+    darkgreen: '006400ff',
+    darkkhaki: 'bdb76bff',
+    darkmagenta: '8b008bff',
+    darkolivegreen: '556b2fff',
+    darkorange: 'ff8c00ff',
+    darkorchid: '9932ccff',
+    darkred: '8b0000ff',
+    darksalmon: 'e9967aff',
+    darkseagreen: '8fbc8fff',
+    darkslateblue: '483d8bff',
+    darkslategray: '2f4f4fff',
+    darkturquoise: '00ced1ff',
+    darkviolet: '9400d3ff',
+    deeppink: 'ff1493ff',
+    deepskyblue: '00bfffff',
+    dimgray: '696969ff',
+    dodgerblue: '1e90ffff',
+    feldspar: 'd19275ff',
+    firebrick: 'b22222ff',
+    floralwhite: 'fffaf0ff',
+    forestgreen: '228b22ff',
+    fuchsia: 'ff00ffff',
+    gainsboro: 'dcdcdcff',
+    ghostwhite: 'f8f8ffff',
+    gold: 'ffd700ff',
+    goldenrod: 'daa520ff',
+    gray: '808080ff',
+    green: '008000ff',
+    greenyellow: 'adff2fff',
+    honeydew: 'f0fff0ff',
+    hotpink: 'ff69b4ff',
+    indianred: 'cd5c5cff',
+    indigo: '4b0082ff',
+    ivory: 'fffff0ff',
+    khaki: 'f0e68cff',
+    lavender: 'e6e6faff',
+    lavenderblush: 'fff0f5ff',
+    lawngreen: '7cfc00ff',
+    lemonchiffon: 'fffacdff',
+    lightblue: 'add8e6ff',
+    lightcoral: 'f08080ff',
+    lightcyan: 'e0ffffff',
+    lightgoldenrodyellow: 'fafad2ff',
+    lightgrey: 'd3d3d3ff',
+    lightgreen: '90ee90ff',
+    lightpink: 'ffb6c1ff',
+    lightsalmon: 'ffa07aff',
+    lightseagreen: '20b2aaff',
+    lightskyblue: '87cefaff',
+    lightslateblue: '8470ffff',
+    lightslategray: '778899ff',
+    lightsteelblue: 'b0c4deff',
+    lightyellow: 'ffffe0ff',
+    lime: '00ff00ff',
+    limegreen: '32cd32ff',
+    linen: 'faf0e6ff',
+    magenta: 'ff00ffff',
+    maroon: '800000ff',
+    mediumaquamarine: '66cdaaff',
+    mediumblue: '0000cdff',
+    mediumorchid: 'ba55d3ff',
+    mediumpurple: '9370d8ff',
+    mediumseagreen: '3cb371ff',
+    mediumslateblue: '7b68eeff',
+    mediumspringgreen: '00fa9aff',
+    mediumturquoise: '48d1ccff',
+    mediumvioletred: 'c71585ff',
+    midnightblue: '191970ff',
+    mintcream: 'f5fffaff',
+    mistyrose: 'ffe4e1ff',
+    moccasin: 'ffe4b5ff',
+    navajowhite: 'ffdeadff',
+    navy: '000080ff',
+    oldlace: 'fdf5e6ff',
+    olive: '808000ff',
+    olivedrab: '6b8e23ff',
+    orange: 'ffa500ff',
+    orangered: 'ff4500ff',
+    orchid: 'da70d6ff',
+    palegoldenrod: 'eee8aaff',
+    palegreen: '98fb98ff',
+    paleturquoise: 'afeeeeff',
+    palevioletred: 'd87093ff',
+    papayawhip: 'ffefd5ff',
+    peachpuff: 'ffdab9ff',
+    peru: 'cd853fff',
+    pink: 'ffc0cbff',
+    plum: 'dda0ddff',
+    powderblue: 'b0e0e6ff',
+    purple: '800080ff',
+    red: 'ff0000ff',
+    rosybrown: 'bc8f8fff',
+    royalblue: '4169e1ff',
+    saddlebrown: '8b4513ff',
+    salmon: 'fa8072ff',
+    sandybrown: 'f4a460ff',
+    seagreen: '2e8b57ff',
+    seashell: 'fff5eeff',
+    sienna: 'a0522dff',
+    silver: 'c0c0c0ff',
+    skyblue: '87ceebff',
+    slateblue: '6a5acdff',
+    slategray: '708090ff',
+    snow: 'fffafaff',
+    springgreen: '00ff7fff',
+    steelblue: '4682b4ff',
+    tan: 'd2b48cff',
+    teal: '008080ff',
+    thistle: 'd8bfd8ff',
+    tomato: 'ff6347ff',
+    turquoise: '40e0d0ff',
+    violet: 'ee82eeff',
+    violetred: 'd02090ff',
+    wheat: 'f5deb3ff',
+    white: 'ffffffff',
+    whitesmoke: 'f5f5f5ff',
+    yellow: 'ffff00ff',
+    yellowgreen: '9acd32ff',
+    transparent: '00000000'
+};
+},{}],74:[function(require,module,exports){
+'use strict';
+module.exports = parse;
+var RGBA = require('../RGBA');
+var HSLA = require('../HSLA');
+var colors = require('./colors');
+var parsed = Object.create(null);
+var TRANSPARENT = [
+        0,
+        0,
+        0,
+        0
+    ];
+var regexps = {
+        hex3: /^#([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])?$/,
+        hex: /^#([0-9a-f]{6})([0-9a-f]{2})?$/,
+        rgb: /^rgb\s*\(\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*\)$|^\s*rgba\s*\(\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\s*\)$/,
+        hsl: /^hsl\s*\(\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\u0025\s*,\s*(\d+|\d*\.\d+)\u0025\s*\)$|^\s*hsla\s*\(\s*(\d+|\d*\.\d+)\s*,\s*(\d+|\d*\.\d+)\u0025\s*,\s*(\d+|\d*\.\d+)\u0025\s*,\s*(\d+|\d*\.\d+)\s*\)$/
+    };
+function parse(string) {
+    var cache = parsed[string] || parsed[string = string.trim().toLowerCase()];
+    if (!cache) {
+        if (cache = colors[string]) {
+            cache = new ColorData(parseHex(cache), RGBA);
+        } else if (cache = regexps.hex.exec(string)) {
+            cache = new ColorData(parseHex(formatHex(cache)), RGBA);
+        } else if (cache = regexps.rgb.exec(string)) {
+            cache = new ColorData(compactMatch(cache), RGBA);
+        } else if (cache = regexps.hsl.exec(string)) {
+            cache = new ColorData(compactMatch(cache), HSLA);
+        } else if (cache = regexps.hex3.exec(string)) {
+            cache = new ColorData(parseHex(formatHex(cache, true)), RGBA);
+        } else {
+            throw SyntaxError(string + ' is not a valid syntax');
+        }
+        parsed[string] = cache;
+    }
+    return new cache.color(cache[0], cache[1], cache[2], cache[3]);
+}
+function formatHex(match, shortSyntax) {
+    var r, g, b, a;
+    if (!shortSyntax) {
+        return match[1] + (match[2] || 'ff');
+    }
+    r = match[1];
+    g = match[2];
+    b = match[3];
+    a = match[4] || 'f';
+    return r + r + g + g + b + b + a + a;
+}
+function parseHex(hex) {
+    if (hex == 0) {
+        return TRANSPARENT;
+    }
+    hex = parseInt(hex, 16);
+    return [
+        hex >> 24 & 255,
+        hex >> 16 & 255,
+        hex >> 8 & 255,
+        (hex & 255) / 255
+    ];
+}
+function compactMatch(match) {
+    if (match[7]) {
+        return [
+            +match[4],
+            +match[5],
+            +match[6],
+            +match[7]
+        ];
+    }
+    return [
+        +match[1],
+        +match[2],
+        +match[3]
+    ];
+}
+function ColorData(match, color) {
+    this[0] = match[0];
+    this[1] = match[1];
+    this[2] = match[2];
+    this[3] = match[3];
+    this.color = color;
+}
+},{"../HSLA":71,"../RGBA":72,"./colors":73}],75:[function(require,module,exports){
+'use strict';
+module.exports = {
+    MODE_AUTO: 1,
+    MODE_GL: 2,
+    MODE_2D: 3,
+    SELF_CONTEXT: 6,
+    BOTTOM: 7,
+    RIGHT: 8,
+    LEFT: 9,
+    TOP: 10,
+    CENTER: 11,
+    MIDDLE: 12
+};
+},{}],76:[function(require,module,exports){
+'use strict';
+function _copyDrawingSettings(target, source, deep) {
+    if (deep) {
+        target._fillColor[0] = source._fillColor[0];
+        target._fillColor[1] = source._fillColor[1];
+        target._fillColor[2] = source._fillColor[2];
+        target._fillColor[3] = source._fillColor[3];
+        target._font.style = source._font.style;
+        target._font.variant = source._font.variant;
+        target._font.weight = source._font.weight;
+        target._font.size = source._font.size;
+        target._font.family = source._font.family;
+        target._strokeColor[0] = source._strokeColor[0];
+        target._strokeColor[1] = source._strokeColor[1];
+        target._strokeColor[2] = source._strokeColor[2];
+        target._strokeColor[3] = source._strokeColor[3];
+    }
+    target._rectAlignX = source._rectAlignX;
+    target._rectAlignY = source._rectAlignY;
+    target._textAlignX = source._textAlignX;
+    target._textAlignY = source._textAlignY;
+    target._doStroke = source._doStroke;
+    target._doFill = source._doFill;
+    target._lineH = source._lineH;
+    target._lineW = source._lineW;
+    return target;
+}
+module.exports = _copyDrawingSettings;
+},{}],77:[function(require,module,exports){
+'use strict';
+module.exports = function _createPolygon(n) {
+    var i = Math.floor(n);
+    var verts = new Float32Array(i * 2 + 2);
+    var step = Math.PI * 2 / n;
+    for (; i >= 0; --i) {
+        verts[i * 2] = Math.cos(step * i);
+        verts[1 + i * 2] = Math.sin(step * i);
+    }
+    return verts;
+};
+},{}],78:[function(require,module,exports){
+'use strict';
+module.exports = function _createProgram(vert, frag, gl) {
+    var program = gl.createProgram();
+    gl.attachShader(program, vert);
+    gl.attachShader(program, frag);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        throw Error('Unable to initialize the shader program: ' + gl.getProgramInfoLog(program));
+    }
+    gl.validateProgram(program);
+    if (!gl.getProgramParameter(program, gl.VALIDATE_STATUS)) {
+        throw Error('Unable to validate the shader program: ' + gl.getProgramInfoLog(program));
+    }
+    return program;
+};
+},{}],79:[function(require,module,exports){
+'use strict';
+module.exports = function _createShader(source, type, gl) {
+    var shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        throw SyntaxError('An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader));
+    }
+    return shader;
+};
+},{}],80:[function(require,module,exports){
+'use strict';
+var once = require('peako/once');
+function _getGLContextName() {
+    var canvas = document.createElement('canvas');
+    var types, i;
+    if (typeof canvas.getContext !== 'function') {
+        return;
+    }
+    types = [
+        'webkit-3d',
+        'moz-webgl',
+        'experimental-webgl',
+        'webgl'
+    ];
+    for (i = types.length - 1; i >= 0; --i) {
+        if (canvas.getContext(types[i])) {
+            return types[i];
+        }
+    }
+}
+module.exports = once(_getGLContextName);
+},{"peako/once":51}],81:[function(require,module,exports){
+'use strict';
+},{}],82:[function(require,module,exports){
+'use strict';
+var _copyDrawingSettings = require('./_copy-drawing-settings'), constants = require('../constants');
+var defaultDrawingSettings = {
+        _rectAlignX: constants.LEFT,
+        _rectAlignY: constants.TOP,
+        _textAlignX: constants.LEFT,
+        _textAlineY: constants.TOP,
+        _doStroke: true,
+        _doFill: true,
+        _lineH: 14,
+        _lineW: 2
+    };
+module.exports = function _setDefaultDrawingSettings(target, source) {
+    _copyDrawingSettings(target, defaultDrawingSettings);
+    target._strokeColor = new source.settings.color();
+    target._fillColor = new source.settings.color();
+    target._font = null;
+    return target;
+};
+},{"../constants":75,"./_copy-drawing-settings":76}],83:[function(require,module,exports){
+'use strict';
+var constants = require('../constants');
+function align(value, width, align) {
+    switch (align) {
+    case constants.LEFT:
+    case constants.TOP:
+        return value;
+    case constants.CENTER:
+    case constants.MIDDLE:
+        return value - width * 0.5;
+    case constants.RIGHT:
+    case constants.BOTTOM:
+        return value - width;
+    }
+    return 0;
+}
+module.exports = align;
+},{"../constants":75}],84:[function(require,module,exports){
+'use strict';
+exports.identity = function identity() {
+    return [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+    ];
+};
+exports.setIdentity = function setIdentity(m1) {
+    m1[0] = m1[4] = m1[8] = 1;
+    m1[1] = m1[2] = m1[3] = m1[5] = m1[6] = m1[7] = 0;
+};
+exports.copy = function copy(m1, m2) {
+    m1[0] = m2[0];
+    m1[1] = m2[1];
+    m1[2] = m2[2];
+    m1[3] = m2[3];
+    m1[4] = m2[4];
+    m1[5] = m2[5];
+    m1[6] = m2[6];
+    m1[7] = m2[7];
+    m1[8] = m2[8];
+};
+exports.clone = function clone(m1) {
+    return [
+        m1[0],
+        m1[1],
+        m1[2],
+        m1[3],
+        m1[4],
+        m1[5],
+        m1[6],
+        m1[7],
+        m1[8]
+    ];
+};
+exports.translate = function translate(m1, x, y) {
+    m1[6] = x * m1[0] + y * m1[3] + m1[6];
+    m1[7] = x * m1[1] + y * m1[4] + m1[7];
+    m1[8] = x * m1[2] + y * m1[5] + m1[8];
+};
+exports.rotate = function rotate(m1, angle) {
+    var m10 = m1[0], m11 = m1[1], m12 = m1[2], m13 = m1[3], m14 = m1[4], m15 = m1[5];
+    var x = Math.cos(angle), y = Math.sin(angle);
+    m1[0] = x * m10 + y * m13;
+    m1[1] = x * m11 + y * m14;
+    m1[2] = x * m12 + y * m15;
+    m1[3] = x * m13 - y * m10;
+    m1[4] = x * m14 - y * m11;
+    m1[5] = x * m15 - y * m12;
+};
+exports.scale = function scale(m1, x, y) {
+    m1[0] *= x;
+    m1[1] *= x;
+    m1[2] *= x;
+    m1[3] *= y;
+    m1[4] *= y;
+    m1[5] *= y;
+};
+exports.transform = function transform(m1, m11, m12, m21, m22, dx, dy) {
+    m1[0] *= m11;
+    m1[1] *= m21;
+    m1[2] *= dx;
+    m1[3] *= m12;
+    m1[4] *= m22;
+    m1[5] *= dy;
+    m1[6] = 0;
+    m1[7] = 0;
+};
+exports.setTransform = function setTransform(m1, m11, m12, m21, m22, dx, dy) {
+    m1[0] = m11;
+    m1[1] = m12;
+    m1[3] = m21;
+    m1[4] = m22;
+    m1[6] = dx;
+    m1[7] = dy;
+};
+},{}],85:[function(require,module,exports){
+'use strict';
+var settings = require('../settings');
+function Vector2D(x, y) {
+    this.set(x, y);
+}
+Vector2D.prototype = {
+    set: function set(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+        return this;
+    },
+    setVector: function setVector(vector) {
+        return this.set(vector.x, vector.y);
+    },
+    lerp: function (x, y, value) {
+        this.x += (x - this.x) * value || 0;
+        this.y += (y - this.y) * value || 0;
+        return this;
+    },
+    lerpVector: function lerpVector(vector, value) {
+        var x = vector.x || 0, y = vector.y || 0;
+        return this.lerp(x, y, value);
+    },
+    add: function add(x, y) {
+        this.x += x || 0;
+        this.y += y || 0;
+        return this;
+    },
+    addVector: function addVector(vector) {
+        return this.add(vector.x, vector.y);
+    },
+    sub: function sub(x, y) {
+        this.x -= x || 0;
+        this.y -= y || 0;
+        return this;
+    },
+    subVector: function subVector(vector) {
+        return this.sub(vector.x, vector.y);
+    },
+    mul: function mul(value) {
+        this.x *= value || 0;
+        this.y *= value || 0;
+        return this;
+    },
+    mulVector: function mulVector(vector) {
+        this.x *= vector.x || 0;
+        this.y *= vector.y || 0;
+        return this;
+    },
+    div: function div(value) {
+        this.x /= value || 0;
+        this.y /= value || 0;
+        return this;
+    },
+    divVector: function divVector(vector) {
+        this.x /= vector.x || 0;
+        this.y /= vector.y || 0;
+        return this;
+    },
+    angle: function angle() {
+        if (settings.degrees) {
+            return Math.atan2(this.y, this.x) * 180 / Math.PI;
+        }
+        return Math.atan2(this.y, this.x);
+    },
+    mag: function mag() {
+        return Math.sqrt(this.magSquare());
+    },
+    magSquare: function magSquare() {
+        return this.x * this.x + this.y * this.y;
+    },
+    setMag: function setMag(value) {
+        return this.normalize().mul(value);
+    },
+    normalize: function normalize() {
+        var mag = this.mag();
+        if (mag && mag !== 1) {
+            this.div(mag);
+        }
+        return this;
+    },
+    dot: function dot(x, y) {
+        return this.x * (x || 0) + this.y * (y || 0);
+    },
+    dotVector: function dotVector(vector) {
+        return this.x * (vector.x || 0) + this.y * (vector.y || 0);
+    },
+    clone: function clone() {
+        return new Vector2D(this.x, this.y);
+    },
+    dist: function dist(vector) {
+        return dist(this.x, this.y, vector.x, vector.y);
+    },
+    limit: function limit(value) {
+        var mag = this.magSquare();
+        if (mag > value * value) {
+            this.div(Math.sqrt(mag)).mul(value);
+        }
+        return this;
+    },
+    cross: function cross(vector) {
+        return Vector2D.cross(this, vector);
+    },
+    toString: function toString() {
+        return 'vec2(' + this.x.toFixed(2) + ', ' + this.y.toFixed(2) + ')';
+    },
+    rotate: function rotate(angle) {
+        var x = this.x, y = this.y;
+        var c, s;
+        if (settings.degrees) {
+            angle *= Math.PI / 180;
+        }
+        c = Math.cos(angle);
+        s = Math.sin(angle);
+        this.x = x * c - y * s;
+        this.y = x * s + y * c;
+        return this;
+    },
+    setAngle: function setAngle(angle) {
+        var mag = this.mag();
+        if (settings.degrees) {
+            angle *= Math.PI / 180;
+        }
+        this.x = mag * Math.cos(angle);
+        this.y = mag * Math.sin(angle);
+        return this;
+    },
+    constructor: Vector2D
+};
+[
+    'normalize',
+    'setMag',
+    'rotate',
+    'limit',
+    'lerp',
+    'mul',
+    'div',
+    'add',
+    'sub',
+    'set'
+].forEach(function (method) {
+    Vector2D[method] = Function('vector, x, y, z, value', 'return vector.copy().' + method + '( x, y, z, value );');
+});
+Vector2D.random = function random() {
+    var x;
+    if (settings.degrees) {
+        x = 360;
+    } else {
+        x = Math.PI * 2;
+    }
+    return Vector2D.fromAngle(Math.random() * x);
+};
+Vector2D.fromAngle = function fromAngle(angle) {
+    if (settings.degrees) {
+        angle *= Math.PI / 180;
+    }
+    return new Vector2D(Math.cos(angle), Math.sin(angle));
+};
+Vector2D.cross = function cross(a, b) {
+    return a.x * b.y - a.y * b.x;
+};
+Vector2D.clone = function clone(vector) {
+    return new Vector2D(vector.x, vector.y);
+};
+module.exports = Vector2D;
+},{"../settings":90}],86:[function(require,module,exports){
+'use strict';
+
+var ArgumentException = require( 'utils/lib/ArgumentException' );
+var LogicalError      = require( 'utils/lib/LogicalError' );
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/**
+ * @method extend
+ * @param  {function} __super__
+ * @param  {object}   __proto__
+ * @param  {function} __proto__.constructor
+ * @return {function}
+ * @example
+ * var extend = require( 'extend' );
+ *
+ * function Animal ( name ) {
+ *   this.name = name;
+ * }
+ *
+ * Animal.prototype.eat = function eat ( food ) {
+ *   console.log( this.name, 'eats', food );
+ * };
+ *
+ * var Cat = extend( Animal, {
+ *   constructor: function Cat ( name ) {
+ *     this.__super__.call( this, name );
+ *   },
+ *
+ *   eat: function eat ( food ) {
+ *     if ( food !== 'fish' ) {
+ *       console.error( this.name, 'cannot eat', food );
+ *     } else {
+ *       this.__super__.prototype.eat.call( this, food );
+ *     }
+ *   }
+ * } );
+ *
+ * var cat = new Cat( 'kitty' );
+ * cat.eat( 'fish' ); // console.log:   'kitty eats fish'
+ * cat.eat( 'dog' );  // console.error: 'kitty cannot eat dog'
+ */
+function extend ( __super__, __proto__ ) {
+  var keys, i, l;
+
+  if ( typeof __super__ !== 'function' ) {
+    throw ArgumentException( 'extend(__super__: function, __proto__: object): function', '__super__', __super__ );
+  }
+
+  if ( ( typeof __proto__ !== 'object' || __proto__ === null ) && typeof __proto__ !== 'function' ) {
+    throw ArgumentException( 'extend(__super__: function, __proto__: object): function', '__proto__', __proto__ );
+  }
+
+  if ( ! hasOwnProperty.call( __proto__, 'constructor' ) ) {
+    throw LogicalError( 'extend(__super__: function, __proto__: object): function', 'cannot find `constructor` function in `__proto__`' );
+  }
+
+  if ( typeof __proto__.constructor !== 'function' ) {
+    throw LogicalError( 'extend(__super__: function, __proto__: object): function', '`__proto__.constructor` is not a function' );
+  }
+
+  if ( typeof __super__.prototype !== 'object' ) {
+    throw LogicalError( 'extend(__super__: function, __proto__: object): function', '`__super__.prototype` must be an object or null' );
+  }
+
+  __proto__.constructor.prototype = Object.create( __super__.prototype );
+  __proto__.constructor.prototype.__super__ = __super__;
+
+  for ( keys = Object.keys( __proto__ ), i = 0, l = keys.length; i < l; ++i ) {
+    __proto__.constructor.prototype[ keys[ i ] ] = __proto__[ keys[ i ] ];
+  }
+
+  return __proto__.constructor;
+}
+
+module.exports = extend;
+
+},{"utils/lib/ArgumentException":63,"utils/lib/LogicalError":64}],87:[function(require,module,exports){
+'use strict';
+module.exports = {
+    settings: {
+        color: require('./colors/RGBA'),
+        smooth: false,
+        scale: 1
+    },
+    antialias: true,
+    blending: true,
+    degrees: false,
+    append: true,
+    alpha: true,
+    mode: require('./constants').MODE_2D
+};
+},{"./colors/RGBA":72,"./constants":75}],88:[function(require,module,exports){
+'use strict';
+if (typeof platform === 'undefined') {
+    var platform;
+    try {
+        platform = require('platform');
+    } catch (e) {
+    }
+}
+var once = require('peako/once');
+var _getGLContextName = require('./internal/_get-gl-context-name'), _options = require('./options'), RendererGL = require('./RendererGL'), Renderer2D = require('./Renderer2D'), constants = require('./constants'), report = require('./report');
+var getRendererMode = once(function () {
+        var touchable, safari;
+        if (typeof window !== 'undefined') {
+            touchable = 'ontouchstart' in window && 'ontouchmove' in window && 'ontouchend' in window;
+        }
+        if (platform) {
+            safari = platform.os && platform.os.family === 'iOS' && platform.name === 'Safari';
+        }
+        if (touchable && !safari) {
+            return constants.MODE_GL;
+        }
+        return constants.MODE_2D;
+    });
+module.exports = function renderer(options) {
+    var mode = options && options.mode || _options.mode;
+    if (mode === constants.MODE_AUTO) {
+        mode = getRendererMode();
+    }
+    if (mode === constants.MODE_GL) {
+        if (_getGLContextName()) {
+            return new RendererGL(options);
+        }
+        report('Cannot create WebGL context, fallback to 2D.');
+    }
+    if (mode === constants.MODE_2D || mode === constants.MODE_GL) {
+        return new Renderer2D(options);
+    }
+};
+},{"./Renderer2D":66,"./RendererGL":67,"./constants":75,"./internal/_get-gl-context-name":80,"./options":87,"./report":89,"peako/once":51,"platform":62}],89:[function(require,module,exports){
+'use strict';
+var report, reported;
+if (typeof console !== 'undefined' && console.warn) {
+    reported = {};
+    report = function report(message) {
+        if (reported[message]) {
+            return;
+        }
+        console.warn(message);
+        reported[message] = true;
+    };
+} else {
+    report = require('peako/noop');
+}
+module.exports = report;
+},{"peako/noop":49}],90:[function(require,module,exports){
+'use strict';
+module.exports = { degress: false };
+},{}],91:[function(require,module,exports){
+'use strict';
+module.exports = {
+    basicVert: 'precision mediump float;attribute vec2 apos;uniform vec2 ures;uniform mat3 utransform;void main(){gl_Position=vec4(((utransform*vec3(apos,1.0)).xy/ures*2.0-1.0)*vec2(1,-1),0,1);}',
+    basicFrag: 'precision mediump float;uniform vec4 ucolor;void main(){gl_FragColor=vec4(ucolor.rgb/255.0,ucolor.a);}',
+    backgroundVert: 'precision mediump float;attribute vec2 apos;void main(){gl_Position = vec4(apos,0,1);}',
+    backgroundFrag: 'precision mediump float;uniform vec4 ucolor;void main(){gl_FragColor=ucolor;}'
+};
+},{}],92:[function(require,module,exports){
+'use strict';
+
+var LightEmitter = require( 'light_emitter' );
+var extend       = require( 'extend' );
+
+var Controls = extend( LightEmitter, {
+  /**
+   * @constructor Controls
+   * @extends {LightEmitter}
+   * @event Controls#touchstart
+   * @event Controls#touchend
+   * @example
+   * var Controls = require( './Controls' );
+   * var controls = new Controls();
+   *   .on( 'touchstart', function ( event, keyboard )
+   *   {
+   *     if ( keyboard ) {
+   *       console.log( 'this event from a keyboard' );
+   *     }
+   *
+   *     console.log( 'works with keyboard and touchscreens (cross-platform)' );
+   *   } );
+   */
+  constructor: function Controls ()
+  {
+
+    console.log( 0 ); // jshint ignore: line
+    var self = this;
+
+    this.__super__.apply( this, arguments );
+
+    function touchstart ( event )
+    {
+      self.emit( 'touchstart', event, ! event.type.indexOf( 'key' ) );
+    }
+
+    window.addEventListener( 'touchstart', touchstart );
+    window.addEventListener( 'mousedown', touchstart );
+
+    function keydown ( event )
+    {
+      if ( event.which === 32 ) {
+        touchstart( event );
+      }
+    }
+
+    window.addEventListener( 'keydown', keydown );
+
+    function touchend ( event )
+    {
+      self.emit( 'touchend', event, ! event.type.indexOf( 'key' ) );
+    }
+
+    window.addEventListener( 'touchend', touchend );
+    window.addEventListener( 'mouseup', touchend );
+
+    function keyup ( event )
+    {
+      if ( event.which === 32 ) {
+        touchend( event );
+      }
+    }
+
+    window.addEventListener( 'keyup', keyup );
+  }
+} );
+
+module.exports = Controls;
+
+},{"extend":1,"light_emitter":2}],93:[function(require,module,exports){
+'use strict';
+
+var Vector2D = require( 'v6.js/math/Vector2D' );
+var random   = require( 'peako/random' );
+
+var Controls = require( './core/Controls' );
+var renderer = require( './objects/renderer' );
+var ticker   = require( './objects/ticker' );
+
+var position = new Vector2D( renderer.w * 0.5, renderer.h * 0.5 );
+var controls = new Controls();
+var fill     = 255;
+
+controls.on( 'touchstart', function ()
+{
+  fill = random( 255 );
+  console.log( fill ); // jshint ignore: line
+} );
+
+console.log( controls ); // jshint ignore: line
+
+ticker.on( 'render', function ()
+{
+  renderer.background( 0 );
+  renderer.fill( fill );
+  renderer.noStroke();
+  renderer.polygon( position.x, position.y, 20, 3 );
+} );
+
+ticker.on( 'update', function ( elapsedTime )
+{
+  var v = 50;
+  var x = random( -v, v ) * elapsedTime;
+  var y = random( -v, v ) * elapsedTime;
+  position.add( x, y );
+} );
+
+ticker.tick();
+
+},{"./core/Controls":92,"./objects/renderer":94,"./objects/ticker":95,"peako/random":53,"v6.js/math/Vector2D":85}],94:[function(require,module,exports){
+'use strict';
+
+var constants = require( 'v6.js/constants' );
+var renderer  = require( 'v6.js/renderer' );
+
+module.exports = renderer( { mode: constants.MODE_AUTO } );
+
+},{"v6.js/constants":75,"v6.js/renderer":88}],95:[function(require,module,exports){
+'use strict';
+
+var Ticker = require( 'v6.js/Ticker' );
+
+module.exports = new Ticker();
+
+},{"v6.js/Ticker":69}]},{},[93]);

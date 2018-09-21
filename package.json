@@ -7,13 +7,14 @@
     "install": "node install silent-tempest/router#master/packages/body_parser && node install silent-tempest/router#master/packages/send_static",
     "start": "node .",
     "test": "mocha -r chai/register-should",
-    "docs": "jsdoc -d docs .",
-    "lintnodejs": "jshint -c .jshintrc_nodejs .",
+    "docs": "jsdoc -c .jsdoc.js .",
+    "lintnodejs": "jshint -c .jshintrc__nodejs .",
     "lint": "jshint static_scripts test"
   },
   "author": "SILENT",
   "license": "GPL-3.0",
   "dependencies": {
+    "helmet": "^3.13.0",
     "pg": "^7.4.3",
     "router": "github:silent-tempest/router#master",
     "router.body_parser": "file:router.body_parser-1.0.0.tgz",
