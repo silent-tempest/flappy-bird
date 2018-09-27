@@ -1,4 +1,32 @@
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: static/scripts/index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: static/scripts/index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&amp;&amp;require;if(!f&amp;&amp;c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&amp;&amp;require,i=0;i&lt;t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 var toString = Object.prototype.toString;
 module.exports = function _throwArgumentException(unexpected, expected) {
@@ -28,10 +56,10 @@ var defineGetter = Object.prototype.__defineGetter__, defineSetter = Object.prot
 function baseDefineProperty(object, key, descriptor) {
     var hasGetter = isset('get', descriptor), hasSetter = isset('set', descriptor), get, set;
     if (hasGetter || hasSetter) {
-        if (hasGetter && typeof (get = descriptor.get) !== 'function') {
+        if (hasGetter &amp;&amp; typeof (get = descriptor.get) !== 'function') {
             throw TypeError('Getter must be a function: ' + get);
         }
-        if (hasSetter && typeof (set = descriptor.set) !== 'function') {
+        if (hasSetter &amp;&amp; typeof (set = descriptor.set) !== 'function') {
             throw TypeError('Setter must be a function: ' + set);
         }
         if (isset('writable', descriptor)) {
@@ -76,7 +104,7 @@ module.exports = function baseForEach(arr, fn, ctx, fromRight) {
         } else {
             idx = ++i;
         }
-        if (isset(idx, arr) && callIteratee(fn, ctx, arr[idx], idx, arr) === false) {
+        if (isset(idx, arr) &amp;&amp; callIteratee(fn, ctx, arr[idx], idx, arr) === false) {
             break;
         }
     }
@@ -104,7 +132,7 @@ module.exports = function baseForIn(obj, fn, ctx, fromRight, keys) {
 var isset = require('../isset');
 module.exports = function baseGet(obj, path, off) {
     var l = path.length - off, i = 0, key;
-    for (; i < l; ++i) {
+    for (; i &lt; l; ++i) {
         key = path[i];
         if (isset(key, obj)) {
             obj = obj[key];
@@ -120,7 +148,7 @@ var baseToIndex = require('./base-to-index');
 var indexOf = Array.prototype.indexOf, lastIndexOf = Array.prototype.lastIndexOf;
 function baseIndexOf(arr, search, fromIndex, fromRight) {
     var l, i, j, idx, val;
-    if (search === search && (idx = fromRight ? lastIndexOf : indexOf)) {
+    if (search === search &amp;&amp; (idx = fromRight ? lastIndexOf : indexOf)) {
         return idx.call(arr, search, fromIndex);
     }
     l = arr.length;
@@ -146,7 +174,7 @@ function baseIndexOf(arr, search, fromIndex, fromRight) {
             idx = ++i;
         }
         val = arr[idx];
-        if (val === search || search !== search && val !== val) {
+        if (val === search || search !== search &amp;&amp; val !== val) {
             return idx;
         }
     }
@@ -172,7 +200,7 @@ if (support === 'not-supported') {
     fixKeys = function fixKeys(keys, object) {
         var i, key;
         for (i = k.length - 1; i >= 0; --i) {
-            if (baseIndexOf(keys, key = k[i]) < 0 && hasOwnProperty.call(object, key)) {
+            if (baseIndexOf(keys, key = k[i]) &lt; 0 &amp;&amp; hasOwnProperty.call(object, key)) {
                 keys.push(key);
             }
         }
@@ -214,7 +242,7 @@ module.exports = function baseToIndex(v, l) {
     if (!l || !v) {
         return 0;
     }
-    if (v < 0) {
+    if (v &lt; 0) {
         v += l;
     }
     return v || 0;
@@ -284,7 +312,7 @@ module.exports = function clamp(value, lower, upper) {
     if (value >= upper) {
         return upper;
     }
-    if (value <= lower) {
+    if (value &lt;= lower) {
         return lower;
     }
     return value;
@@ -302,7 +330,7 @@ module.exports = function clone(deep, target, guard) {
     each(target, function (value, key, target) {
         if (value === target) {
             this[key] = this;
-        } else if (deep && isObjectLike(value)) {
+        } else if (deep &amp;&amp; isObjectLike(value)) {
             this[key] = clone(deep, value);
         } else {
             this[key] = value;
@@ -337,7 +365,7 @@ function C() {
 }
 module.exports = Object.create || function create(prototype, descriptors) {
     var object;
-    if (prototype !== null && isPrimitive(prototype)) {
+    if (prototype !== null &amp;&amp; isPrimitive(prototype)) {
         throw TypeError('Object prototype may only be an Object or null: ' + prototype);
     }
     C.prototype = prototype;
@@ -401,7 +429,7 @@ module.exports = function createProperty(baseProperty, useArgs) {
 },{"../cast-path":16,"../noop":47}],24:[function(require,module,exports){
 'use strict';
 module.exports = function defaultTo(value, defaultValue) {
-    if (value != null && value === value) {
+    if (value != null &amp;&amp; value === value) {
         return value;
     }
     return defaultValue;
@@ -479,7 +507,7 @@ module.exports = Object.getPrototypeOf || function getPrototypeOf(obj) {
 'use strict';
 var isObjectLike = require('./is-object-like'), isLength = require('./is-length'), isWindowLike = require('./is-window-like');
 module.exports = function isArrayLikeObject(value) {
-    return isObjectLike(value) && isLength(value.length) && !isWindowLike(value);
+    return isObjectLike(value) &amp;&amp; isLength(value.length) &amp;&amp; !isWindowLike(value);
 };
 },{"./is-length":35,"./is-object-like":36,"./is-window-like":41}],32:[function(require,module,exports){
 'use strict';
@@ -489,7 +517,7 @@ module.exports = function isArrayLike(value) {
         return false;
     }
     if (typeof value === 'object') {
-        return isLength(value.length) && !isWindowLike(value);
+        return isLength(value.length) &amp;&amp; !isWindowLike(value);
     }
     return typeof value === 'string';
 };
@@ -498,7 +526,7 @@ module.exports = function isArrayLike(value) {
 var isObjectLike = require('./is-object-like'), isLength = require('./is-length');
 var toString = {}.toString;
 module.exports = Array.isArray || function isArray(value) {
-    return isObjectLike(value) && isLength(value.length) && toString.call(value) === '[object Array]';
+    return isObjectLike(value) &amp;&amp; isLength(value.length) &amp;&amp; toString.call(value) === '[object Array]';
 };
 },{"./is-length":35,"./is-object-like":36}],34:[function(require,module,exports){
 'use strict';
@@ -523,19 +551,19 @@ module.exports = isKey;
 'use strict';
 var MAX_ARRAY_LENGTH = require('./constants').MAX_ARRAY_LENGTH;
 module.exports = function isLength(value) {
-    return typeof value === 'number' && value >= 0 && value <= MAX_ARRAY_LENGTH && value % 1 === 0;
+    return typeof value === 'number' &amp;&amp; value >= 0 &amp;&amp; value &lt;= MAX_ARRAY_LENGTH &amp;&amp; value % 1 === 0;
 };
 },{"./constants":19}],36:[function(require,module,exports){
 'use strict';
 module.exports = function isObjectLike(value) {
-    return !!value && typeof value === 'object';
+    return !!value &amp;&amp; typeof value === 'object';
 };
 },{}],37:[function(require,module,exports){
 'use strict';
 var isObjectLike = require('./is-object-like');
 var toString = {}.toString;
 module.exports = function isObject(value) {
-    return isObjectLike(value) && toString.call(value) === '[object Object]';
+    return isObjectLike(value) &amp;&amp; toString.call(value) === '[object Object]';
 };
 },{"./is-object-like":36}],38:[function(require,module,exports){
 'use strict';
@@ -557,12 +585,12 @@ module.exports = function isPlainObject(v) {
         return false;
     }
     c = p.constructor;
-    return typeof c === 'function' && toString.call(c) === OBJECT;
+    return typeof c === 'function' &amp;&amp; toString.call(c) === OBJECT;
 };
 },{"./get-prototype-of":30,"./is-object":37}],39:[function(require,module,exports){
 'use strict';
 module.exports = function isPrimitive(value) {
-    return !value || typeof value !== 'object' && typeof value !== 'function';
+    return !value || typeof value !== 'object' &amp;&amp; typeof value !== 'function';
 };
 },{}],40:[function(require,module,exports){
 'use strict';
@@ -574,7 +602,7 @@ module.exports = function isSymbol(value) {
 'use strict';
 var isObjectLike = require('./is-object-like');
 module.exports = function isWindowLike(value) {
-    return isObjectLike(value) && value.window === value;
+    return isObjectLike(value) &amp;&amp; value.window === value;
 };
 },{"./is-object-like":36}],42:[function(require,module,exports){
 'use strict';
@@ -652,11 +680,11 @@ module.exports = function mixin(deep, object) {
         --i;
     }
     object = toObject(object);
-    for (; i < l; ++i) {
+    for (; i &lt; l; ++i) {
         names = keys(exp = toObject(arguments[i]));
-        for (j = 0, k = names.length; j < k; ++j) {
+        for (j = 0, k = names.length; j &lt; k; ++j) {
             val = exp[key = names[j]];
-            if (deep && val !== exp && (isPlainObject(val) || (nowArray = isArray(val)))) {
+            if (deep &amp;&amp; val !== exp &amp;&amp; (isPlainObject(val) || (nowArray = isArray(val)))) {
                 src = object[key];
                 if (nowArray) {
                     if (!isArray(src)) {
@@ -730,7 +758,7 @@ module.exports = Object.setPrototypeOf || function setPrototypeOf(target, protot
     if (target == null) {
         throw TypeError(ERR.UNDEFINED_OR_NULL);
     }
-    if (prototype !== null && isPrimitive(prototype)) {
+    if (prototype !== null &amp;&amp; isPrimitive(prototype)) {
         throw TypeError('Object prototype may only be an Object or null: ' + prototype);
     }
     if ('__proto__' in target) {
@@ -752,7 +780,7 @@ function test(target) {
 }
 if (test({})) {
     support = 'full';
-} else if (typeof document !== 'undefined' && test(document.createElement('span'))) {
+} else if (typeof document !== 'undefined' &amp;&amp; test(document.createElement('span'))) {
     support = 'dom';
 } else {
     support = 'not-supported';
@@ -781,7 +809,7 @@ if (typeof window !== 'undefined') {
     cancelAF = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelAnimationFrame || window.mozCancelRequestAnimationFrame;
     requestAF = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
 }
-var noRequestAnimationFrame = !requestAF || !cancelAF || typeof navigator !== 'undefined' && /iP(ad|hone|od).*OS\s6/.test(navigator.userAgent);
+var noRequestAnimationFrame = !requestAF || !cancelAF || typeof navigator !== 'undefined' &amp;&amp; /iP(ad|hone|od).*OS\s6/.test(navigator.userAgent);
 if (noRequestAnimationFrame) {
     var lastRequestTime = 0, frameDuration = 1000 / 60;
     exports.request = function request(animate) {
@@ -826,7 +854,7 @@ module.exports = function toKey(val) {
         return val;
     }
     key = '' + val;
-    if (key === '0' && 1 / val === -Infinity) {
+    if (key === '0' &amp;&amp; 1 / val === -Infinity) {
         return '-0';
     }
     return _unescape(key);
@@ -850,7 +878,7 @@ module.exports = function getType(value) {
         return 'null';
     }
     type = typeof value;
-    if (type !== 'object' && type !== 'function') {
+    if (type !== 'object' &amp;&amp; type !== 'function') {
         return type;
     }
     type = types[tag = toString.call(value)];
@@ -1033,7 +1061,7 @@ LightEmitter.prototype = {
       data = [].slice.call( arguments, 1 );
     }
 
-    for ( i = 0, l = list.length; i < l; ++i ) {
+    for ( i = 0, l = list.length; i &lt; l; ++i ) {
       if ( ! list[ i ].active ) {
         continue;
       }
@@ -1066,7 +1094,7 @@ LightEmitter.prototype = {
     } else if ( ( list = _getList( this, type ) ) ) {
       if ( listener ) {
         for ( i = list.length - 1; i >= 0; --i ) {
-          if ( list[ i ].listener === listener && list[ i ].active ) {
+          if ( list[ i ].listener === listener &amp;&amp; list[ i ].active ) {
             list[ i ].active = false;
           }
         }
@@ -1136,10 +1164,10 @@ function _on ( self, type, listener, once ) {
  * @method _getList
  * @param  {LightEmitter}   self
  * @param  {string}         type
- * @return {array<object>?}
+ * @return {array&lt;object>?}
  */
 function _getList ( self, type ) {
-  return self._events && self._events[ type ];
+  return self._events &amp;&amp; self._events[ type ];
 }
 
 module.exports = LightEmitter;
@@ -1147,10 +1175,10 @@ module.exports = LightEmitter;
 },{}],67:[function(require,module,exports){
 (function (global){
 /*!
- * Platform.js <https://mths.be/platform>
- * Copyright 2014-2018 Benjamin Tan <https://bnjmnt4n.now.sh/>
- * Copyright 2011-2013 John-David Dalton <http://allyoucanleet.com/>
- * Available under MIT license <https://mths.be/mit>
+ * Platform.js &lt;https://mths.be/platform>
+ * Copyright 2014-2018 Benjamin Tan &lt;https://bnjmnt4n.now.sh/>
+ * Copyright 2011-2013 John-David Dalton &lt;http://allyoucanleet.com/>
+ * Available under MIT license &lt;https://mths.be/mit>
  */
 ;(function() {
   'use strict';
@@ -1162,20 +1190,20 @@ module.exports = LightEmitter;
   };
 
   /** Used as a reference to the global object. */
-  var root = (objectTypes[typeof window] && window) || this;
+  var root = (objectTypes[typeof window] &amp;&amp; window) || this;
 
   /** Backup possible global object. */
   var oldRoot = root;
 
   /** Detect free variable `exports`. */
-  var freeExports = objectTypes[typeof exports] && exports;
+  var freeExports = objectTypes[typeof exports] &amp;&amp; exports;
 
   /** Detect free variable `module`. */
-  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
+  var freeModule = objectTypes[typeof module] &amp;&amp; module &amp;&amp; !module.nodeType &amp;&amp; module;
 
   /** Detect free variable `global` from Node.js or Browserified code and use it as `root`. */
-  var freeGlobal = freeExports && freeModule && typeof global == 'object' && global;
-  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal || freeGlobal.self === freeGlobal)) {
+  var freeGlobal = freeExports &amp;&amp; freeModule &amp;&amp; typeof global == 'object' &amp;&amp; global;
+  if (freeGlobal &amp;&amp; (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal || freeGlobal.self === freeGlobal)) {
     root = freeGlobal;
   }
 
@@ -1242,14 +1270,14 @@ module.exports = LightEmitter;
       '4.90': 'ME'
     };
     // Detect Windows version from platform tokens.
-    if (pattern && label && /^Win/i.test(os) && !/^Windows Phone /i.test(os) &&
+    if (pattern &amp;&amp; label &amp;&amp; /^Win/i.test(os) &amp;&amp; !/^Windows Phone /i.test(os) &amp;&amp;
         (data = data[/[\d.]+$/.exec(os)])) {
       os = 'Windows ' + data;
     }
     // Correct character case and cleanup string.
     os = String(os);
 
-    if (pattern && label) {
+    if (pattern &amp;&amp; label) {
       os = os.replace(RegExp(pattern, 'i'), label);
     }
 
@@ -1283,8 +1311,8 @@ module.exports = LightEmitter;
     var index = -1,
         length = object ? object.length : 0;
 
-    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-      while (++index < length) {
+    if (typeof length == 'number' &amp;&amp; length > -1 &amp;&amp; length &lt;= maxSafeInteger) {
+      while (++index &lt; length) {
         callback(object[index], index, object);
       }
     } else {
@@ -1346,7 +1374,7 @@ module.exports = LightEmitter;
    */
   function isHostType(object, property) {
     var type = object != null ? typeof object[property] : 'number';
-    return !/^(?:boolean|number|string|undefined)$/.test(type) &&
+    return !/^(?:boolean|number|string|undefined)$/.test(type) &amp;&amp;
       (type == 'object' ? !!object[property] : true);
   }
 
@@ -1404,7 +1432,7 @@ module.exports = LightEmitter;
     var context = root;
 
     /** Used to flag when a custom context is provided. */
-    var isCustomContext = ua && typeof ua == 'object' && getClassOf(ua) != 'String';
+    var isCustomContext = ua &amp;&amp; typeof ua == 'object' &amp;&amp; getClassOf(ua) != 'String';
 
     // Juggle arguments.
     if (isCustomContext) {
@@ -1426,20 +1454,20 @@ module.exports = LightEmitter;
     /** Used to detect if browser is like Chrome. */
     var likeChrome = isCustomContext
       ? !!nav.likeChrome
-      : /\bChrome\b/.test(ua) && !/internal|\n/i.test(toString.toString());
+      : /\bChrome\b/.test(ua) &amp;&amp; !/internal|\n/i.test(toString.toString());
 
     /** Internal `[[Class]]` value shortcuts. */
     var objectClass = 'Object',
         airRuntimeClass = isCustomContext ? objectClass : 'ScriptBridgingProxyObject',
         enviroClass = isCustomContext ? objectClass : 'Environment',
-        javaClass = (isCustomContext && context.java) ? 'JavaPackage' : getClassOf(context.java),
+        javaClass = (isCustomContext &amp;&amp; context.java) ? 'JavaPackage' : getClassOf(context.java),
         phantomClass = isCustomContext ? objectClass : 'RuntimeObject';
 
     /** Detect Java environments. */
-    var java = /\bJava/.test(javaClass) && context.java;
+    var java = /\bJava/.test(javaClass) &amp;&amp; context.java;
 
     /** Detect Rhino. */
-    var rhino = java && getClassOf(context.environment) == enviroClass;
+    var rhino = java &amp;&amp; getClassOf(context.environment) == enviroClass;
 
     /** A character to represent alpha. */
     var alpha = java ? 'a' : '\u03b1';
@@ -1458,7 +1486,7 @@ module.exports = LightEmitter;
     var opera = context.operamini || context.opera;
 
     /** Opera `[[Class]]`. */
-    var operaClass = reOpera.test(operaClass = (isCustomContext && opera) ? opera['[[Class]]'] : getClassOf(opera))
+    var operaClass = reOpera.test(operaClass = (isCustomContext &amp;&amp; opera) ? opera['[[Class]]'] : getClassOf(opera))
       ? operaClass
       : (opera = null);
 
@@ -1480,7 +1508,7 @@ module.exports = LightEmitter;
     var useFeatures = ua == userAgent;
 
     /** The browser/environment version. */
-    var version = useFeatures && opera && typeof opera.version == 'function' && opera.version();
+    var version = useFeatures &amp;&amp; opera &amp;&amp; typeof opera.version == 'function' &amp;&amp; opera.version();
 
     /** A flag to indicate if the OS ends with "/ Version" */
     var isSpecialCasedOS;
@@ -1588,7 +1616,7 @@ module.exports = LightEmitter;
       'Archos': {},
       'Amazon': { 'Kindle': 1, 'Kindle Fire': 1 },
       'Asus': { 'Transformer': 1 },
-      'Barnes & Noble': { 'Nook': 1 },
+      'Barnes &amp; Noble': { 'Nook': 1 },
       'BlackBerry': { 'PlayBook': 1 },
       'Google': { 'Google TV': 1, 'Nexus': 1 },
       'HP': { 'TouchPad': 1 },
@@ -1648,7 +1676,7 @@ module.exports = LightEmitter;
       return reduce(guesses, function(result, guess) {
         return result || RegExp('\\b' + (
           guess.pattern || qualify(guess)
-        ) + '\\b', 'i').exec(ua) && (guess.label || guess);
+        ) + '\\b', 'i').exec(ua) &amp;&amp; (guess.label || guess);
       });
     }
 
@@ -1666,7 +1694,7 @@ module.exports = LightEmitter;
           value[product] ||
           value[/^[a-z]+(?: +[a-z]+\b)*/i.exec(product)] ||
           RegExp('\\b' + qualify(key) + '(?:\\b|\\w*\\d)', 'i').exec(ua)
-        ) && key;
+        ) &amp;&amp; key;
       });
     }
 
@@ -1681,7 +1709,7 @@ module.exports = LightEmitter;
       return reduce(guesses, function(result, guess) {
         return result || RegExp('\\b' + (
           guess.pattern || qualify(guess)
-        ) + '\\b', 'i').exec(ua) && (guess.label || guess);
+        ) + '\\b', 'i').exec(ua) &amp;&amp; (guess.label || guess);
       });
     }
 
@@ -1695,7 +1723,7 @@ module.exports = LightEmitter;
     function getOS(guesses) {
       return reduce(guesses, function(result, guess) {
         var pattern = guess.pattern || qualify(guess);
-        if (!result && (result =
+        if (!result &amp;&amp; (result =
               RegExp('\\b' + pattern + '(?:/[\\d.]+|[ \\w.]*)', 'i').exec(ua)
             )) {
           result = cleanupOS(result, pattern, guess.label || guess);
@@ -1714,13 +1742,13 @@ module.exports = LightEmitter;
     function getProduct(guesses) {
       return reduce(guesses, function(result, guess) {
         var pattern = guess.pattern || qualify(guess);
-        if (!result && (result =
+        if (!result &amp;&amp; (result =
               RegExp('\\b' + pattern + ' *\\d+[.\\w_]*', 'i').exec(ua) ||
               RegExp('\\b' + pattern + ' *\\w+-[\\w]*', 'i').exec(ua) ||
               RegExp('\\b' + pattern + '(?:; *(?:[a-z]+[_-])?[a-z]+\\d+|[^ ();-]*)', 'i').exec(ua)
             )) {
           // Split by forward slash and append product version if needed.
-          if ((result = String((guess.label && !RegExp(pattern, 'i').test(guess.label)) ? guess.label : result).split('/'))[1] && !/[\d.]+/.test(result[0])) {
+          if ((result = String((guess.label &amp;&amp; !RegExp(pattern, 'i').test(guess.label)) ? guess.label : result).split('/'))[1] &amp;&amp; !/[\d.]+/.test(result[0])) {
             result[0] += ' ' + result[1];
           }
           // Correct character case and cleanup string.
@@ -1762,10 +1790,10 @@ module.exports = LightEmitter;
     /*------------------------------------------------------------------------*/
 
     // Convert layout to an array so we can add extra details.
-    layout && (layout = [layout]);
+    layout &amp;&amp; (layout = [layout]);
 
     // Detect product names that contain their manufacturer's name.
-    if (manufacturer && !product) {
+    if (manufacturer &amp;&amp; !product) {
       product = getProduct([manufacturer]);
     }
     // Clean up Google TV.
@@ -1777,11 +1805,11 @@ module.exports = LightEmitter;
       product = (product ? product + ' ' : '') + 'Simulator';
     }
     // Detect Opera Mini 8+ running in Turbo/Uncompressed mode on iOS.
-    if (name == 'Opera Mini' && /\bOPiOS\b/.test(ua)) {
+    if (name == 'Opera Mini' &amp;&amp; /\bOPiOS\b/.test(ua)) {
       description.push('running in Turbo/Uncompressed mode');
     }
     // Detect IE Mobile 11.
-    if (name == 'IE' && /\blike iPhone OS\b/.test(ua)) {
+    if (name == 'IE' &amp;&amp; /\blike iPhone OS\b/.test(ua)) {
       data = parse(ua.replace(/like iPhone OS/, ''));
       manufacturer = data.manufacturer;
       product = data.product;
@@ -1794,13 +1822,13 @@ module.exports = LightEmitter;
         : '');
     }
     // Detect Kubuntu.
-    else if (name == 'Konqueror' && !/buntu/i.test(os)) {
+    else if (name == 'Konqueror' &amp;&amp; !/buntu/i.test(os)) {
       os = 'Kubuntu';
     }
     // Detect Android browsers.
-    else if ((manufacturer && manufacturer != 'Google' &&
-        ((/Chrome/.test(name) && !/\bMobile Safari\b/i.test(ua)) || /\bVita\b/.test(product))) ||
-        (/\bAndroid\b/.test(os) && /^Chrome/.test(name) && /\bVersion\//i.test(ua))) {
+    else if ((manufacturer &amp;&amp; manufacturer != 'Google' &amp;&amp;
+        ((/Chrome/.test(name) &amp;&amp; !/\bMobile Safari\b/i.test(ua)) || /\bVita\b/.test(product))) ||
+        (/\bAndroid\b/.test(os) &amp;&amp; /^Chrome/.test(name) &amp;&amp; /\bVersion\//i.test(ua))) {
       name = 'Android Browser';
       os = /\bAndroid\b/.test(os) ? os : 'Android';
     }
@@ -1815,29 +1843,29 @@ module.exports = LightEmitter;
       }
     }
     // Detect PaleMoon identifying as Firefox.
-    else if (name == 'PaleMoon' && (data = /\bFirefox\/([\d.]+)\b/.exec(ua))) {
+    else if (name == 'PaleMoon' &amp;&amp; (data = /\bFirefox\/([\d.]+)\b/.exec(ua))) {
       description.push('identifying as Firefox ' + data[1]);
     }
     // Detect Firefox OS and products running Firefox.
-    else if (name == 'Firefox' && (data = /\b(Mobile|Tablet|TV)\b/i.exec(ua))) {
+    else if (name == 'Firefox' &amp;&amp; (data = /\b(Mobile|Tablet|TV)\b/i.exec(ua))) {
       os || (os = 'Firefox OS');
       product || (product = data[1]);
     }
     // Detect false positives for Firefox/Safari.
-    else if (!name || (data = !/\bMinefield\b/i.test(ua) && /\b(?:Firefox|Safari)\b/.exec(name))) {
+    else if (!name || (data = !/\bMinefield\b/i.test(ua) &amp;&amp; /\b(?:Firefox|Safari)\b/.exec(name))) {
       // Escape the `/` for Firefox 1.
-      if (name && !product && /[\/,]|^[^(]+?\)/.test(ua.slice(ua.indexOf(data + '/') + 8))) {
+      if (name &amp;&amp; !product &amp;&amp; /[\/,]|^[^(]+?\)/.test(ua.slice(ua.indexOf(data + '/') + 8))) {
         // Clear name of false positives.
         name = null;
       }
       // Reassign a generic name.
-      if ((data = product || manufacturer || os) &&
+      if ((data = product || manufacturer || os) &amp;&amp;
           (product || manufacturer || /\b(?:Android|Symbian OS|Tablet OS|webOS)\b/.test(os))) {
         name = /[a-z]+(?: Hat)?/i.exec(/\bAndroid\b/.test(os) ? os : data) + ' Browser';
       }
     }
     // Add Chrome version to description for Electron.
-    else if (name == 'Electron' && (data = (/\bChrome\/([\d.]+)\b/.exec(ua) || 0)[1])) {
+    else if (name == 'Electron' &amp;&amp; (data = (/\bChrome\/([\d.]+)\b/.exec(ua) || 0)[1])) {
       description.push('Chromium ' + data);
     }
     // Detect non-Opera (Presto-based) versions (order is important).
@@ -1851,16 +1879,16 @@ module.exports = LightEmitter;
     }
     // Detect stubborn layout engines.
     if ((data =
-          layout == 'iCab' && parseFloat(version) > 3 && 'WebKit' ||
-          /\bOpera\b/.test(name) && (/\bOPR\b/.test(ua) ? 'Blink' : 'Presto') ||
-          /\b(?:Midori|Nook|Safari)\b/i.test(ua) && !/^(?:Trident|EdgeHTML)$/.test(layout) && 'WebKit' ||
-          !layout && /\bMSIE\b/i.test(ua) && (os == 'Mac OS' ? 'Tasman' : 'Trident') ||
-          layout == 'WebKit' && /\bPlayStation\b(?! Vita\b)/i.test(name) && 'NetFront'
+          layout == 'iCab' &amp;&amp; parseFloat(version) > 3 &amp;&amp; 'WebKit' ||
+          /\bOpera\b/.test(name) &amp;&amp; (/\bOPR\b/.test(ua) ? 'Blink' : 'Presto') ||
+          /\b(?:Midori|Nook|Safari)\b/i.test(ua) &amp;&amp; !/^(?:Trident|EdgeHTML)$/.test(layout) &amp;&amp; 'WebKit' ||
+          !layout &amp;&amp; /\bMSIE\b/i.test(ua) &amp;&amp; (os == 'Mac OS' ? 'Tasman' : 'Trident') ||
+          layout == 'WebKit' &amp;&amp; /\bPlayStation\b(?! Vita\b)/i.test(name) &amp;&amp; 'NetFront'
         )) {
       layout = [data];
     }
     // Detect Windows Phone 7 desktop mode.
-    if (name == 'IE' && (data = (/; *(?:XBLWP|ZuneWP)(\d+)/i.exec(ua) || 0)[1])) {
+    if (name == 'IE' &amp;&amp; (data = (/; *(?:XBLWP|ZuneWP)(\d+)/i.exec(ua) || 0)[1])) {
       name += ' Mobile';
       os = 'Windows Phone ' + (/\+$/.test(data) ? data : data + '.x');
       description.unshift('desktop mode');
@@ -1873,7 +1901,7 @@ module.exports = LightEmitter;
       version || (version = (/\brv:([\d.]+)/.exec(ua) || 0)[1]);
     }
     // Detect IE 11 identifying as other browsers.
-    else if (name != 'IE' && layout == 'Trident' && (data = /\brv:([\d.]+)/.exec(ua))) {
+    else if (name != 'IE' &amp;&amp; layout == 'Trident' &amp;&amp; (data = /\brv:([\d.]+)/.exec(ua))) {
       if (name) {
         description.push('identifying as ' + name + (version ? ' ' + version : ''));
       }
@@ -1895,7 +1923,7 @@ module.exports = LightEmitter;
             version = context.require('ringo/engine').version.join('.');
             name = 'RingoJS';
           } catch(e) {
-            if ((data = context.system) && data.global.system == context.system) {
+            if ((data = context.system) &amp;&amp; data.global.system == context.system) {
               name = 'Narwhal';
               os || (os = data[0].os || null);
             }
@@ -1905,7 +1933,7 @@ module.exports = LightEmitter;
           }
         }
         else if (
-          typeof context.process == 'object' && !context.process.browser &&
+          typeof context.process == 'object' &amp;&amp; !context.process.browser &amp;&amp;
           (data = context.process)
         ) {
           if (typeof data.versions == 'object') {
@@ -1936,46 +1964,46 @@ module.exports = LightEmitter;
       // Detect PhantomJS.
       else if (getClassOf((data = context.phantom)) == phantomClass) {
         name = 'PhantomJS';
-        version = (data = data.version || null) && (data.major + '.' + data.minor + '.' + data.patch);
+        version = (data = data.version || null) &amp;&amp; (data.major + '.' + data.minor + '.' + data.patch);
       }
       // Detect IE compatibility modes.
-      else if (typeof doc.documentMode == 'number' && (data = /\bTrident\/(\d+)/i.exec(ua))) {
+      else if (typeof doc.documentMode == 'number' &amp;&amp; (data = /\bTrident\/(\d+)/i.exec(ua))) {
         // We're in compatibility mode when the Trident version + 4 doesn't
         // equal the document mode.
         version = [version, doc.documentMode];
         if ((data = +data[1] + 4) != version[1]) {
           description.push('IE ' + version[1] + ' mode');
-          layout && (layout[1] = '');
+          layout &amp;&amp; (layout[1] = '');
           version[1] = data;
         }
         version = name == 'IE' ? String(version[1].toFixed(1)) : version[0];
       }
       // Detect IE 11 masking as other browsers.
-      else if (typeof doc.documentMode == 'number' && /^(?:Chrome|Firefox)\b/.test(name)) {
+      else if (typeof doc.documentMode == 'number' &amp;&amp; /^(?:Chrome|Firefox)\b/.test(name)) {
         description.push('masking as ' + name + ' ' + version);
         name = 'IE';
         version = '11.0';
         layout = ['Trident'];
         os = 'Windows';
       }
-      os = os && format(os);
+      os = os &amp;&amp; format(os);
     }
     // Detect prerelease phases.
-    if (version && (data =
+    if (version &amp;&amp; (data =
           /(?:[ab]|dp|pre|[ab]\d+pre)(?:\d+\+?)?$/i.exec(version) ||
-          /(?:alpha|beta)(?: ?\d)?/i.exec(ua + ';' + (useFeatures && nav.appMinorVersion)) ||
-          /\bMinefield\b/i.test(ua) && 'a'
+          /(?:alpha|beta)(?: ?\d)?/i.exec(ua + ';' + (useFeatures &amp;&amp; nav.appMinorVersion)) ||
+          /\bMinefield\b/i.test(ua) &amp;&amp; 'a'
         )) {
       prerelease = /b/i.test(data) ? 'beta' : 'alpha';
       version = version.replace(RegExp(data + '\\+?$'), '') +
         (prerelease == 'beta' ? beta : alpha) + (/\d+\+?/.exec(data) || '');
     }
     // Detect Firefox Mobile.
-    if (name == 'Fennec' || name == 'Firefox' && /\b(?:Android|Firefox OS)\b/.test(os)) {
+    if (name == 'Fennec' || name == 'Firefox' &amp;&amp; /\b(?:Android|Firefox OS)\b/.test(os)) {
       name = 'Firefox Mobile';
     }
     // Obscure Maxthon's unreliable version.
-    else if (name == 'Maxthon' && version) {
+    else if (name == 'Maxthon' &amp;&amp; version) {
       version = version.replace(/\.[\d.]+/, '.x');
     }
     // Detect Xbox 360 and Xbox One.
@@ -1983,17 +2011,17 @@ module.exports = LightEmitter;
       if (product == 'Xbox 360') {
         os = null;
       }
-      if (product == 'Xbox 360' && /\bIEMobile\b/.test(ua)) {
+      if (product == 'Xbox 360' &amp;&amp; /\bIEMobile\b/.test(ua)) {
         description.unshift('mobile mode');
       }
     }
     // Add mobile postfix.
-    else if ((/^(?:Chrome|IE|Opera)$/.test(name) || name && !product && !/Browser|Mobi/.test(name)) &&
+    else if ((/^(?:Chrome|IE|Opera)$/.test(name) || name &amp;&amp; !product &amp;&amp; !/Browser|Mobi/.test(name)) &amp;&amp;
         (os == 'Windows CE' || /Mobi/i.test(ua))) {
       name += ' Mobile';
     }
     // Detect IE platform preview.
-    else if (name == 'IE' && useFeatures) {
+    else if (name == 'IE' &amp;&amp; useFeatures) {
       try {
         if (context.external === null) {
           description.unshift('platform preview');
@@ -2004,7 +2032,7 @@ module.exports = LightEmitter;
     }
     // Detect BlackBerry OS version.
     // http://docs.blackberry.com/en/developers/deliverables/18169/HTTP_headers_sent_by_BB_Browser_1234911_11.jsp
-    else if ((/\bBlackBerry\b/.test(product) || /\bBB10\b/.test(ua)) && (data =
+    else if ((/\bBlackBerry\b/.test(product) || /\bBB10\b/.test(ua)) &amp;&amp; (data =
           (RegExp(product.replace(/ +/g, ' *') + '/([.\\d]+)', 'i').exec(ua) || 0)[1] ||
           version
         )) {
@@ -2014,20 +2042,20 @@ module.exports = LightEmitter;
     }
     // Detect Opera identifying/masking itself as another browser.
     // http://www.opera.com/support/kb/view/843/
-    else if (this != forOwn && product != 'Wii' && (
-          (useFeatures && opera) ||
-          (/Opera/.test(name) && /\b(?:MSIE|Firefox)\b/i.test(ua)) ||
-          (name == 'Firefox' && /\bOS X (?:\d+\.){2,}/.test(os)) ||
-          (name == 'IE' && (
-            (os && !/^Win/.test(os) && version > 5.5) ||
-            /\bWindows XP\b/.test(os) && version > 8 ||
-            version == 8 && !/\bTrident\b/.test(ua)
+    else if (this != forOwn &amp;&amp; product != 'Wii' &amp;&amp; (
+          (useFeatures &amp;&amp; opera) ||
+          (/Opera/.test(name) &amp;&amp; /\b(?:MSIE|Firefox)\b/i.test(ua)) ||
+          (name == 'Firefox' &amp;&amp; /\bOS X (?:\d+\.){2,}/.test(os)) ||
+          (name == 'IE' &amp;&amp; (
+            (os &amp;&amp; !/^Win/.test(os) &amp;&amp; version > 5.5) ||
+            /\bWindows XP\b/.test(os) &amp;&amp; version > 8 ||
+            version == 8 &amp;&amp; !/\bTrident\b/.test(ua)
           ))
-        ) && !reOpera.test((data = parse.call(forOwn, ua.replace(reOpera, '') + ';'))) && data.name) {
+        ) &amp;&amp; !reOpera.test((data = parse.call(forOwn, ua.replace(reOpera, '') + ';'))) &amp;&amp; data.name) {
       // When "identifying", the UA contains both Opera and the other browser's name.
       data = 'ing as ' + data.name + ((data = data.version) ? ' ' + data : '');
       if (reOpera.test(name)) {
-        if (/\bIE\b/.test(data) && os == 'Mac OS') {
+        if (/\bIE\b/.test(data) &amp;&amp; os == 'Mac OS') {
           os = null;
         }
         data = 'identify' + data;
@@ -2056,7 +2084,7 @@ module.exports = LightEmitter;
       // (e.g. "532.5" becomes "532.05")
       data = [parseFloat(data.replace(/\.(\d)$/, '.0$1')), data];
       // Nightly builds are postfixed with a "+".
-      if (name == 'Safari' && data[1].slice(-1) == '+') {
+      if (name == 'Safari' &amp;&amp; data[1].slice(-1) == '+') {
         name = 'WebKit Nightly';
         prerelease = 'alpha';
         version = data[1].slice(0, -1);
@@ -2069,27 +2097,27 @@ module.exports = LightEmitter;
       // Use the full Chrome version when available.
       data[1] = (/\bChrome\/([\d.]+)/i.exec(ua) || 0)[1];
       // Detect Blink layout engine.
-      if (data[0] == 537.36 && data[2] == 537.36 && parseFloat(data[1]) >= 28 && layout == 'WebKit') {
+      if (data[0] == 537.36 &amp;&amp; data[2] == 537.36 &amp;&amp; parseFloat(data[1]) >= 28 &amp;&amp; layout == 'WebKit') {
         layout = ['Blink'];
       }
       // Detect JavaScriptCore.
       // http://stackoverflow.com/questions/6768474/how-can-i-detect-which-javascript-engine-v8-or-jsc-is-used-at-runtime-in-androi
-      if (!useFeatures || (!likeChrome && !data[1])) {
-        layout && (layout[1] = 'like Safari');
-        data = (data = data[0], data < 400 ? 1 : data < 500 ? 2 : data < 526 ? 3 : data < 533 ? 4 : data < 534 ? '4+' : data < 535 ? 5 : data < 537 ? 6 : data < 538 ? 7 : data < 601 ? 8 : '8');
+      if (!useFeatures || (!likeChrome &amp;&amp; !data[1])) {
+        layout &amp;&amp; (layout[1] = 'like Safari');
+        data = (data = data[0], data &lt; 400 ? 1 : data &lt; 500 ? 2 : data &lt; 526 ? 3 : data &lt; 533 ? 4 : data &lt; 534 ? '4+' : data &lt; 535 ? 5 : data &lt; 537 ? 6 : data &lt; 538 ? 7 : data &lt; 601 ? 8 : '8');
       } else {
-        layout && (layout[1] = 'like Chrome');
-        data = data[1] || (data = data[0], data < 530 ? 1 : data < 532 ? 2 : data < 532.05 ? 3 : data < 533 ? 4 : data < 534.03 ? 5 : data < 534.07 ? 6 : data < 534.10 ? 7 : data < 534.13 ? 8 : data < 534.16 ? 9 : data < 534.24 ? 10 : data < 534.30 ? 11 : data < 535.01 ? 12 : data < 535.02 ? '13+' : data < 535.07 ? 15 : data < 535.11 ? 16 : data < 535.19 ? 17 : data < 536.05 ? 18 : data < 536.10 ? 19 : data < 537.01 ? 20 : data < 537.11 ? '21+' : data < 537.13 ? 23 : data < 537.18 ? 24 : data < 537.24 ? 25 : data < 537.36 ? 26 : layout != 'Blink' ? '27' : '28');
+        layout &amp;&amp; (layout[1] = 'like Chrome');
+        data = data[1] || (data = data[0], data &lt; 530 ? 1 : data &lt; 532 ? 2 : data &lt; 532.05 ? 3 : data &lt; 533 ? 4 : data &lt; 534.03 ? 5 : data &lt; 534.07 ? 6 : data &lt; 534.10 ? 7 : data &lt; 534.13 ? 8 : data &lt; 534.16 ? 9 : data &lt; 534.24 ? 10 : data &lt; 534.30 ? 11 : data &lt; 535.01 ? 12 : data &lt; 535.02 ? '13+' : data &lt; 535.07 ? 15 : data &lt; 535.11 ? 16 : data &lt; 535.19 ? 17 : data &lt; 536.05 ? 18 : data &lt; 536.10 ? 19 : data &lt; 537.01 ? 20 : data &lt; 537.11 ? '21+' : data &lt; 537.13 ? 23 : data &lt; 537.18 ? 24 : data &lt; 537.24 ? 25 : data &lt; 537.36 ? 26 : layout != 'Blink' ? '27' : '28');
       }
       // Add the postfix of ".x" or "+" for approximate versions.
-      layout && (layout[1] += ' ' + (data += typeof data == 'number' ? '.x' : /[.+]/.test(data) ? '' : '+'));
+      layout &amp;&amp; (layout[1] += ' ' + (data += typeof data == 'number' ? '.x' : /[.+]/.test(data) ? '' : '+'));
       // Obscure version for some Safari 1-2 releases.
-      if (name == 'Safari' && (!version || parseInt(version) > 45)) {
+      if (name == 'Safari' &amp;&amp; (!version || parseInt(version) > 45)) {
         version = data;
       }
     }
     // Detect Opera desktop modes.
-    if (name == 'Opera' &&  (data = /\bzbov|zvav$/.exec(os))) {
+    if (name == 'Opera' &amp;&amp;  (data = /\bzbov|zvav$/.exec(os))) {
       name += ' ';
       description.unshift('desktop mode');
       if (data == 'zvav') {
@@ -2101,7 +2129,7 @@ module.exports = LightEmitter;
       os = os.replace(RegExp(' *' + data + '$'), '');
     }
     // Detect Chrome desktop mode.
-    else if (name == 'Safari' && /\bChrome\b/.exec(layout && layout[1])) {
+    else if (name == 'Safari' &amp;&amp; /\bChrome\b/.exec(layout &amp;&amp; layout[1])) {
       description.unshift('desktop mode');
       name = 'Chrome Mobile';
       version = null;
@@ -2114,24 +2142,24 @@ module.exports = LightEmitter;
       }
     }
     // Strip incorrect OS versions.
-    if (version && version.indexOf((data = /[\d.]+$/.exec(os))) == 0 &&
+    if (version &amp;&amp; version.indexOf((data = /[\d.]+$/.exec(os))) == 0 &amp;&amp;
         ua.indexOf('/' + data + '-') > -1) {
       os = trim(os.replace(data, ''));
     }
     // Add layout engine.
-    if (layout && !/\b(?:Avant|Nook)\b/.test(name) && (
+    if (layout &amp;&amp; !/\b(?:Avant|Nook)\b/.test(name) &amp;&amp; (
         /Browser|Lunascape|Maxthon/.test(name) ||
-        name != 'Safari' && /^iOS/.test(os) && /\bSafari\b/.test(layout[1]) ||
-        /^(?:Adobe|Arora|Breach|Midori|Opera|Phantom|Rekonq|Rock|Samsung Internet|Sleipnir|Web)/.test(name) && layout[1])) {
+        name != 'Safari' &amp;&amp; /^iOS/.test(os) &amp;&amp; /\bSafari\b/.test(layout[1]) ||
+        /^(?:Adobe|Arora|Breach|Midori|Opera|Phantom|Rekonq|Rock|Samsung Internet|Sleipnir|Web)/.test(name) &amp;&amp; layout[1])) {
       // Don't add layout details to description if they are falsey.
-      (data = layout[layout.length - 1]) && description.push(data);
+      (data = layout[layout.length - 1]) &amp;&amp; description.push(data);
     }
     // Combine contextual information.
     if (description.length) {
       description = ['(' + description.join('; ') + ')'];
     }
     // Append manufacturer to description.
-    if (manufacturer && product && product.indexOf(manufacturer) < 0) {
+    if (manufacturer &amp;&amp; product &amp;&amp; product.indexOf(manufacturer) &lt; 0) {
       description.push('on ' + manufacturer);
     }
     // Append product to description.
@@ -2141,34 +2169,34 @@ module.exports = LightEmitter;
     // Parse the OS into an object.
     if (os) {
       data = / ([\d.+]+)$/.exec(os);
-      isSpecialCasedOS = data && os.charAt(os.length - data[0].length - 1) == '/';
+      isSpecialCasedOS = data &amp;&amp; os.charAt(os.length - data[0].length - 1) == '/';
       os = {
         'architecture': 32,
-        'family': (data && !isSpecialCasedOS) ? os.replace(data[0], '') : os,
+        'family': (data &amp;&amp; !isSpecialCasedOS) ? os.replace(data[0], '') : os,
         'version': data ? data[1] : null,
         'toString': function() {
           var version = this.version;
-          return this.family + ((version && !isSpecialCasedOS) ? ' ' + version : '') + (this.architecture == 64 ? ' 64-bit' : '');
+          return this.family + ((version &amp;&amp; !isSpecialCasedOS) ? ' ' + version : '') + (this.architecture == 64 ? ' 64-bit' : '');
         }
       };
     }
     // Add browser/OS architecture.
-    if ((data = /\b(?:AMD|IA|Win|WOW|x86_|x)64\b/i.exec(arch)) && !/\bi686\b/i.test(arch)) {
+    if ((data = /\b(?:AMD|IA|Win|WOW|x86_|x)64\b/i.exec(arch)) &amp;&amp; !/\bi686\b/i.test(arch)) {
       if (os) {
         os.architecture = 64;
         os.family = os.family.replace(RegExp(' *' + data), '');
       }
       if (
-          name && (/\bWOW64\b/i.test(ua) ||
-          (useFeatures && /\w(?:86|32)$/.test(nav.cpuClass || nav.platform) && !/\bWin64; x64\b/i.test(ua)))
+          name &amp;&amp; (/\bWOW64\b/i.test(ua) ||
+          (useFeatures &amp;&amp; /\w(?:86|32)$/.test(nav.cpuClass || nav.platform) &amp;&amp; !/\bWin64; x64\b/i.test(ua)))
       ) {
         description.unshift('32-bit');
       }
     }
     // Chrome 39 and above on OS X is always 64-bit.
     else if (
-        os && /^OS X/.test(os.family) &&
-        name == 'Chrome' && parseFloat(version) >= 39
+        os &amp;&amp; /^OS X/.test(os.family) &amp;&amp;
+        name == 'Chrome' &amp;&amp; parseFloat(version) >= 39
     ) {
       os.architecture = 64;
     }
@@ -2202,13 +2230,13 @@ module.exports = LightEmitter;
      * @memberOf platform
      * @type string|null
      */
-    platform.layout = layout && layout[0];
+    platform.layout = layout &amp;&amp; layout[0];
 
     /**
      * The name of the product's manufacturer.
      *
      * The list of manufacturers include:
-     * "Apple", "Archos", "Amazon", "Asus", "Barnes & Noble", "BlackBerry",
+     * "Apple", "Archos", "Amazon", "Asus", "Barnes &amp; Noble", "BlackBerry",
      * "Google", "HP", "HTC", "LG", "Microsoft", "Motorola", "Nintendo",
      * "Nokia", "Samsung" and "Sony"
      *
@@ -2268,7 +2296,7 @@ module.exports = LightEmitter;
      * @memberOf platform
      * @type string|null
      */
-    platform.version = name && version;
+    platform.version = name &amp;&amp; version;
 
     /**
      * The name of the operating system.
@@ -2325,7 +2353,7 @@ module.exports = LightEmitter;
     if (platform.name) {
       description.unshift(name);
     }
-    if (os && name && !(os == String(os).split(' ')[0] && (os == name.split(' ')[0] || product))) {
+    if (os &amp;&amp; name &amp;&amp; !(os == String(os).split(' ')[0] &amp;&amp; (os == name.split(' ')[0] || product))) {
       description.push(product ? '(' + os + ')' : 'on ' + os);
     }
     if (description.length) {
@@ -2340,7 +2368,7 @@ module.exports = LightEmitter;
   var platform = parse();
 
   // Some AMD build optimizers, like r.js, check for condition patterns like the following:
-  if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+  if (typeof define == 'function' &amp;&amp; typeof define.amd == 'object' &amp;&amp; define.amd) {
     // Expose platform on the global object to prevent errors when platform is
     // loaded by a script tag in the presence of an AMD loader.
     // See http://requirejs.org/docs/errors.html#mismatch for more details.
@@ -2352,7 +2380,7 @@ module.exports = LightEmitter;
     });
   }
   // Check for `exports` after `define` in case a build optimizer adds an `exports` object.
-  else if (freeExports && freeModule) {
+  else if (freeExports &amp;&amp; freeModule) {
     // Export for CommonJS support.
     forOwn(platform, function(value, key) {
       freeExports[key] = value;
@@ -2624,7 +2652,7 @@ Renderer2D.prototype.arc = function arc(x, y, r) {
 };
 Renderer2D.prototype.vertices = function vertices(verts, count, _mode, _sx, _sy) {
     var context = this.context, i;
-    if (count < 2) {
+    if (count &lt; 2) {
         return this;
     }
     if (_sx == null) {
@@ -2632,13 +2660,13 @@ Renderer2D.prototype.vertices = function vertices(verts, count, _mode, _sx, _sy)
     }
     context.beginPath();
     context.moveTo(verts[0] * _sx, verts[1] * _sy);
-    for (i = 2, count *= 2; i < count; i += 2) {
+    for (i = 2, count *= 2; i &lt; count; i += 2) {
         context.lineTo(verts[i] * _sx, verts[i + 1] * _sy);
     }
     if (this._doFill) {
         this._fill();
     }
-    if (this._doStroke && this._lineW > 0) {
+    if (this._doStroke &amp;&amp; this._lineW > 0) {
         this._stroke(true);
     }
     return this;
@@ -2653,7 +2681,7 @@ Renderer2D.prototype._stroke = function (close) {
         context.closePath();
     }
     context.strokeStyle = this._strokeColor;
-    if ((context.lineWidth = this._lineWidth) <= 1) {
+    if ((context.lineWidth = this._lineWidth) &lt;= 1) {
         context.stroke();
     }
     context.stroke();
@@ -2729,7 +2757,7 @@ RendererGL.prototype.clear = function clear() {
 RendererGL.prototype.vertices = function vertices(verts, count, mode, _sx, _sy) {
     var program = this.programs.default;
     var gl = this.context;
-    if (count < 2) {
+    if (count &lt; 2) {
         return this;
     }
     if (verts) {
@@ -2750,7 +2778,7 @@ RendererGL.prototype.vertices = function vertices(verts, count, mode, _sx, _sy) 
         program.setUniform('ucolor', this._fillColor.rgba());
         gl.drawArrays(gl.TRIANGLE_FAN, 0, count);
     }
-    if (this._doStroke && this._lineWidth > 0) {
+    if (this._doStroke &amp;&amp; this._lineWidth > 0) {
         program.setUniform('ucolor', this._strokeColor.rgba());
         gl.lineWidth(this._lineWidth);
         gl.drawArrays(gl.LINE_LOOP, 0, count);
@@ -2810,7 +2838,7 @@ ShaderProgram.prototype = {
                 size: info.size,
                 type: info.type
             };
-            if (info.size > 1 && ~(index = info.name.indexOf('['))) {
+            if (info.size > 1 &amp;&amp; ~(index = info.name.indexOf('['))) {
                 uniform.name = info.name.slice(0, index);
             } else {
                 uniform.name = info.name;
@@ -2923,7 +2951,7 @@ function Ticker() {
         elapsedTime = Math.min(1, (_now - self.lastRequestTime) * 0.001);
         self.skippedTime += elapsedTime;
         self.totalTime += elapsedTime;
-        while (self.skippedTime >= self.step && self.running) {
+        while (self.skippedTime >= self.step &amp;&amp; self.running) {
             self.skippedTime -= self.step;
             self.emit('update', self.step, _now);
         }
@@ -2960,7 +2988,7 @@ function Transform() {
 }
 Transform.prototype = {
     save: function save() {
-        if (++this._index < this._stack.length) {
+        if (++this._index &lt; this._stack.length) {
             mat3.copy(this._stack[this._index], this.matrix);
         } else {
             this._stack.push(mat3.clone(this.matrix));
@@ -3017,7 +3045,7 @@ HSLA.prototype = {
         switch (true) {
         case typeof h === 'string':
             h = parse(h);
-        case typeof h === 'object' && h != null:
+        case typeof h === 'object' &amp;&amp; h != null:
             if (h.type !== this.type) {
                 h = h[this.type]();
             }
@@ -3061,19 +3089,19 @@ HSLA.prototype = {
         var h = this[0] % 360 / 360, s = this[1] * 0.01, l = this[2] * 0.01;
         var tr = h + 1 / 3, tg = h, tb = h - 1 / 3;
         var q;
-        if (l < 0.5) {
+        if (l &lt; 0.5) {
             q = l * (1 + s);
         } else {
             q = l + s - l * s;
         }
         var p = 2 * l - q;
-        if (tr < 0) {
+        if (tr &lt; 0) {
             ++tr;
         }
-        if (tg < 0) {
+        if (tg &lt; 0) {
             ++tg;
         }
-        if (tb < 0) {
+        if (tb &lt; 0) {
             ++tb;
         }
         if (tr > 1) {
@@ -3113,13 +3141,13 @@ HSLA.prototype = {
     type: 'hsla'
 };
 function foo(t, p, q) {
-    if (t < 1 / 6) {
+    if (t &lt; 1 / 6) {
         return Math.round((p + (q - p) * 6 * t) * 255);
     }
-    if (t < 0.5) {
+    if (t &lt; 0.5) {
         return Math.round(q * 255);
     }
-    if (t < 2 / 3) {
+    if (t &lt; 2 / 3) {
         return Math.round((p + (q - p) * (2 / 3 - t) * 6) * 255);
     }
     return Math.round(p * 255);
@@ -3150,7 +3178,7 @@ RGBA.prototype = {
         switch (true) {
         case typeof r === 'string':
             r = parse(r);
-        case typeof r === 'object' && r != null:
+        case typeof r === 'object' &amp;&amp; r != null:
             if (r.type !== this.type) {
                 r = r[this.type]();
             }
@@ -3201,7 +3229,7 @@ RGBA.prototype = {
             }
             switch (max) {
             case r:
-                if (g < b) {
+                if (g &lt; b) {
                     h = 1.0472 * (g - b) / diff + 6.2832;
                 } else {
                     h = 1.0472 * (g - b) / diff;
@@ -3454,10 +3482,10 @@ function parseHex(hex) {
     }
     hex = parseInt(hex, 16);
     return [
-        hex >> 24 & 255,
-        hex >> 16 & 255,
-        hex >> 8 & 255,
-        (hex & 255) / 255
+        hex >> 24 &amp; 255,
+        hex >> 16 &amp; 255,
+        hex >> 8 &amp; 255,
+        (hex &amp; 255) / 255
     ];
 }
 function compactMatch(match) {
@@ -3505,7 +3533,7 @@ var constants = require('./constants');
 var report = require('./report');
 var type = require('./options').type;
 function createRenderer(options) {
-    var type_ = options && options.type || type;
+    var type_ = options &amp;&amp; options.type || type;
     if (type_ === constants.RENDERER_AUTO) {
         type_ = getRendererType();
     }
@@ -3616,12 +3644,12 @@ if (typeof platform === 'undefined') {
 function getRendererType() {
     var safari, touchable;
     if (platform) {
-        safari = platform.os && platform.os.family === 'iOS' && platform.name === 'Safari';
+        safari = platform.os &amp;&amp; platform.os.family === 'iOS' &amp;&amp; platform.name === 'Safari';
     }
     if (typeof window !== 'undefined') {
         touchable = 'ontouchend' in window;
     }
-    if (touchable && !safari) {
+    if (touchable &amp;&amp; !safari) {
         return constants.RENDERER_GL;
     }
     return constants.RENDERER_2D;
@@ -3754,7 +3782,7 @@ function AbstractVector() {
 AbstractVector.prototype = {
     normalize: function normalize() {
         var mag = this.mag();
-        if (mag && mag !== 1) {
+        if (mag &amp;&amp; mag !== 1) {
             this.div(mag);
         }
         return this;
@@ -3918,7 +3946,7 @@ module.exports = options;
 },{"./colors/RGBA":75,"./constants":78}],93:[function(require,module,exports){
 'use strict';
 var report, reported;
-if (typeof console !== 'undefined' && console.warn) {
+if (typeof console !== 'undefined' &amp;&amp; console.warn) {
     reported = {};
     report = function report(message) {
         if (reported[message]) {
@@ -3948,3 +3976,26 @@ var shaders = {
     };
 module.exports = shaders;
 },{}]},{},[62]);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FlappyShape.html">FlappyShape</a></li><li><a href="Game.html">Game</a></li><li><a href="LightEmitter.html">LightEmitter</a></li></ul><h3>Events</h3><ul><li><a href="Controls.html#event:touchend">touchend</a></li></ul><h3>Global</h3><ul><li><a href="global.html#platform">platform</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Sep 27 2018 21:22:05 GMT+0700 (+07)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,13 +1,11 @@
 'use strict';
 
-/* globals describe, it */
+var FlappyShape = require( '../core/static/core/FlappyShape' );
 
-var Bird = require( '../static_scripts/Bird' );
-
-describe( 'new Bird', function ()
+describe( 'new FlappyShape', function ()
 {
   it( 'works', function ()
   {
-    var bird = new Bird(); // jshint ignore: line
+    var shape = new FlappyShape(); // jshint ignore: line
   } );
 } );

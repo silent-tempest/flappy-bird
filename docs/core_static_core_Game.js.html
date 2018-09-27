@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: core/static/core/Game.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,40 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: core/static/core/Game.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
+var LightEmitter = require( 'light_emitter' );
 
-    <h3> </h3>
+var Controls     = require( './Controls' );
 
+/**
+ * @constructor Game
+ * @extends {LightEmitter}
+ */
+function Game ()
+{
+  LightEmitter.apply( this, arguments );
+  this.controls = new Controls();
+  this.shapes   = [];
+  this.pipes    = [];
+}
 
+Game.prototype = Object.create( LightEmitter.prototype );
+Game.prototype.constructor = Game;
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+module.exports = Game;
+</code></pre>
+        </article>
+    </section>
 
 
 

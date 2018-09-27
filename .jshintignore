@@ -1,4 +1,4 @@
 node_modules
+core/static
 static
 docs
-.temp

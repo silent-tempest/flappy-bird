@@ -1,4 +1,5 @@
 {
+  "predef": [ "describe", "it" ],
   "esversion": 6,
   "strict": "global",
   "shadow": true,
