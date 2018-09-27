@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = require( 'helmet' )( {
+
   // Content-Security-Policy: default-src 'self'
   contentSecurityPolicy: {
     directives: {
@@ -8,6 +9,7 @@ module.exports = require( 'helmet' )( {
       'script-src':  [ "'self' 'unsafe-eval'" ]
     }
   },
+
   // X-Frame-Options: DENY
   frameguard: {
     action: 'deny'

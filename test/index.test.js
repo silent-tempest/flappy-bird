@@ -6,6 +6,6 @@ describe( 'new FlappyShape', function ()
 {
   it( 'works', function ()
   {
-    var shape = new FlappyShape(); // jshint ignore: line
+    var shape = new FlappyShape(); // eslint-disable-line no-unused-vars
   } );
 } );

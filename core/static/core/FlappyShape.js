@@ -48,7 +48,8 @@ FlappyShape.prototype = {
    * @param  {number} elapsedTime
    * @return {void}
    */
-  update: function update ( elapsedTime ) {
+  update: function update ( elapsedTime )
+  {
     this.velocity.add( this.acceleration );
     this.position.add( this.velocity.copy().mult( elapsedTime ) );
     this.acceleration.set();

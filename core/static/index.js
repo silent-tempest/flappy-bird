@@ -9,12 +9,12 @@ var game     = require( './objects/game' );
 
 var position = new Vector2D( renderer.w * 0.5, renderer.h * 0.5 );
 
-controls.on( 'touchstart', function ( event, keyboard )
+game.controls.on( 'touchstart', function ( event, keyboard )
 {
   if ( keyboard ) {
-    console.log( 'pressed on a keyboard' ); // jshint ignore: line
+    console.log( 'pressed on a keyboard' ); // eslint-disable-line no-console
   } else {
-    console.log( 'touched on a screen' ); // jshint ignore: line
+    console.log( 'touched on a screen' ); // eslint-disable-line no-console
   }
 } );
 
