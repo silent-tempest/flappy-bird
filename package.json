@@ -42,6 +42,7 @@
   "homepage": "https://github.com/silent-tempest/flappyshape#readme",
   "description": "",
   "engines": {
-    "node": "8.11.4"
+    "node": "8.11.4",
+    "npm": "6.4.0"
   }
 }
