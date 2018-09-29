@@ -5,8 +5,8 @@ var LightEmitter = require( 'light_emitter' );
 /**
  * @constructor Controls
  * @extends {LightEmitter}
- * @event Controls#touchstart
- * @event Controls#touchend
+ * @fires touchstart
+ * @fires touchend
  */
 function Controls ()
 {

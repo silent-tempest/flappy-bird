@@ -42,7 +42,7 @@ module.exports = {
             }
         ],
         "brace-style": "off",
-        "callback-return": "error",
+        "callback-return": "off",
         "camelcase": "error",
         "capitalized-comments": [
             "error",

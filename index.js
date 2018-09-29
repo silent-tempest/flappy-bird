@@ -8,6 +8,7 @@ app
   .use( require( './core/middleware/helmet' ) )
   .use( require( './core/middleware/send_static' ) )
   .use( require( './core/middleware/parse_body' ) )
+  .use( require( './core/route/index' ) )
   .use( require( './core/route/404' ) )
   .use( require( './core/route/500' ) );
 
