@@ -25,6 +25,7 @@
     "eslint-plugin-brace-rules": "^0.1.6",
     "jsdoc": "^3.5.5",
     "light_emitter": "github:silent-tempest/light_emitter#master",
+    "matter-js": "^0.14.2",
     "mocha": "^5.2.0",
     "my_utils": "github:silent-tempest/utils#master",
     "platform": "^1.3.5",
@@ -40,7 +41,7 @@
   },
   "homepage": "https://github.com/silent-tempest/flappyshape#readme",
   "engines": {
-    "node": "8.11.4",
-    "npm": "6.4.0"
+    "node": "8.12.0",
+    "npm": "6.4.1"
   }
 }

@@ -50,8 +50,12 @@ FlappyShape.prototype = {
    */
   update: function update ( elapsedTime )
   {
+    // Vector.add( this.velocity, this.acceleration, this.velocity );
+    // Vector.add( this.position, Vector.mult( this.velocity, elapsedTime ), this.position );
+    // this.acceleration.x = 0;
+    // this.acceleration.y = 0;
     this.velocity.add( this.acceleration );
-    this.position.add( this.velocity.copy().mult( elapsedTime ) );
+    this.position.add( this.velocity.clone().mul( elapsedTime ) );
     this.acceleration.set();
     return this;
   },
