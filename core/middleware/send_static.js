@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require( 'express' ).static( 'static' );
+module.exports = require( 'express' ).static( 'public' );

@@ -14,5 +14,7 @@ app
 
 server.listen( process.env.PORT, function ()
 {
-  console.log( ' * The FlappyShape Server started at "http://localhost:' + process.env.PORT + '".' ); // eslint-disable-line no-console
+  console.log( ' - The FlappyShape Server started at ' + process.env.PORT + ' port.' );
+  console.log( ' - A production address: "https://flappyshape.herokuapp.com"' );
+  console.log( ' - A local address:      "http://localhost:' + process.env.PORT + '".' );
 } );

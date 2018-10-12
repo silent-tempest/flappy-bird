@@ -1,5 +1,7 @@
 node_modules
-core/static
+coverage
 static
+public
 docs
 test
+temp

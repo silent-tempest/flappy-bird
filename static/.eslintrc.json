@@ -1,0 +1,12 @@
+{
+	"env": {
+    "commonjs": true,
+		"browser": true
+	},
+
+  "parserOptions": {
+    "ecmaVersion": 5
+  },
+
+	"extends": "../.eslintrc.json"
+}

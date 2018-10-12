@@ -1,6 +1,6 @@
 'use strict';
 
-var Vector2D = require( 'v6.js/math/Vector2D' );
+var Vector2D = require( 'v6.js/core/math/Vector2D' );
 
 /**
  * Класс птички.
@@ -54,8 +54,8 @@ FlappyShape.prototype = {
     // Vector.add( this.position, Vector.mult( this.velocity, elapsedTime ), this.position );
     // this.acceleration.x = 0;
     // this.acceleration.y = 0;
-    this.velocity.add( this.acceleration );
-    this.position.add( this.velocity.clone().mul( elapsedTime ) );
+    this.velocity.addVector( this.acceleration );
+    this.position.addVector( this.velocity.clone().mul( elapsedTime ) );
     this.acceleration.set();
     return this;
   },

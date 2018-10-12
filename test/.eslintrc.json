@@ -1,0 +1,17 @@
+{
+  "globals": {
+    "expect": false,
+    "sinon": false
+  },
+
+  "env": {
+    "commonjs": true,
+    "mocha": true
+  },
+
+  "parserOptions": {
+    "ecmaVersion": 5
+  },
+
+  "extends": "../.eslintrc.json"
+}

@@ -4,7 +4,7 @@
   "description": "A Flappy-Bird-like game.",
   "main": "index.js",
   "scripts": {
-    "prepublish": "make -B lint test script:index.js script:index.js--min docs"
+    "prepublish": "make -B lint mocha script:index.js script:index.js--min docs"
   },
   "author": "SILENT",
   "license": "GPL-3.0",
@@ -19,15 +19,13 @@
   },
   "devDependencies": {
     "browserify": "^16.2.3",
-    "browserify-optional": "^1.0.1",
     "chai": "^4.2.0",
     "eslint": "^5.6.0",
-    "eslint-plugin-brace-rules": "^0.1.6",
+    "eslint-config-v6.js": "github:silent-tempest/eslint-config-v6.js",
     "jsdoc": "^3.5.5",
     "light_emitter": "github:silent-tempest/light_emitter#master",
     "matter-js": "^0.14.2",
     "mocha": "^5.2.0",
-    "my_utils": "github:silent-tempest/utils#master",
     "platform": "^1.3.5",
     "uglify-es": "^3.3.9",
     "v6.js": "github:silent-tempest/v6.js#dev"

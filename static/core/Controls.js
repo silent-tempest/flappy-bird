@@ -50,7 +50,7 @@ function Controls ()
   window.addEventListener( 'keyup', keyup );
 }
 
-LightEmitter.prototype = Object.create( LightEmitter.prototype );
-LightEmitter.prototype.constructor = LightEmitter;
+Controls.prototype = Object.create( LightEmitter.prototype );
+Controls.prototype.constructor = Controls;
 
 module.exports = Controls;

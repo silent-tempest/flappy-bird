@@ -1,13 +1,16 @@
 'use strict';
 
-var Vector2D = require( 'v6.js/math/Vector2D' );
-var random   = require( 'peako/random' );
+var Vector2D = require( 'v6.js/core/math/Vector2D' );
 
 var renderer = require( './objects/renderer' );
 var ticker   = require( './objects/ticker' );
 var game     = require( './objects/game' );
 
 var position = new Vector2D( renderer.w * 0.5, renderer.h * 0.5 );
+
+var state = {
+  touched: false
+};
 
 game.controls.on( 'touchstart', function ( event, keyboard )
 {
@@ -16,11 +19,13 @@ game.controls.on( 'touchstart', function ( event, keyboard )
   } else {
     console.log( 'touched on a screen' ); // eslint-disable-line no-console
   }
+
+  state.touched = true;
 } );
 
 ticker.on( 'render', function ()
 {
-  renderer.background( 0 );
+  renderer.backgroundColor( 0 );
   renderer.fill( 255 );
   renderer.stroke( 'lightpink' );
   renderer.lineWidth( 5 );
@@ -29,10 +34,15 @@ ticker.on( 'render', function ()
 
 ticker.on( 'update', function ( elapsedTime )
 {
-  var v = 50;
-  var x = random( -v, v ) * elapsedTime;
-  var y = random( -v, v ) * elapsedTime;
-  position.add( x, y );
+  if ( state.touched ) {
+    state.touched = false;
+    position.add( 2 * elapsedTime, 2 * elapsedTime );
+  }
 } );
 
 ticker.start();
+
+self.addEventListener( 'resize', function ()
+{
+  renderer.resizeTo( renderer.canvas.parentNode );
+} );
