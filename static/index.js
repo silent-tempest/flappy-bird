@@ -4,18 +4,29 @@ var renderer = require( './objects/renderer' );
 var ticker   = require( './objects/ticker' );
 var game     = require( './objects/game' );
 
-var TOUCHED = false;
+var TOUCHENDED = true;
+var TOUCHED    = false;
 
-game.controls.on( 'touchstart', function ontouchstart ()
+game.controls.on( 'touchstart', function ontouchstart ( event, fromKeyboard )
 {
-  TOUCHED = true;
+  if ( ! fromKeyboard || TOUCHENDED ) {
+    TOUCHENDED = false;
+    TOUCHED    = true;
+  }
+} );
+
+game.controls.on( 'touchend', function ontouchend ( event, fromKeyboard )
+{
+  if ( fromKeyboard ) {
+    TOUCHENDED = true;
+  }
 } );
 
 ticker.on( 'update', function onupdate ( elapsedTime )
 {
   if ( TOUCHED ) {
     TOUCHED = false;
-    game.shapes[ 0 ].position.add( elapsedTime * 50, elapsedTime * 50 );
+    game.shapes[ 0 ].position.add( elapsedTime * 500, elapsedTime * 500 );
   }
 } );
 
@@ -27,7 +38,7 @@ ticker.on( 'render', function onrender ()
 
 ticker.start();
 
-self.addEventListener( 'resize', function ()
+self.addEventListener( 'resize', function onresize ()
 {
   renderer.resizeTo( renderer.canvas.parentNode );
 } );

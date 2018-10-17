@@ -43,4 +43,4 @@ script\:%--min:
 	@node_modules/.bin/uglifyjs -mco public/scripts/$* public/scripts/$*
 
 coveralls:
-	@$(COVERALLS) cat coverage/lcov.info | node_modules/.bin/coveralls
+	@cat coverage/lcov.info | $(COVERALLS) node_modules/.bin/coveralls
