@@ -1,7 +1,14 @@
 'use strict';
 
-var server = require( './core/server' );
-var app    = require( './core/app' );
+var { request } = require( 'http' );
+var { URL }     = require( 'url' );
+
+var server      = require( './core/server' );
+var app         = require( './core/app' );
+
+if ( typeof process.env.PORT === 'undefined' ) {
+  throw Error( ' - The FlappyShape Server was started without a port. "PORT" must be exported before starting the server: "PORT=3000 node .".' );
+}
 
 app
   .use( require( './core/middleware/compression' ) )
@@ -14,7 +21,16 @@ app
 
 server.listen( process.env.PORT, function ()
 {
-  console.log( ' - The FlappyShape Server started at ' + process.env.PORT + ' port.' );
-  console.log( ' - A production address: "https://flappyshape.herokuapp.com"' );
-  console.log( ' - A local address:      "http://localhost:' + process.env.PORT + '".' );
+  console.log( ' - The FlappyShape Server is running.' );
+
+  if ( process.env.NODE_ENV === 'production' ) {
+    console.log( ' - The address: "http://flappyshape.herokuapp.com/".' );
+  } else {
+    console.log( ' - The address: "http://localhost:' + process.env.PORT + '/".' );
+  }
 } );
+
+if ( process.env.NODE_ENV === 'production' ) {
+  // Make a request to our free dyno every 10 minutes.
+  setInterval( request, 1000 * 60 * 10, new URL( 'http://flappyshape.herokuapp.com/' ) );
+}

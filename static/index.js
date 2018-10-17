@@ -1,43 +1,28 @@
 'use strict';
 
-var Vector2D = require( 'v6.js/core/math/Vector2D' );
-
 var renderer = require( './objects/renderer' );
 var ticker   = require( './objects/ticker' );
 var game     = require( './objects/game' );
 
-var position = new Vector2D( renderer.w * 0.5, renderer.h * 0.5 );
+var TOUCHED = false;
 
-var state = {
-  touched: false
-};
-
-game.controls.on( 'touchstart', function ( event, keyboard )
+game.controls.on( 'touchstart', function ontouchstart ()
 {
-  if ( keyboard ) {
-    console.log( 'pressed on a keyboard' ); // eslint-disable-line no-console
-  } else {
-    console.log( 'touched on a screen' ); // eslint-disable-line no-console
-  }
-
-  state.touched = true;
+  TOUCHED = true;
 } );
 
-ticker.on( 'render', function ()
+ticker.on( 'update', function onupdate ( elapsedTime )
 {
-  renderer.backgroundColor( 0 );
-  renderer.fill( 255 );
-  renderer.stroke( 'lightpink' );
-  renderer.lineWidth( 5 );
-  renderer.polygon( position.x, position.y, 20, 3 );
+  if ( TOUCHED ) {
+    TOUCHED = false;
+    game.shapes[ 0 ].position.add( elapsedTime * 50, elapsedTime * 50 );
+  }
 } );
 
-ticker.on( 'update', function ( elapsedTime )
+ticker.on( 'render', function onrender ()
 {
-  if ( state.touched ) {
-    state.touched = false;
-    position.add( 2 * elapsedTime, 2 * elapsedTime );
-  }
+  renderer.backgroundColor( 'skyblue' );
+  game.render( renderer );
 } );
 
 ticker.start();
@@ -46,3 +31,14 @@ self.addEventListener( 'resize', function ()
 {
   renderer.resizeTo( renderer.canvas.parentNode );
 } );
+
+/**
+ * @interface IGameObject
+ */
+
+/**
+ * Отрисовывает объект на холсте.
+ * @method IGameObject#render
+ * @param  {v6.AbstractRenderer} renderer Рендерер.
+ * @return {void}                         Ничего не возвращает.
+ */

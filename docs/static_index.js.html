@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: static/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,49 +17,62 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: static/index.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>FlappyShape</h1><p>The FlappyShape Game.</p>
-<h3>Development</h3><h5>Linting</h5><ul>
-<li><code>make lint:static</code></li>
-<li><code>make lint:core</code></li>
-<li><code>make lint:test</code></li>
-</ul>
-<h5>Testing</h5><ul>
-<li>First, edit <code>build/browsers.txt</code> (it is ignored in <code>.gitignore</code>) for your system</li>
-<li><code>make mocha</code></li>
-<li><code>make karma</code></li>
-</ul>
-<h5>Before Committing</h5><ul>
-<li><code>rm -rf docs coverage public/scripts/* &amp;&amp; npm run prepublish</code></li>
-</ul></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+var renderer = require( './objects/renderer' );
+var ticker   = require( './objects/ticker' );
+var game     = require( './objects/game' );
+
+var TOUCHED = false;
+
+game.controls.on( 'touchstart', function ontouchstart ()
+{
+  TOUCHED = true;
+} );
+
+ticker.on( 'update', function onupdate ( elapsedTime )
+{
+  if ( TOUCHED ) {
+    TOUCHED = false;
+    game.shapes[ 0 ].position.add( elapsedTime * 50, elapsedTime * 50 );
+  }
+} );
+
+ticker.on( 'render', function onrender ()
+{
+  renderer.backgroundColor( 'skyblue' );
+  game.render( renderer );
+} );
+
+ticker.start();
+
+self.addEventListener( 'resize', function ()
+{
+  renderer.resizeTo( renderer.canvas.parentNode );
+} );
+
+/**
+ * @interface IGameObject
+ */
+
+/**
+ * Отрисовывает объект на холсте.
+ * @method IGameObject#render
+ * @param  {v6.AbstractRenderer} renderer Рендерер.
+ * @return {void}                         Ничего не возвращает.
+ */
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

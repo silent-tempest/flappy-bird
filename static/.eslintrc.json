@@ -1,6 +1,5 @@
 {
 	"env": {
-    "commonjs": true,
 		"browser": true
 	},
 
@@ -8,5 +7,5 @@
     "ecmaVersion": 5
   },
 
-	"extends": "../.eslintrc.json"
+	"extends": "v6.js"
 }

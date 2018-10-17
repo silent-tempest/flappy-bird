@@ -1,10 +1,14 @@
 'use strict';
 
-// Require.
-var chai = require( 'chai' );
+var chai  = require( 'chai' );
+var like  = require( 'chai-like' );
 
-// Export to global.
+var as    = require( './chai-as' );
+
 global.expect = chai.expect;
 
-// Call.
 chai.should();
+chai.use( like );
+chai.use( as );
+
+chai.truncateThreshold = 0;

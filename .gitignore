@@ -1,2 +1,3 @@
+build/browsers.txt
 node_modules
-coverage/!(*.txt)
+coverage
