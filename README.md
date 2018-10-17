@@ -1,5 +1,7 @@
 # FlappyShape
 
+[![Coverage Status](https://coveralls.io/repos/github/tikhiy/flappyshape/badge.svg)](https://coveralls.io/github/tikhiy/flappyshape)
+
 The FlappyShape Game.
 
 ### Development
