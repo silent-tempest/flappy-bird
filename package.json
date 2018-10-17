@@ -22,6 +22,7 @@
     "browserify-istanbul": "^3.0.1",
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
+    "coveralls": "^3.0.2",
     "eslint": "^5.7.0",
     "eslint-config-v6.js": "github:tikhiy/eslint-config-v6.js#master",
     "jsdoc": "^3.5.5",

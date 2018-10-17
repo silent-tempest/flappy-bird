@@ -1,4 +1,5 @@
-BROWSERS := $(shell cat build/browsers.txt)
+COVERALLS := $(shell cat build/coveralls.txt)
+BROWSERS  := $(shell cat build/browsers.txt)
 
 lint\:static:
 	@cd static && ../node_modules/.bin/eslint .
@@ -40,3 +41,6 @@ script\:%:
 
 script\:%--min:
 	@node_modules/.bin/uglifyjs -mco public/scripts/$* public/scripts/$*
+
+coveralls:
+	@$(COVERALLS) cat coverage/lcov.info | node_modules/.bin/coveralls
