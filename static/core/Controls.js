@@ -3,14 +3,25 @@
 var LightEmitter = require( 'light_emitter' );
 
 /**
+ * The Controls class.
  * @constructor Controls
  * @extends {LightEmitter}
  * @fires touchstart
  * @fires touchend
+ * @example
+ * var contorls = new Controls();
+ * @example
+ * controls.on( 'touchstart', function ( event, fromKeyboard )
+ * {
+ *   if ( fromKeyboard ) {
+ *     console.log( 'A user pressed on spacebar.' );
+ *   } else {
+ *     console.log( 'A user touched a screen.' );
+ *   }
+ * } );
  */
 function Controls ()
 {
-
   var self = this;
 
   LightEmitter.apply( this, arguments );
@@ -26,7 +37,7 @@ function Controls ()
   function keydown ( event )
   {
     if ( event.which === 32 ) {
-      touchstart( event );
+      touchstart( event, true );
     }
   }
 
@@ -43,7 +54,7 @@ function Controls ()
   function keyup ( event )
   {
     if ( event.which === 32 ) {
-      touchend( event );
+      touchend( event, true );
     }
   }
 

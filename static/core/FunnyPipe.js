@@ -5,7 +5,11 @@ var Vector2D = require( 'v6.js/core/math/Vector2D' );
 /**
  * The FunnyPipe class.
  * @constructor FunnyPipe
- * @implements IGameObject
+ * @param {number} [x] Начальная позиция FunnyPipe.
+ * @param {number} [y] Начальная позиция FunnyPipe.
+ * @example
+ * // Create an FunnyPipe instance.
+ * var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );
  */
 function FunnyPipe ( x, y )
 {
@@ -31,6 +35,8 @@ FunnyPipe.prototype = {
    * @method FunnyPipe#render
    * @param  {v6.AbstractRenderer} renderer Рендерер.
    * @return {void}                         Ничего не возвращает.
+   * @example
+   * funnyPipe.render( renderer );
    */
   render: function render ( renderer )
   {

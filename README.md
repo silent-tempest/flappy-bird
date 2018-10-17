@@ -19,3 +19,7 @@ The FlappyShape Game.
 ##### Before Committing
 
 * `rm -rf docs coverage public/scripts/* && npm run prepublish`
+
+### License
+
+Released under the [GPL-3.0](LICENSE) license.

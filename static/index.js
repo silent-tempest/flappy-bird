@@ -31,14 +31,3 @@ self.addEventListener( 'resize', function ()
 {
   renderer.resizeTo( renderer.canvas.parentNode );
 } );
-
-/**
- * @interface IGameObject
- */
-
-/**
- * Отрисовывает объект на холсте.
- * @method IGameObject#render
- * @param  {v6.AbstractRenderer} renderer Рендерер.
- * @return {void}                         Ничего не возвращает.
- */

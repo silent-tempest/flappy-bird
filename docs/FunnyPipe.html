@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>FunnyPipe<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>FunnyPipe<span class="signature">(x<span class="signature-attributes">opt</span>, y<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="FunnyPipe"><span class="type-signature"></span>new FunnyPipe<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="FunnyPipe"><span class="type-signature"></span>new FunnyPipe<span class="signature">(x<span class="signature-attributes">opt</span>, y<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -60,6 +60,100 @@
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Начальная позиция FunnyPipe.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Начальная позиция FunnyPipe.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
 
 
 
@@ -76,13 +170,6 @@
 
     
 
-    
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="IGameObject.html">IGameObject</a></li>
-        
-    </ul></dd>
     
 
     
@@ -125,6 +212,12 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Create an FunnyPipe instance.
+var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
 
 
 
@@ -202,7 +295,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_core_FunnyPipe.js.html">static/core/FunnyPipe.js</a>, <a href="static_core_FunnyPipe.js.html#line22">line 22</a>
+        <a href="static_core_FunnyPipe.js.html">static/core/FunnyPipe.js</a>, <a href="static_core_FunnyPipe.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -274,7 +367,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_core_FunnyPipe.js.html">static/core/FunnyPipe.js</a>, <a href="static_core_FunnyPipe.js.html#line12">line 12</a>
+        <a href="static_core_FunnyPipe.js.html">static/core/FunnyPipe.js</a>, <a href="static_core_FunnyPipe.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -346,7 +439,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_core_FunnyPipe.js.html">static/core/FunnyPipe.js</a>, <a href="static_core_FunnyPipe.js.html#line17">line 17</a>
+        <a href="static_core_FunnyPipe.js.html">static/core/FunnyPipe.js</a>, <a href="static_core_FunnyPipe.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -367,170 +460,6 @@
 
     
         <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(renderer)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Отрисовывает FlappyShape на холсте.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>renderer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">v6.AbstractRenderer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Рендерер.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="IGameObject.html#render">IGameObject#render</a></li>
-        
-    </ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_core_FlappyShape.js.html">static/core/FlappyShape.js</a>, <a href="static_core_FlappyShape.js.html#line35">line 35</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Ничего не возвращает.</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
 
         
             
@@ -623,13 +552,6 @@
     
 
     
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="IGameObject.html#render">IGameObject#render</a></li>
-        
-    </ul></dd>
-    
 
     
 
@@ -646,7 +568,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_core_FunnyPipe.js.html">static/core/FunnyPipe.js</a>, <a href="static_core_FunnyPipe.js.html#line29">line 29</a>
+        <a href="static_core_FunnyPipe.js.html">static/core/FunnyPipe.js</a>, <a href="static_core_FunnyPipe.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -695,6 +617,173 @@
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>funnyPipe.render( renderer );</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(renderer)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Отрисовывает FlappyShape на холсте.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>renderer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">v6.AbstractRenderer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Рендерер.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="static_core_FlappyShape.js.html">static/core/FlappyShape.js</a>, <a href="static_core_FlappyShape.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Ничего не возвращает.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>flappyShape.render( renderer );</code></pre>
+
+
 
         
     
@@ -712,13 +801,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controls.html">Controls</a></li><li><a href="FlappyShape.html">FlappyShape</a></li><li><a href="FunnyPipe.html">FunnyPipe</a></li><li><a href="Game.html">Game</a></li></ul><h3>Interfaces</h3><ul><li><a href="IGameObject.html">IGameObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#setup">setup</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controls.html">Controls</a></li><li><a href="FlappyShape.html">FlappyShape</a></li><li><a href="FunnyPipe.html">FunnyPipe</a></li><li><a href="Game.html">Game</a></li></ul><h3>Global</h3><ul><li><a href="global.html#setup">setup</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Oct 17 2018 22:12:48 GMT+0700 (+07)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Oct 17 2018 22:44:41 GMT+0700 (+07)
 </footer>
 
 <script> prettyPrint(); </script>
