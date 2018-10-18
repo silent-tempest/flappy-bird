@@ -8,19 +8,35 @@ The FlappyShape Game.
 
 ##### Linting
 
-* `make lint:static`
-* `make lint:core`
-* `make lint:test`
+| Command            | Description                   |
+| ------------------ | ----------------------------- |
+| `make lint:static` | Lint **client-side** scripts. |
+| `make lint:core`   | Lint **server-side** scripts. |
+| `make lint:test`   | Lint **test** scripts.        |
+| `make lint`        | Lint **all** scripts above.   |
 
 ##### Testing
 
-* First, edit `build/browsers.txt` (it is ignored in `.gitignore`) for your system
-* `make mocha`
-* `make karma`
+First, edit `build/browsers.txt` (it is ignored in `.gitignore`) for your system.
+
+| Command                 | Description                   | Example                 |
+| ----------------------- | ----------------------------- | ----------------------- |
+| `make mocha`            | Run Mocha.                    | `make mocha`            |
+| `make karma`            | Run Karma.                    | `make karma`            |
+| `make karma--no-colors` | Run Karma with `--no-colors`. | `make karma--no-colors` |
+
+##### Building Client JavaScript
+
+| Command                                | Example                                                  |
+| -------------------------------------- | -------------------------------------------------------- |
+| `build/script <script> <output>`       | `build/script home/scripts/index.js home/index.js`       |
+| `build/script <script> <output> --min` | `build/script home/scripts/index.js home/index.js --min` |
 
 ##### Before Committing
 
-* `rm -rf docs coverage public/scripts/* && npm run prepublish`
+* `npm run prepublish`
+
+**Source maps should not be on production!**
 
 ### License
 

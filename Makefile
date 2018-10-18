@@ -1,5 +1,7 @@
-COVERALLS := $(shell cat build/coveralls.txt 2>/dev/null)
-BROWSERS  := $(shell cat build/browsers.txt 2>/dev/null)
+COVERALLS := $(shell cat config/coveralls.txt 2>/dev/null)
+BROWSERS  := $(shell cat config/browsers.txt  2>/dev/null)
+SCRIPTS   := home/scripts/index.js
+STYLES    := home/styles/index.scss
 
 lint\:static:
 	@cd static && ../node_modules/.bin/eslint .
@@ -10,13 +12,15 @@ lint\:test:
 lint\:core:
 	@node_modules/.bin/eslint .
 
+lint: lint\:static lint\:core lint\:test
+
 mocha:
-	@if [ "$(REPORTER)" = 'mocha' ]; then                                                                     \
-		node_modules/.bin/mocha -r test/internal/register `find test -name '*.test.js'` --reporter spec;        \
-	elif [ "$(REPORTER)" ]; then                                                                              \
-		node_modules/.bin/mocha -r test/internal/register `find test -name '*.test.js'` --reporter $(REPORTER); \
-	else                                                                                                      \
-		node_modules/.bin/mocha -r test/internal/register `find test -name '*.test.js'`;                        \
+	@if [ "$(REPORTER)" = 'mocha' ]; then                                                                            \
+		node_modules/.bin/mocha `find test -name '*.test.js'` --require test/internal/register --reporter spec;        \
+	elif [ "$(REPORTER)" ]; then                                                                                     \
+		node_modules/.bin/mocha `find test -name '*.test.js'` --require test/internal/register --reporter $(REPORTER); \
+	else                                                                                                             \
+		node_modules/.bin/mocha `find test -name '*.test.js'` --require test/internal/register;                        \
 	fi
 
 karma--no-colors:
@@ -33,21 +37,28 @@ karma:
 		$(BROWSERS) node_modules/.bin/karma start;                         \
 	fi
 
+$(SCRIPTS):
+	@build/script $@ $@ --min
+
+scripts: $(SCRIPTS)
+
+$(STYLES):
+	@build/style $@ $(subst .scss,.css,$@) --min
+
+styles: $(STYLES)
+
 docs:
 	@node_modules/.bin/jsdoc -c .jsdoc.json
-
-script\:%:
-	@node_modules/.bin/browserify -o public/scripts/$* static/$* -x platform -x qs -d
-
-script\:%--min:
-	@node_modules/.bin/uglifyjs -mco public/scripts/$* public/scripts/$*
 
 coveralls:
 	@cat coverage/lcov.info | $(COVERALLS) node_modules/.bin/coveralls
 
 prepublish:
-	@if [ "$(NODE_ENV)" = 'production' ]; then                                                                                                  \
-		make --no-print-directory --always-make lint:static lint:core lint:test mocha script:index.js script:index.js--min;                       \
-	else                                                                                                                                        \
-		make --no-print-directory --always-make lint:static lint:core lint:test mocha karma--no-colors script:index.js script:index.js--min docs; \
+	@if [ "$(NODE_ENV)" = 'production' ]; then                                                 \
+		make --no-print-directory --always-make lint mocha scripts styles;                       \
+	else                                                                                       \
+		make --no-print-directory --always-make lint mocha karma--no-colors scripts styles docs; \
 	fi
+
+clean:
+	@rm -rf docs coverage public/*

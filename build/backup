@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Back-up a file into `temp` folder.
+# @param $1 - The file.
+# @example
+# backup public/scripts/home/index.js
+function backup
+{
+  if [[ ! -e $1 ]]; then
+    return 0
+  fi
+
+  if [[ ! -e temp ]]; then
+    mkdir temp
+  fi
+
+  cp $1 temp/`echo $1 | sed 's/.*\///'`
+}
+
+backup $1

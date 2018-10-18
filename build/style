@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+STATIC=static
+PUBLIC=public
+
+if [[ "$3" = '--min' ]]; then
+  build/backup $PUBLIC/$2 && node_modules/.bin/sass $STATIC/$1 $PUBLIC/$2 --no-source-map --style=compressed
+else
+  build/backup $PUBLIC/$2 && node_modules/.bin/sass $STATIC/$1 $PUBLIC/$2 --embed-source-map
+fi

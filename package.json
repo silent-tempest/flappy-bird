@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prepublish": "make --always-make prepublish"
+    "prepublish": "make --always-make clean prepublish"
   },
   "author": "SILENT",
   "license": "GPL-3.0",
@@ -39,6 +39,7 @@
     "matter-js": "^0.14.2",
     "mocha": "^5.2.0",
     "peako": "github:tikhiy/peako#dev",
+    "sass": "^1.14.3",
     "socket.io-client": "^2.1.1",
     "uglify-es": "^3.3.9",
     "v6.js": "github:tikhiy/v6.js#dev"

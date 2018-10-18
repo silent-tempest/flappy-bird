@@ -1,7 +1,19 @@
 {
   "source": {
-    "exclude": [ "node_modules", "docs", "dist", "test", "coverage" ],
-    "include": [ ".", "README.md" ]
+    "exclude": [
+      "config",
+      "coverage",
+      "docs",
+      "node_modules",
+      "public",
+      "temp",
+      "test"
+    ],
+
+    "include": [
+      ".",
+      "README.md"
+    ]
   },
 
   "opts": {

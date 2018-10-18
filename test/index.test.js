@@ -1,6 +1,6 @@
 'use strict';
 
-var FlappyShape = require( '../static/core/FlappyShape' );
+var FlappyShape = require( '../static/home/scripts/core/FlappyShape' );
 
 describe( 'new FlappyShape', function ()
 {

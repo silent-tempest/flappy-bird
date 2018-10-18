@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = function ( request, response )
+var Router = require( 'express/lib/router' );
+
+module.exports = Router().get( '/', function ( request, response )
 {
-  response.render( 'index' );
-};
+  response.render( 'home' );
+} );

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+STATIC=static
+PUBLIC=public
+
+# Builds JavaScript source code using Browserify.
+# @param $1 - The source file.
+# @param $2 - The output file.
+# @example
+# script static/home/scripts/index.js public/scripts/home/index.js
+function script
+{
+  node_modules/.bin/browserify $1 -o $2 -x platform -x qs --debug
+}
+
+# Minifies JavaScript source code using Uglify-ES.
+# @param $1 - The source file that should be minified. This file will be backed-up and replaced.
+# @example
+# minify public/scripts/home/index.js
+function minify
+{
+  node_modules/.bin/uglifyjs $1 --mangle --compress -o $1
+}
+
+if [[ "$3" = '--min' ]]; then
+  build/backup $PUBLIC/$2 && script $STATIC/$1 $PUBLIC/$2 && minify $PUBLIC/$2
+else
+  build/backup $PUBLIC/$2 && script $STATIC/$1 $PUBLIC/$2
+fi

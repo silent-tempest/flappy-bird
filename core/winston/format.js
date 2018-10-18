@@ -35,18 +35,7 @@ var formats = [
 ];
 
 if ( process.env.NODE_ENV !== 'production' ) {
-  // var options = {
-  //   colors: {
-  //     error:   'red',
-  //     warn:    'yellow',
-  //     info:    'blue',
-  //     debug:   'gray'
-  //   }
-  // };
-
-  var colorize = winston.format.colorize();
-
-  formats.unshift( colorize );
+  formats.unshift( winston.format.colorize() );
 }
 
 module.exports = winston.format.combine.apply( winston.format, formats );

@@ -1,5 +1,6 @@
-build/coveralls.txt
-build/browsers.txt
-node_modules
+config/coveralls.txt
+config/browsers.txt
 coverage
+node_modules
+temp
 **/*.log
