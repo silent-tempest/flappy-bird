@@ -1,4 +1,4 @@
-COVERALLS := $(shell cat build/coveralls.txt)
+COVERALLS := $(shell cat build/coveralls.txt 2>/dev/null)
 BROWSERS  := $(shell cat build/browsers.txt)
 
 lint\:static:
