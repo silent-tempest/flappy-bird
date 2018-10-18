@@ -17,7 +17,9 @@ The FlappyShape Game.
 
 ##### Testing
 
-First, edit `build/browsers.txt` (it is ignored in `.gitignore`) for your system.
+First, edit `build/browsers.txt` (it is ignored in `.gitignore`) for your system if required.
+
+**NOTE:** no empty line at the end.
 
 | Command                 | Description                   | Example                 |
 | ----------------------- | ----------------------------- | ----------------------- |
