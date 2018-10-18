@@ -8,7 +8,7 @@ var formats = [
   winston.format.splat(),
 
   winston.format.timestamp( {
-    format: 'YYYY-MM-DD hh:mm:ss.SSS A'
+    format: 'MM/DD/YYYY hh:mm:ss.SSS A'
   } ),
 
   winston.format.align(),
