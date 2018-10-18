@@ -4,7 +4,8 @@ var express = require( 'express' );
 
 var app = express()
   .set( 'view engine', 'ejs' )
-  .set( 'views', 'core/views' );
+  .set( 'views', 'core/views' )
+  .set( 'trust proxy', true );
 
 if ( process.env.NODE_ENV === 'production' ) {
   app.set( 'view cache', true );

@@ -20,13 +20,12 @@ function loggerMiddleware ( request, response, next )
   var from;
 
   if ( userAgent ) {
-    from = platform.parse( request.headers[ 'user-agent' ] );
+    from = platform.parse( userAgent );
   } else {
-    from = '<NoUserAgent>';
+    from = 'Unknown User Agent';
   }
 
-  logger.verbose( 'A "%s" request to "%s" from %s, an IP address: "%s"', request.method, request.url, from, request.connection.remoteAddress );
-  logger.verbose( 'A request\'s "X-Forwarded-For" header: %s', request.headers[ 'x-forwarded-for' ] );
+  logger.verbose( 'A "%s" request to "%s" from %s, an IP address: "%s"', request.method, request.url, from, request.ip );
   next();
 }
 
