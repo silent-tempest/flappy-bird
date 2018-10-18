@@ -44,3 +44,10 @@ script\:%--min:
 
 coveralls:
 	@cat coverage/lcov.info | $(COVERALLS) node_modules/.bin/coveralls
+
+prepublish:
+	@if [ "$(NODE_ENV)" = 'production' ]; then                                                                                                  \
+		make --no-print-directory --always-make lint:static lint:core lint:test mocha script:index.js script:index.js--min;                       \
+	else                                                                                                                                        \
+		make --no-print-directory --always-make lint:static lint:core lint:test mocha karma--no-colors script:index.js script:index.js--min docs; \
+	fi

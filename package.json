@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prepublish": "make --always-make lint:static lint:core lint:test mocha karma--no-colors script:index.js script:index.js--min docs"
+    "prepublish": "make --always-make prepublish"
   },
   "author": "SILENT",
   "license": "GPL-3.0",
