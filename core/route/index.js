@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function ( request, response, next )
+module.exports = function ( request, response )
 {
   response.render( 'index' );
 };
