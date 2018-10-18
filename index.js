@@ -11,6 +11,7 @@ if ( typeof process.env.PORT === 'undefined' ) {
 }
 
 app
+  .use( require( './core/middleware/winston' ) )
   .use( require( './core/middleware/compression' ) )
   .use( require( './core/middleware/helmet' ) )
   .use( require( './core/middleware/send_static' ) )
