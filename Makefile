@@ -1,5 +1,5 @@
 COVERALLS := $(shell cat build/coveralls.txt 2>/dev/null)
-BROWSERS  := $(shell cat build/browsers.txt)
+BROWSERS  := $(shell cat build/browsers.txt 2>/dev/null)
 
 lint\:static:
 	@cd static && ../node_modules/.bin/eslint .
