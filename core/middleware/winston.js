@@ -1,18 +1,8 @@
 'use strict';
 
-var platform  = require( 'platform' );
-var winston   = require( 'winston' );
+var platform = require( 'platform' );
 
-var transport = require( '../winston/transport' );
-var level     = require( '../winston/level' );
-
-var logger = winston.createLogger( {
-  level: level,
-
-  transports: [
-    transport
-  ]
-} );
+var logger   = require( '../logger' );
 
 function loggerMiddleware ( request, response, next )
 {
