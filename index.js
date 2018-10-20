@@ -1,13 +1,9 @@
 'use strict';
 
-var { request } = require( 'http' );
-var { URL }     = require( 'url' );
+var io     = require( 'socket.io' );
 
-var io          = require( 'socket.io' );
-
-var logger      = require( './core/logger' );
-var server      = require( './core/server' );
-var app         = require( './core/app' );
+var server = require( './core/server' );
+var app    = require( './core/app' );
 
 if ( typeof process.env.PORT === 'undefined' ) {
   throw Error( ' - The FlappyShape Server was started without a port. "PORT" must be exported before starting the server: "PORT=3000 node .".' );
