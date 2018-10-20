@@ -39,30 +39,6 @@ server.listen( process.env.PORT, function ()
   }
 } );
 
-if ( process.env.NODE_ENV === 'production' ) {
-  // Make a request to our free dyno every 10 minutes.
-  setInterval( function ()
-  {
-    logger.verbose( 'Making a request to the FlappyShape dyno' );
-
-    request( new URL( 'http://flappyshape.herokuapp.com/' ), function ( response )
-    {
-      response.on( 'data', function ()
-      {
-        logger.verbose( 'Got data from the FlappyShape dyno' );
-      } );
-
-      response.on( 'end', function ()
-      {
-        logger.info( 'Made a request to the FlappyShape dyno' );
-      } );
-    } ).on( 'error', function ( error )
-    {
-      logger.error( 'Cannot make a request to the FlappyShape dyno: "%s"', error );
-    } ).end();
-  }, 1000 * 60 * 10 );
-}
-
 if ( process.env.NODE_ENV !== 'production' ) {
   var socket = io( server, {
     path: '/sockets/home/'
