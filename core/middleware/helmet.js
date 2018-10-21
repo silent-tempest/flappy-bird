@@ -1,12 +1,13 @@
 'use strict';
 
-module.exports = require( 'helmet' )( {
+var helmet = require( 'helmet' );
 
+module.exports = helmet( {
   // Content-Security-Policy: default-src 'self'
   contentSecurityPolicy: {
     directives: {
-      'default-src': [ "'self'" ],
-      'script-src':  [ "'self' 'unsafe-eval'" ]
+      'frame-ancestors': [ "'none'" ],
+      'default-src':     [ "'self'" ]
     }
   },
 

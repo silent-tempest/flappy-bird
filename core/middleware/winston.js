@@ -12,7 +12,7 @@ function loggerMiddleware ( request, response, next )
   if ( userAgent ) {
     from = platform.parse( userAgent );
   } else {
-    from = 'Unknown User Agent';
+    from = 'unknown user agent';
   }
 
   logger.verbose( 'A "%s" request to "%s" from %s, an IP address: "%s"', request.method, request.url, from, request.ip );
