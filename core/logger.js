@@ -2,14 +2,11 @@
 
 var { createLogger } = require( 'winston' );
 
-var transport        = require( './winston/transport' );
+var transports       = require( './winston/transports' );
 var level            = require( './winston/level' );
 
 var logger = createLogger( {
-  transports: [
-    transport
-  ],
-
+  transports: transports,
   level: level
 } );
 

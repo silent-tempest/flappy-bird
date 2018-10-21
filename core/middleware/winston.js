@@ -6,16 +6,12 @@ var logger   = require( '../logger' );
 
 function loggerMiddleware ( request, response, next )
 {
-  var userAgent = request.headers[ 'user-agent' ];
-  var from;
-
-  if ( userAgent ) {
-    from = platform.parse( userAgent );
-  } else {
-    from = 'unknown user agent';
-  }
-
-  logger.verbose( 'A "%s" request to "%s" from %s, an IP address: "%s"', request.method, request.url, from, request.ip );
+  var Worker = process.env.WEB_WORKER;
+  var IP     = request.ip;
+  var UA     = request.headers[ 'user-agent' ] && platform.parse( request.headers[ 'user-agent' ] ) + '';
+  var Method = request.method;
+  var URL    = request.url;
+  logger.verbose( `Worker: "${Worker}", IP: "${IP}", UA: "${UA}", Method: "${Method}", URL: "${URL}"` );
   next();
 }
 

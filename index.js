@@ -1,50 +1,27 @@
 'use strict';
 
-var io     = require( 'socket.io' );
+var cluster = require( 'cluster' );
+var os      = require( 'os' );
 
-var server = require( './core/server' );
-var app    = require( './core/app' );
+var logger  = require( './core/logger' );
 
-if ( typeof process.env.PORT === 'undefined' ) {
-  throw Error( ' - The FlappyShape Server was started without a port. "PORT" must be exported before starting the server: "PORT=3000 node .".' );
-}
+var concurrency = Number( process.env.WEB_CONCURRENCY ) || os.cpus().length;
 
-app
-  .use( require( './core/middleware/winston' ) )
-  .use( require( './core/middleware/compression' ) )
-  .use( require( './core/middleware/helmet' ) )
-  .use( require( './core/middleware/send_static' ) )
-  .use( require( './core/middleware/parse_body' ) );
+if ( cluster.isMaster && concurrency > 1 ) {
+  logger.verbose( 'Booting The FlappyShape Server with %s workers', concurrency );
 
-if ( process.env.NODE_ENV !== 'production' ) {
-  app.use( require( './core/route/index' ) );
-}
-
-app
-  .use( require( './core/route/404' ) )
-  .use( require( './core/route/500' ) );
-
-server.listen( process.env.PORT, function ()
-{
-  console.log( ' - The FlappyShape Server is running.' );
-
-  if ( process.env.NODE_ENV === 'production' ) {
-    console.log( ' - The address: "http://flappyshape.herokuapp.com/".' );
-  } else {
-    console.log( ' - The address: "http://localhost:' + process.env.PORT + '/".' );
+  for ( var i = 0; i < concurrency; ++i ) {
+    cluster.fork( { WEB_WORKER: i } );
   }
-} );
 
-if ( process.env.NODE_ENV !== 'production' ) {
-  var socket = io( server, {
-    path: '/sockets/home/'
-  } );
-
-  socket.on( 'connection', function ( client )
+  cluster.on( 'error', function ( error )
   {
-    client.on( 'position', function ( position )
-    {
-      console.log( 'received position', position );
-    } );
+    logger.error( 'An error in cluster occured', error );
   } );
+} else {
+  if ( typeof process.env.WEB_WORKER === 'undefined' ) {
+    process.env.WEB_WORKER = '0';
+  }
+
+  require( './core/worker' );
 }
