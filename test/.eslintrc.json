@@ -5,7 +5,5 @@
     "it": false
   },
 
-  "parserOptions": {
-    "ecmaVersion": 5
-  }
+  "extends": "v6.js"
 }

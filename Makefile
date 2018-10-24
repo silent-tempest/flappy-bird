@@ -2,17 +2,22 @@ COVERALLS := $(shell cat config/coveralls.txt 2>/dev/null)
 BROWSERS  := $(shell cat config/browsers.txt  2>/dev/null)
 SCRIPTS   := home/scripts/index.js
 STYLES    := home/styles/index.scss
+STATIC    := static
+PUBLIC    := public
 
 lint\:static:
 	@cd static && ../node_modules/.bin/eslint .
 
+lint\:server:
+	@node_modules/.bin/eslint .
+
+lint\:shared:
+	@cd shared && ../node_modules/.bin/eslint .
+
 lint\:test:
 	@cd test && ../node_modules/.bin/eslint .
 
-lint\:core:
-	@node_modules/.bin/eslint .
-
-lint: lint\:static lint\:core lint\:test
+lint: lint\:static lint\:server lint\:test
 
 mocha:
 	@if [ "$(REPORTER)" = 'mocha' ]; then                                                                            \
@@ -38,12 +43,12 @@ karma:
 	fi
 
 $(SCRIPTS):
-	@build/script $@ $@ --min
+	@build/script $(STATIC)/$@ $(PUBLIC)/$@ --min
 
 scripts: $(SCRIPTS)
 
 $(STYLES):
-	@build/style $@ $(subst .scss,.css,$@) --min
+	@build/style $(STATIC)/$@ $(PUBLIC)/$(subst .scss,.css,$@) --min
 
 styles: $(STYLES)
 

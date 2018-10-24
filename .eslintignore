@@ -3,6 +3,7 @@ coverage
 docs
 node_modules
 public
+shared
 static
 temp
 test

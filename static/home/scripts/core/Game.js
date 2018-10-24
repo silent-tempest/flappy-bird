@@ -6,7 +6,7 @@ var Camera       = require( 'v6.js/core/camera/Camera' );
 
 var Controls     = require( './Controls' );
 var FlappyShape  = require( './FlappyShape' );
-var FunnyPipe    = require( './FunnyPipe' );
+var Pipe         = require( './Pipe' );
 
 /**
  * @constructor Game
@@ -23,7 +23,7 @@ function Game ()
   ];
 
   this.pipes = [
-    new FunnyPipe( 0, 0 )
+    new Pipe( 0, 0 )
   ];
 
   this.camera = new Camera( {
@@ -34,6 +34,8 @@ function Game ()
       }
     }
   } );
+
+  this.camera.lookAt( this.shapes[ 0 ] );
 }
 
 Game.prototype = Object.create( LightEmitter.prototype );

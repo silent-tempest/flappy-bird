@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-STATIC=static
-PUBLIC=public
-
 # Builds JavaScript source code using Browserify.
 # @param $1 - The source file.
 # @param $2 - The output file.
@@ -23,7 +20,7 @@ function minify
 }
 
 if [[ "$3" = '--min' ]]; then
-  build/backup $PUBLIC/$2 && script $STATIC/$1 $PUBLIC/$2 && minify $PUBLIC/$2
+  build/backup $2 && script $1 $2 && minify $2
 else
-  build/backup $PUBLIC/$2 && script $STATIC/$1 $PUBLIC/$2
+  build/backup $2 && script $1 $2
 fi
