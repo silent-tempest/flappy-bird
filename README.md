@@ -11,7 +11,8 @@ The FlappyShape Game.
 | Command            | Description                   |
 | ------------------ | ----------------------------- |
 | `make lint:static` | Lint **client-side** scripts. |
-| `make lint:core`   | Lint **server-side** scripts. |
+| `make lint:server` | Lint **server-side** scripts. |
+| `make lint:shared` | Lint **shared** scripts.      |
 | `make lint:test`   | Lint **test** scripts.        |
 | `make lint`        | Lint **all** scripts above.   |
 
@@ -29,10 +30,17 @@ First, edit `build/browsers.txt` (it is ignored in `.gitignore`) for your system
 
 ##### Building Client JavaScript
 
-| Command                                | Example                                                  |
-| -------------------------------------- | -------------------------------------------------------- |
-| `build/script <script> <output>`       | `build/script home/scripts/index.js home/index.js`       |
-| `build/script <script> <output> --min` | `build/script home/scripts/index.js home/index.js --min` |
+| Command                                | Example                                                                        |
+| -------------------------------------- | ------------------------------------------------------------------------------ |
+| `build/script <script> <output>`       | `build/script static/home/scripts/index.js public/home/scripts/index.js`       |
+| `build/script <script> <output> --min` | `build/script static/home/scripts/index.js public/home/scripts/index.js --min` |
+
+##### Building Style Sheets
+
+| Command                                | Example                                                                      |
+| -------------------------------------- | ---------------------------------------------------------------------------- |
+| `build/style <style> <output>`       | `build/style static/home/styles/index.scss public/home/styles/index.css`       |
+| `build/style <style> <output> --min` | `build/style static/home/styles/index.scss public/home/styles/index.css --min` |
 
 ##### Before Committing
 
