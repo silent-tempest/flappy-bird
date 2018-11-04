@@ -1,46 +1,30 @@
-COVERALLS := $(shell cat config/coveralls.txt 2>/dev/null)
-BROWSERS  := $(shell cat config/browsers.txt  2>/dev/null)
-SCRIPTS   := home/scripts/index.js
-STYLES    := home/styles/index.scss
-STATIC    := static
-PUBLIC    := public
-
-lint\:static:
-	@cd static && ../node_modules/.bin/eslint .
+BROWSERS := $(subst \n, ,$(shell cat config/browsers.txt))
+SCRIPTS  := \
+  play/scripts/index.js
+STYLES   := \
+  play/styles/index.scss
+STATIC   := static
+PUBLIC   := public
 
 lint\:server:
-	@node_modules/.bin/eslint .
+	@node_modules/.bin/eslint . $(ESLINT)
+
+lint\:static:
+	@cd static && ../node_modules/.bin/eslint . $(ESLINT)
 
 lint\:shared:
-	@cd shared && ../node_modules/.bin/eslint .
+	@cd shared && ../node_modules/.bin/eslint . $(ESLINT)
 
 lint\:test:
-	@cd test && ../node_modules/.bin/eslint .
+	@cd test && ../node_modules/.bin/eslint . $(ESLINT)
 
-lint: lint\:static lint\:server lint\:test
+lint: lint\:server lint\:static lint\:shared lint\:test
 
 mocha:
-	@if [ "$(REPORTER)" = 'mocha' ]; then                                                                            \
-		node_modules/.bin/mocha `find test -name '*.test.js'` --require test/internal/register --reporter spec;        \
-	elif [ "$(REPORTER)" ]; then                                                                                     \
-		node_modules/.bin/mocha `find test -name '*.test.js'` --require test/internal/register --reporter $(REPORTER); \
-	else                                                                                                             \
-		node_modules/.bin/mocha `find test -name '*.test.js'` --require test/internal/register;                        \
-	fi
-
-karma--no-colors:
-	@if [ "$(REPORTER)" ]; then                                                      \
-		$(BROWSERS) node_modules/.bin/karma start --no-colors --reporters $(REPORTER); \
-	else                                                                             \
-		$(BROWSERS) node_modules/.bin/karma start --no-colors;                         \
-	fi
+	node_modules/.bin/mocha -r test/internal/register `find test -name '*.test.js'` $(MOCHA)
 
 karma:
-	@if [ "$(REPORTER)" ]; then                                          \
-		$(BROWSERS) node_modules/.bin/karma start --reporters $(REPORTER); \
-	else                                                                 \
-		$(BROWSERS) node_modules/.bin/karma start;                         \
-	fi
+	$(BROWSERS) node_modules/.bin/karma start $(KARMA)
 
 $(SCRIPTS):
 	@build/script $(STATIC)/$@ $(PUBLIC)/$@ --min
@@ -55,14 +39,14 @@ styles: $(STYLES)
 docs:
 	@node_modules/.bin/jsdoc -c .jsdoc.json
 
-coveralls:
-	@cat coverage/lcov.info | $(COVERALLS) node_modules/.bin/coveralls
+coverage:
+	@cat coverage/lcov.info | $(subst \n, ,$(shell cat config/coveralls.txt)) node_modules/.bin/coveralls
 
 prepublish:
-	@if [ "$(NODE_ENV)" = 'production' ]; then                                                 \
-		make --no-print-directory --always-make lint mocha scripts styles;                       \
-	else                                                                                       \
-		make --no-print-directory --always-make lint mocha karma--no-colors scripts styles docs; \
+	@if [ "$(NODE_ENV)" = 'production' ]; then                                                          \
+		make --no-print-directory --always-make lint mocha scripts styles;                                \
+	else                                                                                                \
+		KARMA='--no-colors' make --no-print-directory --always-make lint mocha karma scripts styles docs; \
 	fi
 
 clean:
