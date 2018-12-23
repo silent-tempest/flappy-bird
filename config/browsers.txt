@@ -1,1 +1,4 @@
-FIREFOX_DEVELOPER_BIN=firefox-developer CHROMIUM_BIN=chromium-browser FIREFOX_BIN=firefox CHROME_BIN=google-chrome
+FIREFOX_DEVELOPER_BIN=firefox-developer
+CHROMIUM_BIN=chromium-browser
+CHROME_BIN=google-chrome
+FIREFOX_BIN=firefox

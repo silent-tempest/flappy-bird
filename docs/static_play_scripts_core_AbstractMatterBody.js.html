@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Game</title>
+    <title>JSDoc: Source: static/play/scripts/core/AbstractMatterBody.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,142 +17,65 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Game</h1>
+    <h1 class="page-title">Source: static/play/scripts/core/AbstractMatterBody.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Game<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-
-    
-    <h4 class="name" id="Game"><span class="type-signature"></span>new Game<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_play_scripts_core_Game.js.html">static/play/scripts/core/Game.js</a>, <a href="static_play_scripts_core_Game.js.html#line11">line 11</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li>LightEmitter</li>
-    </ul>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+/**
+ * @constructor AbstractMatterBody
+ */
+function AbstractMatterBody ()
+{
+  /**
+   * Matter Body.
+   * @member {Matter.Body} AbstractMatterBody#body
+   */
+
+  throw Error( 'Cannot create an instance of the abstract class (new AbstractMatterBody)' );
+}
+
+/**
+ * X координата AbstractMatterBody.
+ * @member {number} AbstractMatterBody#x
+ */
+Object.defineProperty( AbstractMatterBody.prototype, 'x', {
+  get: function get ()
+  {
+    return this.body.position.x;
+  }
+} );
+
+/**
+ * Y координата AbstractMatterBody.
+ * @member {number} AbstractMatterBody#y
+ */
+Object.defineProperty( AbstractMatterBody.prototype, 'y', {
+  get: function get ()
+  {
+    return this.body.position.y;
+  }
+} );
+
+/**
+ * Отрисовывает объект на холсте.
+ * @method AbstractMatterBody#render
+ * @param  {v6.AbstractRenderer} renderer Рендерер.
+ * @return {void}                         Ничего не возвращает.
+ * @example
+ * flappyShape.render( renderer );
+ */
+
+module.exports = AbstractMatterBody;
+</code></pre>
+        </article>
+    </section>
 
 
 

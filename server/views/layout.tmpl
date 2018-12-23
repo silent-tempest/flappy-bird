@@ -1,0 +1,71 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Page title. -->
+  <title><%= data.data.title || 'The FlappyShape' %></title>
+  <!-- Use latest IE version by default. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Set "Content-Type" HTTP header with UTF-8 charset. -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!-- Tell the browser that the page is optimized for mobile devices. -->
+  <meta name="HandheldFriendly" content="True" />
+  <!-- Disables automatic conversion of phone numbers and emails into links. -->
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="adress=no" />
+  <!-- Progressive Web App (PWA). -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="The FlappyShape" />
+  <meta name="apple-mobile-web-app-title" content="The FlappyShape" />
+  <!-- Action Bar background color. -->
+  <meta name="theme-color" content="#000" />
+  <meta name="msapplication-navbutton-color" content="#000" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <!-- Adaptation for mobile devices. -->
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, shrink-to-fit=no" />
+  <!-- Some SEO and copyright stuff.  -->
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Progressive Play" />
+  <meta name="copyright" content="" />
+  <!-- Import the fonts and set them before importing the CSS libraries. -->
+  <style>
+    @font-face {
+      font-family: UbuntuFont;
+      font-weight: 500;
+      src: url( "fonts/Ubuntu-Medium.ttf" );
+    }
+    @font-face {
+      font-family: UbuntuFont;
+      font-weight: 400;
+      src: url( "fonts/Ubuntu-Regular.ttf" );
+    }
+    body {
+      font-family: UbuntuFont, sans-serif;
+    }
+  </style>
+  <!-- Import styles, manifest, icons. -->
+  <% if ( data.data.head ) { %>
+    <%- data.data.head.join( '' ) %>
+  <% } %>
+  <link type="image/png" sizes="48x48"   href="icons/48x48.png"   rel="apple-touch-icon" />
+  <link type="image/png" sizes="96x96"   href="icons/96x96.png"   rel="apple-touch-icon" />
+  <link type="image/png" sizes="144x144" href="icons/144x144.png" rel="apple-touch-icon" />
+  <link type="image/png" sizes="192x192" href="icons/192x192.png" rel="apple-touch-icon" />
+  <link type="image/png" sizes="48x48"   href="icons/48x48.png"   rel="icon" />
+  <link type="image/png" sizes="96x96"   href="icons/96x96.png"   rel="icon" />
+  <link type="image/png" sizes="144x144" href="icons/144x144.png" rel="icon" />
+  <link type="image/png" sizes="192x192" href="icons/192x192.png" rel="icon" />
+</head>
+<body>
+  <%- data.data.content %>
+  <noscript>
+    <div>That application does not work without JavaScript.</div>
+  </noscript>
+  <!-- Import scripts. -->
+  <% if ( data.data.body ) { %>
+    <%- data.data.body.join( '' ) %>
+  <% } %>
+</body>
+</html>

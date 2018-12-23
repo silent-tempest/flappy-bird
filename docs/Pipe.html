@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: FunnyPipe</title>
+    <title>JSDoc: Class: Pipe</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: FunnyPipe</h1>
+    <h1 class="page-title">Class: Pipe</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>FunnyPipe<span class="signature">(x<span class="signature-attributes">opt</span>, y<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Pipe<span class="signature">(x<span class="signature-attributes">opt</span>, y<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="FunnyPipe"><span class="type-signature"></span>new FunnyPipe<span class="signature">(x<span class="signature-attributes">opt</span>, y<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Pipe"><span class="type-signature"></span>new Pipe<span class="signature">(x<span class="signature-attributes">opt</span>, y<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    <p>The FunnyPipe class.</p>
+    <p>The Pipe class.</p>
 </div>
 
 
@@ -113,7 +113,7 @@
 
             
 
-            <td class="description last"><p>Начальная позиция FunnyPipe.</p></td>
+            <td class="description last"><p>Начальная позиция Pipe.</p></td>
         </tr>
 
     
@@ -146,7 +146,7 @@
 
             
 
-            <td class="description last"><p>Начальная позиция FunnyPipe.</p></td>
+            <td class="description last"><p>Начальная позиция Pipe.</p></td>
         </tr>
 
     
@@ -187,7 +187,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_home_scripts_core_FunnyPipe.js.html">static/home/scripts/core/FunnyPipe.js</a>, <a href="static_home_scripts_core_FunnyPipe.js.html#line5">line 5</a>
+        <a href="static_play_scripts_core_Pipe.js.html">static/play/scripts/core/Pipe.js</a>, <a href="static_play_scripts_core_Pipe.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -216,13 +216,24 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// Create an FunnyPipe instance.
-var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
+    <pre class="prettyprint"><code>// Create an Pipe instance.
+var pipe = new Pipe( 100, 0, 100 );</code></pre>
 
 
 
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="AbstractMatterBody.html">AbstractMatterBody</a></li>
+    </ul>
+
 
     
 
@@ -241,13 +252,90 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
 
         
             
+<h4 class="name" id="body"><span class="type-signature"></span>body<span class="type-signature"> :Matter.Body</span></h4>
+
+
+
+
+<div class="description">
+    <p>Matter Body.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Matter.Body</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="AbstractMatterBody.html#body">AbstractMatterBody#body</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="static_play_scripts_core_AbstractMatterBody.js.html">static/play/scripts/core/AbstractMatterBody.js</a>, <a href="static_play_scripts_core_AbstractMatterBody.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="h"><span class="type-signature"></span>h<span class="type-signature"> :number</span></h4>
 
 
 
 
 <div class="description">
-    <p>Высота FunnyPipe.</p>
+    <p>Высота Pipe.</p>
 </div>
 
 
@@ -295,79 +383,7 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_home_scripts_core_FunnyPipe.js.html">static/home/scripts/core/FunnyPipe.js</a>, <a href="static_home_scripts_core_FunnyPipe.js.html#line26">line 26</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="position"><span class="type-signature"></span>position<span class="type-signature"> :v6.Vector2D</span></h4>
-
-
-
-
-<div class="description">
-    <p>Позиция.</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">v6.Vector2D</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_home_scripts_core_FunnyPipe.js.html">static/home/scripts/core/FunnyPipe.js</a>, <a href="static_home_scripts_core_FunnyPipe.js.html#line16">line 16</a>
+        <a href="static_play_scripts_core_Pipe.js.html">static/play/scripts/core/Pipe.js</a>, <a href="static_play_scripts_core_Pipe.js.html#line25">line 25</a>
     </li></ul></dd>
     
 
@@ -391,7 +407,7 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
 
 
 <div class="description">
-    <p>Ширина FunnyPipe.</p>
+    <p>Ширина Pipe.</p>
 </div>
 
 
@@ -439,7 +455,161 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_home_scripts_core_FunnyPipe.js.html">static/home/scripts/core/FunnyPipe.js</a>, <a href="static_home_scripts_core_FunnyPipe.js.html#line21">line 21</a>
+        <a href="static_play_scripts_core_Pipe.js.html">static/play/scripts/core/Pipe.js</a>, <a href="static_play_scripts_core_Pipe.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="x"><span class="type-signature"></span>x<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    <p>X координата AbstractMatterBody.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="AbstractMatterBody.html#x">AbstractMatterBody#x</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="static_play_scripts_core_AbstractMatterBody.js.html">static/play/scripts/core/AbstractMatterBody.js</a>, <a href="static_play_scripts_core_AbstractMatterBody.js.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="y"><span class="type-signature"></span>y<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Y координата AbstractMatterBody.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="AbstractMatterBody.html#y">AbstractMatterBody#y</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="static_play_scripts_core_AbstractMatterBody.js.html">static/play/scripts/core/AbstractMatterBody.js</a>, <a href="static_play_scripts_core_AbstractMatterBody.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -475,7 +645,7 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
 
 
 <div class="description">
-    <p>Отрисовывает FlappyShape на холсте.</p>
+    <p>Отрисовывает Pipe на холсте.</p>
 </div>
 
 
@@ -548,6 +718,11 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="AbstractMatterBody.html#render">AbstractMatterBody#render</a>
+    </li></ul></dd>
+    
 
     
 
@@ -568,7 +743,7 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_home_scripts_core_FlappyShape.js.html">static/home/scripts/core/FlappyShape.js</a>, <a href="static_home_scripts_core_FlappyShape.js.html#line26">line 26</a>
+        <a href="static_play_scripts_core_Pipe.js.html">static/play/scripts/core/Pipe.js</a>, <a href="static_play_scripts_core_Pipe.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -619,169 +794,7 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>flappyShape.render( renderer );</code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(renderer)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Отрисовывает FunnyPipe на холсте.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>renderer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">v6.AbstractRenderer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Рендерер.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="static_home_scripts_core_FunnyPipe.js.html">static/home/scripts/core/FunnyPipe.js</a>, <a href="static_home_scripts_core_FunnyPipe.js.html#line33">line 33</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Ничего не возвращает.</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>funnyPipe.render( renderer );</code></pre>
+    <pre class="prettyprint"><code>pipe.render( renderer );</code></pre>
 
 
 
@@ -801,13 +814,13 @@ var funnyPipe = new FunnyPipe( 0, renderer.height / 2 );</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controls.html">Controls</a></li><li><a href="FlappyShape.html">FlappyShape</a></li><li><a href="FunnyPipe.html">FunnyPipe</a></li><li><a href="Game.html">Game</a></li></ul><h3>Global</h3><ul><li><a href="global.html#setup">setup</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AbstractMatterBody.html">AbstractMatterBody</a></li><li><a href="Controls.html">Controls</a></li><li><a href="FlappyShape.html">FlappyShape</a></li><li><a href="Game.html">Game</a></li><li><a href="Pipe.html">Pipe</a></li></ul><h3>Namespaces</h3><ul><li><a href="constants.html">constants</a></li></ul><h3>Interfaces</h3><ul><li><a href="IPipeData.html">IPipeData</a></li></ul><h3>Global</h3><ul><li><a href="global.html#generate">generate</a></li><li><a href="global.html#setup">setup</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Oct 22 2018 06:01:44 GMT+0700 (+07)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 23 2018 08:28:56 GMT+0700 (+07)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -43,59 +43,55 @@
 
 
     <section>
-        <article><h1>FlappyShape</h1><p><a href="https://coveralls.io/github/tikhiy/flappyshape"><img src="https://coveralls.io/repos/github/tikhiy/flappyshape/badge.svg" alt="Coverage Status"></a></p>
-<p>The FlappyShape Game.</p>
+        <article><h1>flappyshape</h1><p><a href="https://coveralls.io/github/tikhiy/flappyshape"><img src="https://coveralls.io/repos/github/tikhiy/flappyshape/badge.svg" alt="Coverage Status"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL-3.0"></a></p>
+<p>The FlappyShape.</p>
 <h3>Development</h3><h5>Linting</h5><table>
 <thead>
 <tr>
 <th>Command</th>
-<th>Description</th>
+<th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>make lint:static</code></td>
-<td>Lint <strong>client-side</strong> scripts.</td>
+<td><code>make lint:server</code></td>
+<td><code>ESLINT='--fix' make lint:server</code></td>
 </tr>
 <tr>
-<td><code>make lint:core</code></td>
-<td>Lint <strong>server-side</strong> scripts.</td>
+<td><code>make lint:static</code></td>
+<td><code>ESLINT='--fix' make lint:static</code></td>
+</tr>
+<tr>
+<td><code>make lint:shared</code></td>
+<td><code>ESLINT='--fix' make lint:shared</code></td>
 </tr>
 <tr>
 <td><code>make lint:test</code></td>
-<td>Lint <strong>test</strong> scripts.</td>
+<td><code>ESLINT='--fix' make lint:test</code></td>
 </tr>
 <tr>
 <td><code>make lint</code></td>
-<td>Lint <strong>all</strong> scripts above.</td>
+<td><code>ESLINT='--fix' make lint</code></td>
 </tr>
 </tbody>
 </table>
 <h5>Testing</h5><p>First, edit <code>build/browsers.txt</code> (it is ignored in <code>.gitignore</code>) for your system if required.</p>
-<p><strong>NOTE:</strong> no empty line at the end.</p>
 <table>
 <thead>
 <tr>
 <th>Command</th>
-<th>Description</th>
 <th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>make mocha</code></td>
-<td>Run Mocha.</td>
-<td><code>make mocha</code></td>
+<td><code>MOCHA='--reporter=spec' make mocha</code></td>
 </tr>
 <tr>
 <td><code>make karma</code></td>
-<td>Run Karma.</td>
-<td><code>make karma</code></td>
-</tr>
-<tr>
-<td><code>make karma--no-colors</code></td>
-<td>Run Karma with <code>--no-colors</code>.</td>
-<td><code>make karma--no-colors</code></td>
+<td><code>KARMA='--reporters=mocha' make karma</code></td>
 </tr>
 </tbody>
 </table>
@@ -103,24 +99,61 @@
 <thead>
 <tr>
 <th>Command</th>
+<th>Description</th>
 <th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>build/script &lt;script&gt; &lt;output&gt;</code></td>
-<td><code>build/script home/scripts/index.js home/index.js</code></td>
+<td><code>build/script &lt;script&gt; &lt;output&gt; [--min]</code></td>
+<td>This command will make</td>
+<td></td>
+<td>Number</td>
+<td>Example</td>
+<td></td>
 </tr>
 <tr>
-<td><code>build/script &lt;script&gt; &lt;output&gt; --min</code></td>
-<td><code>build/script home/scripts/index.js home/index.js --min</code></td>
+<td></td>
+<td>a static script.</td>
+<td></td>
+<td>------</td>
+<td>------------------------------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td><code>build/script static/play/scripts/index.js public/play/scripts/index.js</code></td>
 </tr>
 </tbody>
 </table>
+<p>|| <em>Year</em> || <em>Temperature (low)</em> || <em>Temperature (high)</em> ||
+||   1900 ||                 -10 ||                   25 ||
+||   1910 ||                 -15 ||                   30 ||
+||   1920 ||                 -10 ||                   32 ||</p>
+<h6><code>build/script &lt;script&gt; &lt;output&gt; [--min]</code> Command</h6><p>This command will make a static script. Examples:</p>
+<ul>
+<li><code>build/script static/play/scripts/index.js public/play/scripts/index.js</code></li>
+<li><code>build/script static/play/scripts/index.js public/play/scripts/index.js --min</code></li>
+</ul>
+<h6><code>make scripts</code> Command</h6><p>This command will make all scripts specified in <code>config/scripts.txt</code>.</p>
+<h5>Building Style Sheets</h5><h6><code>build/style &lt;style&gt; &lt;output&gt; [--min]</code> Command</h6><p>This command will make a static script. Examples:</p>
+<ul>
+<li><code>build/style static/play/styles/index.scss public/play/styles/index.css</code></li>
+<li><code>build/style static/play/styles/index.scss public/play/styles/index.css --min</code></li>
+</ul>
+<h6><code>make styles</code> Command</h6><p>This command will make all stylesheets specified in <code>config/styles.txt</code>.</p>
 <h5>Before Committing</h5><ul>
 <li><code>npm run prepublish</code></li>
 </ul>
-<p><strong>Source maps should not be on production!</strong></p>
+<h5>What To Commit</h5><ul>
+<li>No <code>docs</code>!</li>
+<li>No <code>config/browsers.txt</code>!</li>
+<li>No <code>config/coveralls.txt</code>!</li>
+<li>No <code>temp</code>!</li>
+</ul>
 <h3>License</h3><p>Released under the <a href="LICENSE">GPL-3.0</a> license.</p></article>
     </section>
 
@@ -132,13 +165,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controls.html">Controls</a></li><li><a href="FlappyShape.html">FlappyShape</a></li><li><a href="FunnyPipe.html">FunnyPipe</a></li><li><a href="Game.html">Game</a></li></ul><h3>Global</h3><ul><li><a href="global.html#setup">setup</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AbstractMatterBody.html">AbstractMatterBody</a></li><li><a href="Controls.html">Controls</a></li><li><a href="FlappyShape.html">FlappyShape</a></li><li><a href="Game.html">Game</a></li><li><a href="Pipe.html">Pipe</a></li></ul><h3>Namespaces</h3><ul><li><a href="constants.html">constants</a></li></ul><h3>Interfaces</h3><ul><li><a href="IPipeData.html">IPipeData</a></li></ul><h3>Global</h3><ul><li><a href="global.html#generate">generate</a></li><li><a href="global.html#setup">setup</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Oct 22 2018 06:01:44 GMT+0700 (+07)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 23 2018 08:28:56 GMT+0700 (+07)
 </footer>
 
 <script> prettyPrint(); </script>

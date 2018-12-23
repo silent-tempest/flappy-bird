@@ -1,13 +1,11 @@
 'use strict';
 
-var { createLogger } = require( 'winston' );
+var winston    = require( 'winston' );
 
-var transports       = require( './winston/transports' );
-var level            = require( './winston/level' );
+var transports = require( './winston/transports' );
+var level      = require( './winston/level' );
 
-var logger = createLogger( {
+module.exports = winston.createLogger( {
   transports: transports,
-  level: level
+  level:      level
 } );
-
-module.exports = logger;

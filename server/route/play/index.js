@@ -1,17 +1,17 @@
 'use strict';
 
 var io     = require( 'socket.io' );
-var Router = require( 'express/lib/router' );
+var Router = require( 'express' ).Router;
 
-var server = require( '../server' );
+var server = require( '../../server' );
 
-var router = Router().get( '/', function ( request, response )
+var router = new Router().get( '/play', function ( request, response )
 {
-  response.render( 'home' );
+  response.render( 'play.ejs' );
 } );
 
 var socket = io( server, {
-  path: '/socket/home/'
+  path: '/socket/play'
 } );
 
 socket.on( 'connection', function ( client )

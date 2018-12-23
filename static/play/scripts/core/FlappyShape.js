@@ -38,7 +38,15 @@ FlappyShape.prototype.constructor = FlappyShape;
  */
 FlappyShape.prototype.render = function render ( renderer )
 {
-  renderer.arc( this.body.position.x, this.body.position.y, renderer.settings.scale * this.radius );
+  debugger;
+  renderer.push();
+  renderer.fill( 0, 0.12 );
+  renderer.save();
+  renderer.translate( 8, -8 );
+  renderer.arc( this.x, this.y, renderer.settings.scale * this.radius );
+  renderer.restore();
+  renderer.pop();
+  renderer.arc( this.x, this.y, renderer.settings.scale * this.radius );
 };
 
 module.exports = FlappyShape;

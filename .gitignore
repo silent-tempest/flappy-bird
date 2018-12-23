@@ -1,6 +1,6 @@
+node_modules
+coverage
 config/coveralls.txt
 config/browsers.txt
-coverage
-node_modules
 temp
-**/*.log
+*.log

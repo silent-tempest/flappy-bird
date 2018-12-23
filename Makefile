@@ -1,8 +1,6 @@
 BROWSERS := $(subst \n, ,$(shell cat config/browsers.txt))
-SCRIPTS  := \
-  play/scripts/index.js
-STYLES   := \
-  play/styles/index.scss
+SCRIPTS  := $(subst \n, ,$(shell cat config/scripts.txt))
+STYLES   := $(subst \n, ,$(shell cat config/styles.txt))
 STATIC   := static
 PUBLIC   := public
 

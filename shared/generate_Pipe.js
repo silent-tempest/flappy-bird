@@ -1,6 +1,6 @@
 'use strict';
 
-var constants = require( './constants' );
+// var constants = require( './constants' );
 
 /**
  * Создает JSON с данными новой Pipe.

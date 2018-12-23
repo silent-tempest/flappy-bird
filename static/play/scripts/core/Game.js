@@ -35,7 +35,7 @@ function Game ()
     }
   } );
 
-  this.camera.lookAt( this.shapes[ 0 ] );
+  this.camera.lookAt( this.shapes, '0' );
 }
 
 Game.prototype = Object.create( LightEmitter.prototype );
@@ -53,7 +53,7 @@ Game.prototype.render = function render ( renderer )
     this.pipes[ i ].render( renderer );
   }
 
-  renderer.fill( 'orange' );
+  renderer.fill( global.fs || 'lightpink' );
 
   for ( i = this.shapes.length - 1; i >= 0; --i ) {
     this.shapes[ i ].render( renderer );
